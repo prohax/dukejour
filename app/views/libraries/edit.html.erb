@@ -1,0 +1,12 @@
+<h1>Editing library</h1>
+
+<% form_for(@library) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @library %> |
+<%= link_to 'Back', libraries_path %>

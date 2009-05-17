@@ -1,0 +1,14 @@
+defaults: &defaults
+  adapter: postgresql
+
+production:
+  <<: *defaults
+  database: corkboard
+
+development:
+  <<: *defaults
+  database: corkboard
+
+test:
+  <<: *defaults
+  database: corkboard_test

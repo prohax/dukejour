@@ -1,0 +1,3 @@
+2009-05-18 01:28:06 EST | /opt/local/lib/ruby/gems/1.8/gems/hammock-0.2.24/lib/hammock/scope.rb:70:in `current_verb_scope' | No public index scope available for Track.
+2009-05-18 01:28:06 EST | /opt/local/lib/ruby/gems/1.8/gems/hammock-0.2.24/lib/hammock/resource_retrieval.rb:110:in `render_for_status' | 404
+2009-05-18 01:28:30 EST | /opt/local/lib/ruby/gems/1.8/gems/hammock-0.2.24/lib/hammock/restful_support.rb:82:in `assign_entity' | Unkicked query: {:conditions=>"true", :order=>"tracks.\"id\""}
