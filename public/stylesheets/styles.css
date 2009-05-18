@@ -5,7 +5,7 @@
 body {
   margin: 2em;
   background-color: #ddd;
-  font: 12px 'Lucida Grande', sans-serif;
+  font: 13px Helvetica, sans-serif;
 }
 a {
   color: #826;
@@ -29,12 +29,12 @@ h1 {
   margin: 2em 0 1em 0;
 }
 
-#main, #footer {
-  padding: 1em;
+#world {
+  min-width: 48em;
 }
 
 #main {
-  
+  overflow: hidden;
 }
 
 #footer {
@@ -42,21 +42,55 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
-  padding-left: 2em;
+  padding: 1em 2em;
   background-color: #bbb;
 }
 
+#search {
+  width: 32em;
+  float: left;
+}
 #queue {
-  width: 50%;
-  float: right;
+  margin-left: 33em;
 }
 
 #suggest_track {
   font: 2.5em Georgia;
+  width: 96%;
   color: #338;
   margin-bottom: 1em;
   padding: 0.2em 0.1em;
   border: #777 1px solid;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+}
+
+#queue li.track {
+  padding: 0.4em 0;
+  display: block;
+}
+
+#queue li.track .name,
+#queue li.track .artist,
+#queue li.track .album,
+#queue li.track .year {
+  padding: 0;
+}
+
+#queue li.track .name {
+  font-size: 18px;
+}
+
+#queue li.track .artist {
+  color: #555;
+  clear: both;
+}
+
+#queue li.track .album {
+  font-size: 14px;
+  color: #444;
+}
+
+li.track .library_name {
+  float: right;
 }
