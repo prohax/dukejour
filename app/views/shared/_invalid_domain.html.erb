@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <%= stylesheet_import_tag 'common' %>
+  <title>Invalid Domain</title>
+</head>
+<body>
+  <div id="wr_world"><div id="world" class="fworld">
+    <div class="content" class="cont calign">
+      <p>The domain <tt><%= @current_domain %></tt> means nothing to me. Please <%= email_to Cfg[:mail_support], :text => 'contact support', :subject => "Corkboard account for #{@current_domain}" %> if you believe this to be in error.</p>
+    </div>
+    
+    <!-- TODO: duplicated -->
+    <div id="footer">
+      <span>&copy; 2006-07 <a href="mailto:ben@hoskings.net?subject=Corkboard">Ben Hoskings</a></span>
+      <span><%= link_to 'Valid XHTML', "http://validator.w3.org/check?uri=https%3A%2F%2F#{request.host_with_port}#{request.request_uri}?_session_id=#{session.session_id}" %></span>
+      <span><%= link_to 'Valid CSS', "http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2F#{request.host_with_port}#{request.request_uri}&amp;warning=1&amp;profile=css21&amp;usermedium=all" %></span>
+    </div>
+  </div></div>
+</body>
+</html>

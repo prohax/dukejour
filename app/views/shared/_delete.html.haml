@@ -1,0 +1,13 @@
+- if can_verb_entity? :destroy, record
+  %span.record_links
+    - if defined?(index_links) && index_links
+      = render :partial => "#{mdl.table_name}/index_links", :locals => {:record => record}
+
+    %span.child.delete_link
+      %span.undestroy{:style => ('display: none' unless record.deleted?)}
+        deleted &mdash;
+        = ajax_link :undestroy, record, :format => :js, :text => 'undo', :target => "#{mdl_name}_#{record.id}"
+      %span.destroy{:style => ('display: none' if record.deleted?)}
+        = ajax_link :destroy, record, :format => :js, :text => ((defined?(delete_text) && delete_text) || 'x'), :target => "#{mdl_name}_#{record.id}"
+
+  = javascript_for_ajax_response

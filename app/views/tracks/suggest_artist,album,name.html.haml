@@ -1,0 +1,12 @@
+- @results.each do |record|
+  %li{:class => "#{record.base_model}_#{record.id}"}
+    = render :partial => 'shared/statuses'
+
+    %span.primary.name= highlight(record.name, @queries)
+    %span.secondary.artist= highlight(record.artist, @queries)
+    %span.secondary.album= highlight(record.album, @queries)
+    %span.secondary.year= record.year
+    
+    %span.tertiary.library_name= record.library.name
+
+    %span.track_id{:style => 'display: none'}= record.id
