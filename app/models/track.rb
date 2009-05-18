@@ -22,8 +22,16 @@ class Track < ActiveRecord::Base
     end
   end
 
+  def self.persistent_ids_for library
+    ActiveRecord::Base.connection.execute(
+      "SELECT persistent_id FROM tracks WHERE library_id = #{library.id}"
+    ).map {|i|
+      i['persistent_id']
+    }
+  end
+
   def source
-    library.source.tracks.detect {|t|
+    library.source.search(name).detect {|t|
       t.persistent_id == persistent_id
     }
   end

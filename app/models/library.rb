@@ -6,37 +6,71 @@ class Library < ActiveRecord::Base
   validates_presence_of :persistent_id, :name
   validates_uniqueness_of :name
 
-  def self.import source
-    returning find_or_create_with({
+  def display_name
+    "'#{name}' (#{persistent_id})"
+  end
+
+  def self.create_for source
+    find_or_create_with({
       :name => source.name
     }, {
       :persistent_id => source.persistent_id
-    }, true) do |library|
-      count_before_import = library.tracks.count
-      if library.new_or_deleted_before_save?
-        puts "Importing new library #{source.persistent_id} (#{source.name})."
+    }, true)
+  end
+
+  def import
+    if source.nil?
+      puts "Source for #{display_name} not available, marking as offline."
+      update_attribute :active, false
+    else
+      count_before_import = tracks.count
+      if new_or_deleted_before_save?
+        puts "Importing new library #{display_name}."
       else
-        puts "Re-importing from #{source.name} - already have #{count_before_import} tracks."
+        puts "Re-importing library #{display_name}, currently #{count_before_import} tracks."
       end
-      library.import_tracks
-      puts "Finished importing library #{source.persistent_id} - #{source.name}, #{library.tracks.count - count_before_import} tracks added, #{library.tracks.count} total."
+      import_tracks
     end
   end
 
-  def import_tracks
-    source_tracks.each {|t| Track.import t, self }
-  end
-
   def source
-    iTunes.sources.detect {|l|
+    detected_source = iTunes.sources.detect {|l|
       l.name == name
-    }.library_playlists[0]
+    }
+    detected_source.library_playlists.first unless detected_source.nil?
   end
 
   def source_tracks
-    source.file_tracks.to_a.concat(source.shared_tracks.to_a).select {|t|
+    @source_tracks ||= source.tracks.select {|t|
       t.video_kind == OSA::ITunes::EVDK::NONE && !t.podcast?
     }
+  end
+
+  private
+
+  def import_tracks
+    original_track_count = tracks.count
+
+    have = Track.persistent_ids_for self
+    want = source_tracks.map &:persistent_id
+    have_and_dont_want, want_and_dont_have = have - want, want - have
+
+    if have_and_dont_want.empty? && want_and_dont_have.empty?
+      puts "Nothing to update for #{display_name}."
+    else
+      have_and_dont_want.each {|old_id|
+        puts "Destroying old track #{old_id}."
+        tracks.find_by_persistent_id(old_id).destroy
+      }
+
+      want_and_dont_have.each {|new_id|
+        Track.import source_tracks.detect {|t| t.persistent_id == new_id }, self
+      }
+
+      update_attribute :active, true
+      touch :imported_at
+      puts "Finished importing #{display_name} - library went from #{original_track_count} to #{tracks.count} tracks (#{want_and_dont_have.length} added, #{have_and_dont_want.length} removed).\n"
+    end
   end
 
 end
