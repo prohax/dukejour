@@ -1,5 +1,4 @@
 class Track < ActiveRecord::Base
-  include OSAHelpers
 
   public_resource_for :read, :index
 

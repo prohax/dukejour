@@ -1,5 +1,4 @@
 class Library < ActiveRecord::Base
-  include OSAHelpers
 
   public_resource_for :read, :index
 
@@ -29,7 +28,7 @@ class Library < ActiveRecord::Base
   end
 
   def source
-    self.class.all_sources.detect {|l|
+    iTunes.sources.detect {|l|
       l.persistent_id == persistent_id
     }.library_playlists[0]
   end
