@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090518102239) do
+ActiveRecord::Schema.define(:version => 20090518104123) do
+
+  create_table "entries", :force => true do |t|
+    t.integer  "track_id"
+    t.datetime "played_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "libraries", :force => true do |t|
     t.string   "persistent_id", :limit => 16

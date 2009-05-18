@@ -1,0 +1,5 @@
+#queue.entries
+  - @entries.each do |entry|
+    = render :partial => 'show', :locals => {:entry => entry}
+
+= render :partial => 'tracks/suggest'
