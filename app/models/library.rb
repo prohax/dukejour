@@ -34,7 +34,9 @@ class Library < ActiveRecord::Base
   end
 
   def source_tracks
-    source.file_tracks.to_a.concat source.shared_tracks.to_a
+    source.file_tracks.to_a.concat(source.shared_tracks.to_a).select {|t|
+      t.video_kind == OSA::ITunes::EVDK::NONE && !t.podcast?
+    }
   end
 
 end
