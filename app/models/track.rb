@@ -1,7 +1,7 @@
 class Track < ActiveRecord::Base
   include OSAHelpers
 
-  public_resource
+  public_resource_for :read, :index
 
   belongs_to :library
   validates_presence_of :persistent_id, :library_id

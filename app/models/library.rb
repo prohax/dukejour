@@ -1,7 +1,7 @@
 class Library < ActiveRecord::Base
   include OSAHelpers
 
-  public_resource
+  public_resource_for :read, :index
 
   has_many :tracks, :dependent => :destroy
   validates_presence_of :persistent_id, :name
