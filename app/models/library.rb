@@ -8,14 +8,17 @@ class Library < ActiveRecord::Base
   validates_uniqueness_of :persistent_id
 
   def self.import source
-    puts "Importing library #{source.persistent_id} (#{source.name})."
     returning find_or_create_with({
       :persistent_id => source.persistent_id
     }, {
       :name => source.name
     }, true) do |library|
       count_before_import = library.tracks.count
-      puts "Importing tracks from #{source.name} - already have #{count_before_import}."
+      if library.new_or_deleted_before_save?
+        puts "Importing new library #{source.persistent_id} (#{source.name})."
+      else
+        puts "Re-importing from #{source.name} - already have #{count_before_import} tracks."
+      end
       library.import_tracks
       puts "Finished importing library #{source.persistent_id} - #{source.name}, #{library.tracks.count - count_before_import} tracks added, #{library.tracks.count} total."
     end

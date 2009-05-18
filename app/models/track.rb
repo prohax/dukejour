@@ -8,7 +8,7 @@ class Track < ActiveRecord::Base
   validates_uniqueness_of :persistent_id, :scope => :library_id
 
   def self.import source, library
-    find_or_create_with({
+    returning find_or_create_with({
       :persistent_id => source.persistent_id,
       :library_id => library.id
     }, {
@@ -17,7 +17,9 @@ class Track < ActiveRecord::Base
       :name => source.name,
       :year => source.year
     }, true) do |track|
-      puts "Added #{library.persistent_id}/#{source.persistent_id}: #{source.name} from #{library.name}"
+      if track.new_or_deleted_before_save?
+        puts "Added #{library.identifier}/#{source.persistent_id}: #{source.name} from #{library.name}"
+      end
     end
   end
 
