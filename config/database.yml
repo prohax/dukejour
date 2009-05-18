@@ -3,12 +3,12 @@ defaults: &defaults
 
 production:
   <<: *defaults
-  database: corkboard
+  database: dukejour
 
 development:
   <<: *defaults
-  database: corkboard
+  database: dukejour
 
 test:
   <<: *defaults
-  database: corkboard_test
+  database: dukejour_test
