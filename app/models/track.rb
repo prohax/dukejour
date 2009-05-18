@@ -17,7 +17,7 @@ class Track < ActiveRecord::Base
       :name => source.name,
       :year => source.year
     }, true) do |track|
-      log "Added #{library.persistent_id}/#{source.persistent_id}: #{source.name} from #{library.name}"
+      puts "Added #{library.persistent_id}/#{source.persistent_id}: #{source.name} from #{library.name}"
     end
   end
 
