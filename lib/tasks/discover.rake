@@ -18,10 +18,10 @@ namespace "dukejour" do
         puts "Adding library #{row_names[r_index]}"
         rows[r_index].actions.select { |a| a.name == "AXShowMenu" }.first.perform
         sleep(1)
-        sys.key_code 53
+        sys.key_code 53 # escape the right-click menu
         sleep(1)
-        sys.key_code 53
-        sys.key_code 100
+        sys.key_code 53 # escape the password prompt, if it appeared
+        sys.key_code 100 # dismiss an error dialog, e.g. 'too many connections', if it appeared
         sleep(1)
         puts "Done."
       }
