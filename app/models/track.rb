@@ -6,6 +6,18 @@ class Track < ActiveRecord::Base
   validates_presence_of :persistent_id, :library_id
   validates_uniqueness_of :persistent_id, :scope => :library_id
 
+  def has_artist?
+    !artist.blank? && (/unknown( artist)?/i !~ artist)
+  end
+
+  def has_album?
+    !album.blank? && (/unknown( album)?/i !~ album)
+  end
+
+  def has_year?
+    !year.nil? && !year.zero?
+  end
+
   def self.import source, library
     returning find_or_create_with({
       :persistent_id => source.persistent_id,
