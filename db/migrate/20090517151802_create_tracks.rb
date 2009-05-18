@@ -3,10 +3,12 @@ class CreateTracks < ActiveRecord::Migration
     create_table :tracks do |t|
       t.integer :library_id
 
+      t.string :persistent_id, :limit => 16
+
       t.string :artist, :limit => 256
       t.string :album, :limit => 256
       t.string :name, :limit => 256
-      t.string :year, :integer
+      t.integer :year
 
       t.timestamps
     end
