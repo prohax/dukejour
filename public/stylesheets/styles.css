@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 2em;
+  background-color: #ddd;
+  font: 12px 'Lucida Grande', sans-serif;
+}
+a {
+  color: #826;
+}
+li.track a {
+  text-decoration: none;
+}
+li.track.playing {
+  font-weight: bold;
+}
+li.track.playing:before {
+  content: '▶';
+}
+a.track:hover {
+  border-bottom: #a48 1px solid;
+}
+li {
+  list-style-type: none;
+}
+h1 {
+  margin: 2em 0 1em 0;
+}
+
+#main, #footer {
+  padding: 1em;
+}
+
+#main {
+  
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 2em;
+  background-color: #bbb;
+}
+
+#queue {
+  width: 50%;
+  float: right;
+}
+
+#suggest_track {
+  font: 2.5em Georgia;
+  color: #338;
+  margin-bottom: 1em;
+  padding: 0.2em 0.1em;
+  border: #777 1px solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
