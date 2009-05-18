@@ -17,6 +17,9 @@ module OSAHelpers
       iTunes.sources.select {|s|
         [OSA::ITunes::ESRC::LIBRARY, OSA::ITunes::ESRC::SHARED_LIBRARY].include? s.kind
       }
+    rescue
+      puts "Couldn't connect to iTunes."
+      exit 1
     end
   end
 
