@@ -5,13 +5,13 @@ class Library < ActiveRecord::Base
 
   has_many :tracks, :dependent => :destroy
   validates_presence_of :persistent_id, :name
-  validates_uniqueness_of :persistent_id
+  validates_uniqueness_of :name
 
   def self.import source
     returning find_or_create_with({
-      :persistent_id => source.persistent_id
-    }, {
       :name => source.name
+    }, {
+      :persistent_id => source.persistent_id
     }, true) do |library|
       count_before_import = library.tracks.count
       if library.new_or_deleted_before_save?

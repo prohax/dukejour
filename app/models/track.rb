@@ -18,7 +18,7 @@ class Track < ActiveRecord::Base
       :year => source.year
     }, true) do |track|
       if track.new_or_deleted_before_save?
-        puts "Added #{library.identifier}/#{source.persistent_id}: #{source.name} from #{library.name}"
+        puts "Added #{library.name}/#{source.persistent_id}: #{source.name}"
       end
     end
   end
