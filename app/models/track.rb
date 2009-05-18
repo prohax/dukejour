@@ -6,6 +6,13 @@ class Track < ActiveRecord::Base
   validates_presence_of :persistent_id, :library_id
   validates_uniqueness_of :persistent_id, :scope => :library_id
 
+  before_create :clean_strings
+  def clean_strings
+    artist.strip! unless artist.nil?
+    album.strip! unless album.nil?
+    name.strip! unless name.nil?
+  end
+
   def has_artist?
     !artist.blank? && (/unknown( artist)?/i !~ artist)
   end

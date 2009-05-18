@@ -6,6 +6,11 @@ class Library < ActiveRecord::Base
   validates_presence_of :persistent_id, :name
   validates_uniqueness_of :name
 
+  before_create :clean_strings
+  def clean_strings
+    name.strip! unless name.nil?
+  end
+
   def display_name
     "'#{name}' (#{persistent_id})"
   end
