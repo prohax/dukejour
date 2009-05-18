@@ -21,6 +21,20 @@ class ITunesOSAWrapper
   def playing?; :playing == player_state end
   def paused?;  :paused  == player_state end
 
+  def play obj = nil
+    if obj
+      app_reference.play obj
+    elsif paused?
+      app_reference.playpause
+    end
+  end
+  def pause!
+    app_reference.pause
+  end
+  def stop!
+    app_reference.stop
+  end
+
   private
 
   def app_reference
