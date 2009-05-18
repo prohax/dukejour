@@ -22,4 +22,14 @@ class Track < ActiveRecord::Base
     end
   end
 
+  def source
+    library.source.tracks.detect {|t|
+      t.persistent_id == persistent_id
+    }
+  end
+
+  def play!
+    iTunes.play source
+  end
+
 end
