@@ -1,0 +1,20 @@
+!!! Strict
+%html{html_attrs('en')}
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %title== Dukejour
+    = stylesheet_link_tag 'styles'
+
+    -# TODO http://code.google.com/apis/ajaxlibs/documentation/
+    = javascript_include_tag :defaults, 'suggest', :cache => true
+    = javascript_tag yield :javascript
+    = javascript_for_page
+  %body
+    #world
+      #main
+        = yield
+      #footer
+        &copy; 2009
+        = link_to '@glenmaddern', 'http://twitter.com/glenmaddern'
+        and
+        = link_to '@ben_h', 'http://twitter.com/ben_h'
