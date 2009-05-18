@@ -29,7 +29,7 @@ class Library < ActiveRecord::Base
 
   def source
     iTunes.sources.detect {|l|
-      l.persistent_id == persistent_id
+      l.name == name
     }.library_playlists[0]
   end
 
