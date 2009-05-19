@@ -1,7 +1,5 @@
 namespace "dukejour" do
   def find_rows_containing elem, str
-    p elem
-    p str
     if elem.respond_to?(:rows) && elem.rows.detect { |r| r.static_texts.detect { |t| t.name == str } }
       elem.rows 
     else
