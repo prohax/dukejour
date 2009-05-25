@@ -1,6 +1,7 @@
 #search
   = render :partial => 'tracks/suggest'
 
-#queue.entries
-  - @entries.each do |entry|
-    = render :partial => 'index_entry', :locals => {:entry => entry}
+#queue
+  %ul.entries
+    - @entries.each do |entry|
+      = render :partial => 'index_entry', :locals => {:entry => entry}
