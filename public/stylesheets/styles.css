@@ -10,13 +10,13 @@ body {
 a {
   color: #826;
 }
-li.track a {
+li.entry a {
   text-decoration: none;
 }
-li.track.playing {
+li.entry.playing {
   font-weight: bold;
 }
-li.track.playing:before {
+li.entry.playing:before {
   content: '▶';
 }
 a.track:hover {
@@ -61,7 +61,7 @@ h1 {
 }
 
 #suggest_track {
-  font: 2.5em Georgia;
+  font-size: 2.5em;
   width: 96%;
   color: #338;
   margin-bottom: 1em;
@@ -71,45 +71,39 @@ h1 {
   -moz-border-radius: 3px;
 }
 
-#queue li.track {
+#queue li.entry {
   padding: 0.4em 0.2em;
   display: block;
   overflow: hidden;
 }
 
-#queue li.track:hover {
+#queue li.entry:hover {
   background-color: #ccc;
 }
 
-#queue li.track .name,
-#queue li.track .artist,
-#queue li.track .album,
-#queue li.track .year {
+#queue li.entry .name,
+#queue li.entry .artist,
+#queue li.entry .album,
+#queue li.entry .year {
   padding: 0;
 }
 
-#queue li.track .name {
+#queue li.entry .name {
   font-size: 18px;
 }
 
-#queue li.track .artist {
+#queue li.entry .artist {
   color: #555;
   clear: both;
 }
 
-#queue li.track .album {
+#queue li.entry .album {
   font-size: 14px;
   color: #444;
 }
 
-li.track .library_name {
+li.entry .library_name {
   float: right;
-}
-
-.ac_results {
-  width: 32em;
-  padding: 0.4em;
-  position: absolute;
 }
 
 .votes {
@@ -119,4 +113,31 @@ li.track .library_name {
   font-weight: bold;
   padding: 0 0.4em;
   line-height: 1;
+}
+
+.ac_results {
+  width: 32em;
+  position: absolute;
+}
+
+.ac_results ul {
+  margin-top: 0.4em;
+  border-left: #bbb 2px solid;
+}
+
+.ac_results li.track {
+  margin: 0.2em;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+.ac_results li.track:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
+
+.ac_results li.track .artist,
+.ac_results li.track .album,
+.ac_results li.track .name {
+  padding-right: 1em;
 }

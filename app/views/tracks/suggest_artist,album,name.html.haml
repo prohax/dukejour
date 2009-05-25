@@ -1,9 +1,10 @@
-- @results.each do |record|
-  %li.track{:class => "#{record.base_model}_#{record.id}"}
-    = render :partial => 'shared/statuses'
+%ul.tracks
+  - @results.each do |record|
+    %li.track.hoverable{:class => "#{record.base_model}_#{record.id}"}
+      = render :partial => 'shared/statuses'
 
-    %span.primary.name= highlight(record.name, @queries)
-    %span.secondary.artist= highlight(record.artist, @queries)
-    %span.secondary.album= highlight(record.album, @queries)
+      %span.primary.name= highlight(record.name, @queries)
+      %span.secondary.artist= highlight(record.artist, @queries)
+      %span.secondary.album= highlight(record.album, @queries)
 
-    %span.track_id{:style => 'display: none'}= record.id
+      %span.track_id{:style => 'display: none'}= record.id
