@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
     entry.resources :votes
   end
 
-  map.resources :events do |event|
+  map.resources :events, :collection => {:window => :get} do |event|
     event.resources :entries
   end
 
