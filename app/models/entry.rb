@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
 
-  public_resource
+  public_resource_for :read, :index
 
   belongs_to :track
 
