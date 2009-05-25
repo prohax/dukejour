@@ -3,52 +3,28 @@
   create_entry = jquery_xhr :create, Entry,
     :params => "'entry[track_id]': track_id",
     :callback => %Q(
-      $('#queue').append(data);
-      $('.ac_results').stop();
+      $('#queue ul.entries').append(data)
+        .children(':last').hide()
+        .show('blind', {direction: 'vertical'}, 500);
     )
 %>
 
-function email_to_selector(record_email) {
-  return 'ul.copies li[class*=recipient_' + record_email + ']';
-}
-
-function email_to_li(record_email) {
-  return jQuery('<li/>').addClass("recipient_" + record_email).append(
-    jQuery('<span/>')
-      .addClass('secondary').addClass('email').addClass('raw_email')
-      .html(record_email)
-  ).append('<%= escape_javascript(render :partial => "shared/statuses") %>');
-}
-
 function selectSearchResult() {
   var record, record_email;
-  
+
   track_id = parseInt($(this).find('.track_id').html());
-  
+
   if (0 < track_id) {
     <%= create_entry %>;
 
     jQuery('#suggest_<%= mdl %>')
-      .val('').focus();
-  }
-  
-  
-  // only get the result if we have a valid record to fetch
-  if (record_email && valid_email(record_email)) {
-    // TODO this selects portions of superset addresses, need to only select entire class name
-    current_entries_selector = email_to_selector(record_email);
-    if (0 < jQuery(current_entries_selector).length) {
-      // Record is already on the page; highlight it
-      jQuery(current_entries_selector).show('highlight', {}, 3000);
-    } else {
-      create_copy(record, record_email, current_entries_selector);
-    }
-    jQuery('.ac_results').hide();
-    jQuery('.new_recipient_message').hide();
+      .val('')
+      .focus();
   }
 }
 
 jQuery(function() {
+
   // Prevent submits
   jQuery("form:first").submit(function() { return false; });
 
