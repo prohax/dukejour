@@ -35,6 +35,7 @@ h1 {
 
 #main {
   overflow: hidden;
+  margin-bottom: 4em;
 }
 
 #footer {
@@ -54,6 +55,11 @@ h1 {
   margin-left: 33em;
 }
 
+#queue ul.entries {
+  border-top: #999 1px dashed;
+  border-bottom: #999 1px dashed;
+}
+
 #suggest_track {
   font: 2.5em Georgia;
   width: 96%;
@@ -66,8 +72,13 @@ h1 {
 }
 
 #queue li.track {
-  padding: 0.4em 0;
+  padding: 0.4em 0.2em;
   display: block;
+  overflow: hidden;
+}
+
+#queue li.track:hover {
+  background-color: #ccc;
 }
 
 #queue li.track .name,
@@ -93,4 +104,19 @@ h1 {
 
 li.track .library_name {
   float: right;
+}
+
+.ac_results {
+  width: 32em;
+  padding: 0.4em;
+  position: absolute;
+}
+
+.votes {
+  float: right;
+  color: #338;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0 0.4em;
+  line-height: 1;
 }
