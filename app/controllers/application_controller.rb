@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   layout 'application'
   protect_from_forgery
 
+
+  private
+
   def current_user
     nil
   end
