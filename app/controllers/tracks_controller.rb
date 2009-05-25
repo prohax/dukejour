@@ -1,3 +1,2 @@
 class TracksController < ApplicationController
-  
 end
