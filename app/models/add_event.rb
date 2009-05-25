@@ -1,0 +1,2 @@
+class AddEvent < Event
+end

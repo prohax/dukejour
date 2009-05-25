@@ -9,11 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090518104123) do
+ActiveRecord::Schema.define(:version => 20090525112103) do
 
   create_table "entries", :force => true do |t|
     t.integer  "track_id"
     t.datetime "played_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "entry_id"
+    t.string   "type",       :limit => 16
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,6 +41,12 @@ ActiveRecord::Schema.define(:version => 20090518104123) do
     t.string   "album",         :limit => 256
     t.string   "name",          :limit => 256
     t.integer  "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "entry_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

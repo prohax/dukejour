@@ -1,0 +1,2 @@
+class VoteEvent < Event
+end

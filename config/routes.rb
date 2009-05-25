@@ -1,14 +1,24 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resources :votes
+
   %w[tracks].each do |name|
     map.send "suggest_#{name}".to_sym, "#{name}/suggest/:fields", :controller => name, :action => 'suggest', :conditions => {:method => :get}
   end
 
-  map.resources :entries
+  map.resources :entries, :member => {:play => :get} do |entry|
+    entry.resources :votes
+  end
 
-  map.resources :tracks, :member => {:get => :post, :stop => :post}
+  map.resources :events do |event|
+    event.resources :entries
+  end
+
+  map.resources :tracks
 
   map.resources :libraries do |library|
-    library.resources :tracks, :member => {:get => :post, :stop => :post}
+    library.resources :tracks
   end
+
+  map.root :controller => 'entries', :action => 'index'
 end
