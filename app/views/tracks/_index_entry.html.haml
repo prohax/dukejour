@@ -1,0 +1,10 @@
+%span.primary.name= track.name
+%span.secondary.artist= track.artist if track.has_artist?
+
+- if track.has_album?
+  %span.secondary.album= track.album
+
+  - if track.has_year?
+    %span.secondary.year==, #{track.year}
+
+%span.track_id{:style => 'display: none'}= track.id

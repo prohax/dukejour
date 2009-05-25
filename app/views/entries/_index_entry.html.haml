@@ -1,0 +1,7 @@
+%li.track.hoverable{:class => "#{entry.base_model}_#{entry.id}"}
+
+  .votes
+    %span.count= entry.votes.count
+    = ajax_link :create, [entry, Vote], :text => '+', :class => 'vote child', :format => :js
+  
+  = render :partial => 'tracks/index_entry', :locals => {:track => entry.track}
