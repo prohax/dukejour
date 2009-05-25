@@ -46,9 +46,13 @@ class Library < ActiveRecord::Base
   end
 
   def source_tracks
-    @source_tracks ||= source.tracks.select {|t|
-      t.video_kind == OSA::ITunes::EVDK::NONE && !t.podcast?
-    }
+    if @source_tracks.nil?
+      @source_tracks = {}
+      source.tracks.each { |t|
+        @source_tracks[t.persistent_id] = t if t.video_kind == OSA::ITunes::EVDK::NONE && !t.podcast?
+      }
+    end
+    @source_tracks
   end
 
   private
@@ -57,7 +61,7 @@ class Library < ActiveRecord::Base
     original_track_count = tracks.count
 
     have = Track.persistent_ids_for self
-    want = source_tracks.map &:persistent_id
+    want = source_tracks.keys
     have_and_dont_want, want_and_dont_have = have - want, want - have
 
     if have_and_dont_want.empty? && want_and_dont_have.empty?
@@ -69,7 +73,7 @@ class Library < ActiveRecord::Base
       }
 
       want_and_dont_have.each {|new_id|
-        Track.import source_tracks.detect {|t| t.persistent_id == new_id }, self
+        Track.import source_tracks[new_id], self
       }
 
       update_attribute :active, true

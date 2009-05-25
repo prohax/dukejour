@@ -25,18 +25,18 @@ class Track < ActiveRecord::Base
     !year.nil? && !year.zero?
   end
 
-  def self.import source, library
+  def self.import track_source, library
     returning find_or_create_with({
-      :persistent_id => source.persistent_id,
+      :persistent_id => track_source.persistent_id,
       :library_id => library.id
     }, {
-      :artist => source.artist,
-      :album => source.album,
-      :name => source.name,
-      :year => source.year
+      :artist => track_source.artist,
+      :album => track_source.album,
+      :name => track_source.name,
+      :year => track_source.year
     }, true) do |track|
       if track.new_or_deleted_before_save?
-        puts "Added #{library.name}/#{source.persistent_id}: #{source.name}"
+        puts "Added #{library.name}/#{track_source.persistent_id}: #{track_source.name}"
       end
     end
   end
