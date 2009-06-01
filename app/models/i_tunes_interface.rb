@@ -1,4 +1,4 @@
-class ITunesOSAWrapper
+class ITunesInterface
 
   def sources
     app_reference.sources.select {|s|

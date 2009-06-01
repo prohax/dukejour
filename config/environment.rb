@@ -10,5 +10,5 @@ Rails::Initializer.run do |config|
 end
 
 def iTunes
-  ITunesOSAWrapper.new
+  ITunesInterface.new
 end
