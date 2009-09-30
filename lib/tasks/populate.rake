@@ -1,9 +1,8 @@
 namespace "dukejour" do
   desc "populate the DB from the network"
   task :populate => :environment do
-    iTunes.sources.each {|source|
+    iTunes.sources.map {|source|
       Library.create_for source
-    }
-    Library.each &:import
+    }.each &:import
   end
 end
