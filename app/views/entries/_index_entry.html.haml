@@ -1,4 +1,4 @@
-%li.entry.hoverable{:class => "#{entry.base_model}_#{entry.id}"}
+%li.entry.hoverable{:class => entry.description}
   .votes
     %span.count= entry.votes.count
     = ajax_link :create, [entry, Vote], :text => '+', :class => 'vote child', :format => :js
