@@ -4,4 +4,10 @@ class EntriesController < ApplicationController
     @entry.add_events.create
   end
 
+  def play
+    if find_record
+      @entry.track.play!
+    end
+  end
+
 end
