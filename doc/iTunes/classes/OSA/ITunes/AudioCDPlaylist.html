@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: OSA::ITunes::AudioCDPlaylist</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">OSA::ITunes::AudioCDPlaylist</td>
+        </tr>
+<!--
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/var/folders/aY/aYtovb1sFkeIccJfXbPw6++++TM/-Tmp-/iTunes-0-49903_rb.html">
+                /var/folders/aY/aYtovb1sFkeIccJfXbPw6++++TM/-Tmp-/iTunes-0-49903.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+-->
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="Playlist.html">
+                OSA::ITunes::Playlist
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A playlist representing an audio CD.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000001">artist</a>&nbsp;&nbsp;
+      <a href="#M000002">artist=</a>&nbsp;&nbsp;
+      <a href="#M000015">audio_cd_tracks</a>&nbsp;&nbsp;
+      <a href="#M000006">compilation=</a>&nbsp;&nbsp;
+      <a href="#M000005">compilation?</a>&nbsp;&nbsp;
+      <a href="#M000003">composer</a>&nbsp;&nbsp;
+      <a href="#M000004">composer=</a>&nbsp;&nbsp;
+      <a href="#M000007">disc_count</a>&nbsp;&nbsp;
+      <a href="#M000008">disc_count=</a>&nbsp;&nbsp;
+      <a href="#M000013">disc_number</a>&nbsp;&nbsp;
+      <a href="#M000014">disc_number=</a>&nbsp;&nbsp;
+      <a href="#M000011">genre</a>&nbsp;&nbsp;
+      <a href="#M000012">genre=</a>&nbsp;&nbsp;
+      <a href="#M000009">year</a>&nbsp;&nbsp;
+      <a href="#M000010">year=</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <span class="method-name">artist<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="AudioCDPlaylist.html#M000001">artist</a> property &#8212;
+the <a href="AudioCDPlaylist.html#M000001">artist</a> of the CD.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <span class="method-name">artist=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the <a href="AudioCDPlaylist.html#M000001">artist</a> property &#8212;
+the <a href="AudioCDPlaylist.html#M000001">artist</a> of the CD.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <span class="method-name">audio_cd_tracks<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the audio CD tracks associated with this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="AudioCDTrack.html">OSA::ITunes::AudioCDTrack</a>
+objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <span class="method-name">compilation=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the compilation property &#8212; is this CD a compilation album?
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <span class="method-name">compilation?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the compilation property &#8212; is this CD a compilation album?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <span class="method-name">composer<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="AudioCDPlaylist.html#M000003">composer</a> property
+&#8212; the <a href="AudioCDPlaylist.html#M000003">composer</a> of the CD.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <span class="method-name">composer=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the <a href="AudioCDPlaylist.html#M000003">composer</a> property
+&#8212; the <a href="AudioCDPlaylist.html#M000003">composer</a> of the CD.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <span class="method-name">disc_count<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the disc count property &#8212; the total number of discs in this
+CD’s album.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <span class="method-name">disc_count=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the disc count property &#8212; the total number of discs in this
+CD’s album.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <span class="method-name">disc_number<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the disc number property &#8212; the index of this CD disc in the
+source album.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <span class="method-name">disc_number=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the disc number property &#8212; the index of this CD disc in the
+source album.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <span class="method-name">genre<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="AudioCDPlaylist.html#M000011">genre</a> property &#8212;
+the <a href="AudioCDPlaylist.html#M000011">genre</a> of the CD.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <span class="method-name">genre=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the <a href="AudioCDPlaylist.html#M000011">genre</a> property &#8212;
+the <a href="AudioCDPlaylist.html#M000011">genre</a> of the CD.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <span class="method-name">year<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="AudioCDPlaylist.html#M000009">year</a> property &#8212;
+the <a href="AudioCDPlaylist.html#M000009">year</a> the album was
+recorded/released.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <span class="method-name">year=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the <a href="AudioCDPlaylist.html#M000009">year</a> property &#8212;
+the <a href="AudioCDPlaylist.html#M000009">year</a> the album was
+recorded/released.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be set, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: OSA::ITunes::PrintSettings</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">OSA::ITunes::PrintSettings</td>
+        </tr>
+<!--
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/var/folders/aY/aYtovb1sFkeIccJfXbPw6++++TM/-Tmp-/iTunes-0-49903_rb.html">
+                /var/folders/aY/aYtovb1sFkeIccJfXbPw6++++TM/-Tmp-/iTunes-0-49903.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+-->
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                OSA::Element
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000245">collating?</a>&nbsp;&nbsp;
+      <a href="#M000253">copies</a>&nbsp;&nbsp;
+      <a href="#M000249">ending_page</a>&nbsp;&nbsp;
+      <a href="#M000248">error_handling</a>&nbsp;&nbsp;
+      <a href="#M000244">fax_number</a>&nbsp;&nbsp;
+      <a href="#M000251">pages_across</a>&nbsp;&nbsp;
+      <a href="#M000252">pages_down</a>&nbsp;&nbsp;
+      <a href="#M000247">printer_features</a>&nbsp;&nbsp;
+      <a href="#M000250">requested_print_time</a>&nbsp;&nbsp;
+      <a href="#M000246">starting_page</a>&nbsp;&nbsp;
+      <a href="#M000243">target_printer</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000245" class="method-detail">
+        <a name="M000245"></a>
+
+        <div class="method-heading">
+          <span class="method-name">collating?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the collating property &#8212; should printed <a
+href="PrintSettings.html#M000253">copies</a> be collated?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000253" class="method-detail">
+        <a name="M000253"></a>
+
+        <div class="method-heading">
+          <span class="method-name">copies<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="PrintSettings.html#M000253">copies</a> property &#8212;
+the number of <a href="PrintSettings.html#M000253">copies</a> of a document
+to be printed.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000249" class="method-detail">
+        <a name="M000249"></a>
+
+        <div class="method-heading">
+          <span class="method-name">ending_page<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the ending page property &#8212; the last page of the document to be
+printed.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000248" class="method-detail">
+        <a name="M000248"></a>
+
+        <div class="method-heading">
+          <span class="method-name">error_handling<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the error handling property &#8212; how errors are handled.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as <a href="ENUM.html">OSA::ITunes::ENUM</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000244" class="method-detail">
+        <a name="M000244"></a>
+
+        <div class="method-heading">
+          <span class="method-name">fax_number<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the fax number property &#8212; for fax number.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000251" class="method-detail">
+        <a name="M000251"></a>
+
+        <div class="method-heading">
+          <span class="method-name">pages_across<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the pages across property &#8212; number of logical pages laid across
+a physical page.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000252" class="method-detail">
+        <a name="M000252"></a>
+
+        <div class="method-heading">
+          <span class="method-name">pages_down<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the pages down property &#8212; number of logical pages laid out down
+a physical page.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000247" class="method-detail">
+        <a name="M000247"></a>
+
+        <div class="method-heading">
+          <span class="method-name">printer_features<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the printer features property &#8212; printer specific options.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as list.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000250" class="method-detail">
+        <a name="M000250"></a>
+
+        <div class="method-heading">
+          <span class="method-name">requested_print_time<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the requested print time property &#8212; the time at which the
+desktop printer should print the document.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as date.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000246" class="method-detail">
+        <a name="M000246"></a>
+
+        <div class="method-heading">
+          <span class="method-name">starting_page<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the starting page property &#8212; the first page of the document to
+be printed.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000243" class="method-detail">
+        <a name="M000243"></a>
+
+        <div class="method-heading">
+          <span class="method-name">target_printer<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the target printer property &#8212; for target printer.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

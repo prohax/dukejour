@@ -1,0 +1,1672 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: OSA::ITunes::Application</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">OSA::ITunes::Application</td>
+        </tr>
+<!--
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/var/folders/aY/aYtovb1sFkeIccJfXbPw6++++TM/-Tmp-/iTunes-0-49903_rb.html">
+                /var/folders/aY/aYtovb1sFkeIccJfXbPw6++++TM/-Tmp-/iTunes-0-49903.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+-->
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                OSA::Element
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The application program.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000216">activate</a>&nbsp;&nbsp;
+      <a href="#M000227">add</a>&nbsp;&nbsp;
+      <a href="#M000228">back_track</a>&nbsp;&nbsp;
+      <a href="#M000207">browser_windows</a>&nbsp;&nbsp;
+      <a href="#M000217">close</a>&nbsp;&nbsp;
+      <a href="#M000229">convert</a>&nbsp;&nbsp;
+      <a href="#M000218">count</a>&nbsp;&nbsp;
+      <a href="#M000190">current_encoder</a>&nbsp;&nbsp;
+      <a href="#M000191">current_encoder=</a>&nbsp;&nbsp;
+      <a href="#M000182">current_eq_preset</a>&nbsp;&nbsp;
+      <a href="#M000183">current_eq_preset=</a>&nbsp;&nbsp;
+      <a href="#M000203">current_playlist</a>&nbsp;&nbsp;
+      <a href="#M000185">current_stream_title</a>&nbsp;&nbsp;
+      <a href="#M000184">current_stream_url</a>&nbsp;&nbsp;
+      <a href="#M000202">current_track</a>&nbsp;&nbsp;
+      <a href="#M000180">current_visual</a>&nbsp;&nbsp;
+      <a href="#M000181">current_visual=</a>&nbsp;&nbsp;
+      <a href="#M000219">delete</a>&nbsp;&nbsp;
+      <a href="#M000220">duplicate</a>&nbsp;&nbsp;
+      <a href="#M000208">encoders</a>&nbsp;&nbsp;
+      <a href="#M000193">eq_enabled=</a>&nbsp;&nbsp;
+      <a href="#M000192">eq_enabled?</a>&nbsp;&nbsp;
+      <a href="#M000209">eq_presets</a>&nbsp;&nbsp;
+      <a href="#M000210">eq_windows</a>&nbsp;&nbsp;
+      <a href="#M000221">exists?</a>&nbsp;&nbsp;
+      <a href="#M000230">fast_forward</a>&nbsp;&nbsp;
+      <a href="#M000201">fixed_indexing=</a>&nbsp;&nbsp;
+      <a href="#M000200">fixed_indexing?</a>&nbsp;&nbsp;
+      <a href="#M000196">frontmost=</a>&nbsp;&nbsp;
+      <a href="#M000195">frontmost?</a>&nbsp;&nbsp;
+      <a href="#M000206">full_screen=</a>&nbsp;&nbsp;
+      <a href="#M000205">full_screen?</a>&nbsp;&nbsp;
+      <a href="#M000222">make</a>&nbsp;&nbsp;
+      <a href="#M000189">mute=</a>&nbsp;&nbsp;
+      <a href="#M000188">mute?</a>&nbsp;&nbsp;
+      <a href="#M000179">name</a>&nbsp;&nbsp;
+      <a href="#M000231">next_track</a>&nbsp;&nbsp;
+      <a href="#M000223">open</a>&nbsp;&nbsp;
+      <a href="#M000242">open_location</a>&nbsp;&nbsp;
+      <a href="#M000232">pause</a>&nbsp;&nbsp;
+      <a href="#M000233">play</a>&nbsp;&nbsp;
+      <a href="#M000198">player_position</a>&nbsp;&nbsp;
+      <a href="#M000199">player_position=</a>&nbsp;&nbsp;
+      <a href="#M000204">player_state</a>&nbsp;&nbsp;
+      <a href="#M000211">playlist_windows</a>&nbsp;&nbsp;
+      <a href="#M000234">playpause</a>&nbsp;&nbsp;
+      <a href="#M000235">previous_track</a>&nbsp;&nbsp;
+      <a href="#M000215">print</a>&nbsp;&nbsp;
+      <a href="#M000225">quit</a>&nbsp;&nbsp;
+      <a href="#M000236">resume</a>&nbsp;&nbsp;
+      <a href="#M000237">rewind</a>&nbsp;&nbsp;
+      <a href="#M000224">run</a>&nbsp;&nbsp;
+      <a href="#M000194">selection</a>&nbsp;&nbsp;
+      <a href="#M000226">set</a>&nbsp;&nbsp;
+      <a href="#M000177">sound_volume</a>&nbsp;&nbsp;
+      <a href="#M000178">sound_volume=</a>&nbsp;&nbsp;
+      <a href="#M000212">sources</a>&nbsp;&nbsp;
+      <a href="#M000238">stop</a>&nbsp;&nbsp;
+      <a href="#M000239">subscribe</a>&nbsp;&nbsp;
+      <a href="#M000240">updateallpodcasts</a>&nbsp;&nbsp;
+      <a href="#M000241">updatepodcast</a>&nbsp;&nbsp;
+      <a href="#M000197">version</a>&nbsp;&nbsp;
+      <a href="#M000186">visual_size</a>&nbsp;&nbsp;
+      <a href="#M000187">visual_size=</a>&nbsp;&nbsp;
+      <a href="#M000213">visuals</a>&nbsp;&nbsp;
+      <a href="#M000176">visuals_enabled=</a>&nbsp;&nbsp;
+      <a href="#M000175">visuals_enabled?</a>&nbsp;&nbsp;
+      <a href="#M000214">windows</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000216" class="method-detail">
+        <a name="M000216"></a>
+
+        <div class="method-heading">
+          <span class="method-name">activate<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Activate the application.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000227" class="method-detail">
+        <a name="M000227"></a>
+
+        <div class="method-heading">
+          <span class="method-name">add(direct, to=nil)<br />
+add(direct, :to => nil)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add one or more files to a playlist.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The file(s) to <a href="Application.html#M000227">add</a>.
+
+</td></tr>
+<tr><td valign="top">to:</td><td>The location of the added file(s). Optional. Can be passed as a Hash
+key/value.
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>Reference to added track(s).
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000228" class="method-detail">
+        <a name="M000228"></a>
+
+        <div class="method-heading">
+          <span class="method-name">back_track<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reposition to beginning of current track or go to previous track if already
+at start of current track.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000207" class="method-detail">
+        <a name="M000207"></a>
+
+        <div class="method-heading">
+          <span class="method-name">browser_windows<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the browser <a href="Application.html#M000214">windows</a> associated
+with this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="BrowserWindow.html">OSA::ITunes::BrowserWindow</a>
+objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000217" class="method-detail">
+        <a name="M000217"></a>
+
+        <div class="method-heading">
+          <span class="method-name">close(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Close an object.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The object to <a href="Application.html#M000217">close</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000229" class="method-detail">
+        <a name="M000229"></a>
+
+        <div class="method-heading">
+          <span class="method-name">convert(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Convert one or more files or tracks.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The file(s)/tracks(s) to <a href="Application.html#M000229">convert</a>.
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>Reference to converted track(s).
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000218" class="method-detail">
+        <a name="M000218"></a>
+
+        <div class="method-heading">
+          <span class="method-name">count(direct, each)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the number of elements of a particular class within an object.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The object whose elements are to be counted.
+
+</td></tr>
+<tr><td valign="top">each:</td><td>The class of the elements to be counted. Keyword &#8216;each&#8217; is
+optional in AppleScript.
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>The number of elements.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000190" class="method-detail">
+        <a name="M000190"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_encoder<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current encoder property &#8212; the currently selected encoder
+(MP3, AIFF, WAV, etc.).
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as a <a href="Encoder.html">OSA::ITunes::Encoder</a>
+object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000191" class="method-detail">
+        <a name="M000191"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_encoder=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the current encoder property &#8212; the currently selected encoder
+(MP3, AIFF, WAV, etc.).
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as a <a
+href="Encoder.html">OSA::ITunes::Encoder</a> object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000182" class="method-detail">
+        <a name="M000182"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_eq_preset<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current EQ preset property &#8212; the currently selected
+equalizer preset.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as a <a href="EQPreset.html">OSA::ITunes::EQPreset</a>
+object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000183" class="method-detail">
+        <a name="M000183"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_eq_preset=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the current EQ preset property &#8212; the currently selected
+equalizer preset.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as a <a
+href="EQPreset.html">OSA::ITunes::EQPreset</a> object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000203" class="method-detail">
+        <a name="M000203"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_playlist<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current playlist property &#8212; the playlist containing the
+currently targeted track.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as a <a href="Playlist.html">OSA::ITunes::Playlist</a>
+object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000185" class="method-detail">
+        <a name="M000185"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_stream_title<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current stream title property &#8212; the <a
+href="Application.html#M000179">name</a> of the current song in the playing
+stream (provided by streaming server).
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000184" class="method-detail">
+        <a name="M000184"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_stream_url<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current stream URL property &#8212; the URL of the playing stream
+or streaming web site (provided by streaming server).
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_track<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current track property &#8212; the current targeted track.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as a <a href="Track.html">OSA::ITunes::Track</a>
+object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000180" class="method-detail">
+        <a name="M000180"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_visual<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the current visual property &#8212; the currently selected visual
+plug-in.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as a <a href="Visual.html">OSA::ITunes::Visual</a>
+object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000181" class="method-detail">
+        <a name="M000181"></a>
+
+        <div class="method-heading">
+          <span class="method-name">current_visual=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the current visual property &#8212; the currently selected visual
+plug-in.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as a <a
+href="Visual.html">OSA::ITunes::Visual</a> object.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000219" class="method-detail">
+        <a name="M000219"></a>
+
+        <div class="method-heading">
+          <span class="method-name">delete(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Delete an element from an object.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The element to <a href="Application.html#M000219">delete</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000220" class="method-detail">
+        <a name="M000220"></a>
+
+        <div class="method-heading">
+          <span class="method-name">duplicate(direct, to=nil)<br />
+duplicate(direct, :to => nil)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Duplicate one or more object(s).
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The object(s) to <a href="Application.html#M000220">duplicate</a>.
+
+</td></tr>
+<tr><td valign="top">to:</td><td>The new location for the object(s). Optional. Can be passed as a Hash
+key/value.
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>To the duplicated object(s).
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000208" class="method-detail">
+        <a name="M000208"></a>
+
+        <div class="method-heading">
+          <span class="method-name">encoders<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000208">encoders</a> associated with
+this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="Encoder.html">OSA::ITunes::Encoder</a> objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000193" class="method-detail">
+        <a name="M000193"></a>
+
+        <div class="method-heading">
+          <span class="method-name">eq_enabled=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the EQ enabled property &#8212; is the equalizer enabled?
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000192" class="method-detail">
+        <a name="M000192"></a>
+
+        <div class="method-heading">
+          <span class="method-name">eq_enabled?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the EQ enabled property &#8212; is the equalizer enabled?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000209" class="method-detail">
+        <a name="M000209"></a>
+
+        <div class="method-heading">
+          <span class="method-name">eq_presets<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the EQ presets associated with this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="EQPreset.html">OSA::ITunes::EQPreset</a> objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000210" class="method-detail">
+        <a name="M000210"></a>
+
+        <div class="method-heading">
+          <span class="method-name">eq_windows<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the EQ <a href="Application.html#M000214">windows</a> associated with
+this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="EQWindow.html">OSA::ITunes::EQWindow</a> objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000221" class="method-detail">
+        <a name="M000221"></a>
+
+        <div class="method-heading">
+          <span class="method-name">exists?(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Verify if an object exists.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The object in question.
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>True if it exists, false if not.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000230" class="method-detail">
+        <a name="M000230"></a>
+
+        <div class="method-heading">
+          <span class="method-name">fast_forward<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Skip forward in a playing track.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000201" class="method-detail">
+        <a name="M000201"></a>
+
+        <div class="method-heading">
+          <span class="method-name">fixed_indexing=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the fixed indexing property &#8212; true if all AppleScript track
+indices should be independent of the <a
+href="Application.html#M000233">play</a> order of the owning playlist.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000200" class="method-detail">
+        <a name="M000200"></a>
+
+        <div class="method-heading">
+          <span class="method-name">fixed_indexing?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the fixed indexing property &#8212; true if all AppleScript track
+indices should be independent of the <a
+href="Application.html#M000233">play</a> order of the owning playlist.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000196" class="method-detail">
+        <a name="M000196"></a>
+
+        <div class="method-heading">
+          <span class="method-name">frontmost=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the frontmost property &#8212; is iTunes the frontmost application?
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000195" class="method-detail">
+        <a name="M000195"></a>
+
+        <div class="method-heading">
+          <span class="method-name">frontmost?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the frontmost property &#8212; is iTunes the frontmost application?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000206" class="method-detail">
+        <a name="M000206"></a>
+
+        <div class="method-heading">
+          <span class="method-name">full_screen=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the full screen property &#8212; are <a
+href="Application.html#M000213">visuals</a> displayed using the entire
+screen?
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000205" class="method-detail">
+        <a name="M000205"></a>
+
+        <div class="method-heading">
+          <span class="method-name">full_screen?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the full screen property &#8212; are <a
+href="Application.html#M000213">visuals</a> displayed using the entire
+screen?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000222" class="method-detail">
+        <a name="M000222"></a>
+
+        <div class="method-heading">
+          <span class="method-name">make(new, at=nil, with_properties=nil)<br />
+make(new, :at => nil, :with_properties => nil)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Make a new element.
+</p>
+<table>
+<tr><td valign="top">new:</td><td>The class of the new element. Keyword &#8216;new&#8217; is optional in
+AppleScript.
+
+</td></tr>
+<tr><td valign="top">at:</td><td>The location at which to insert the element. Optional. Can be passed as a
+Hash key/value.
+
+</td></tr>
+<tr><td valign="top">with_properties:</td><td>The initial values for the properties of the element. Optional. Can be
+passed as a Hash key/value.
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>To the new object(s).
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000189" class="method-detail">
+        <a name="M000189"></a>
+
+        <div class="method-heading">
+          <span class="method-name">mute=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the mute property &#8212; has the sound output been muted?
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000188" class="method-detail">
+        <a name="M000188"></a>
+
+        <div class="method-heading">
+          <span class="method-name">mute?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the mute property &#8212; has the sound output been muted?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000179" class="method-detail">
+        <a name="M000179"></a>
+
+        <div class="method-heading">
+          <span class="method-name">name<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000179">name</a> property &#8212; the
+<a href="Application.html#M000179">name</a> of the application.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as text.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000231" class="method-detail">
+        <a name="M000231"></a>
+
+        <div class="method-heading">
+          <span class="method-name">next_track<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Advance to the next track in the current playlist.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000223" class="method-detail">
+        <a name="M000223"></a>
+
+        <div class="method-heading">
+          <span class="method-name">open(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Open the specified object(s).
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>List of objects to <a href="Application.html#M000223">open</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000242" class="method-detail">
+        <a name="M000242"></a>
+
+        <div class="method-heading">
+          <span class="method-name">open_location(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Opens a Music Store or audio stream URL.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The URL to <a href="Application.html#M000223">open</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000232" class="method-detail">
+        <a name="M000232"></a>
+
+        <div class="method-heading">
+          <span class="method-name">pause<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Pause playback.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000233" class="method-detail">
+        <a name="M000233"></a>
+
+        <div class="method-heading">
+          <span class="method-name">play(direct, once=nil)<br />
+play(direct, :once => nil)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Play the current track or the specified track or file.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td><a href="Item.html">Item</a> to <a
+href="Application.html#M000233">play</a>.
+
+</td></tr>
+<tr><td valign="top">once:</td><td>If true, <a href="Application.html#M000233">play</a> this track once and
+then <a href="Application.html#M000238">stop</a>. Optional. Can be passed
+as a Hash key/value.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000198" class="method-detail">
+        <a name="M000198"></a>
+
+        <div class="method-heading">
+          <span class="method-name">player_position<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the player position property &#8212; the player’s position within
+the currently playing track in seconds.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000199" class="method-detail">
+        <a name="M000199"></a>
+
+        <div class="method-heading">
+          <span class="method-name">player_position=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the player position property &#8212; the player’s position within
+the currently playing track in seconds.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000204" class="method-detail">
+        <a name="M000204"></a>
+
+        <div class="method-heading">
+          <span class="method-name">player_state<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the player state property &#8212; is iTunes stopped, paused, or
+playing?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as <a href="EPLS.html">OSA::ITunes::EPLS</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000211" class="method-detail">
+        <a name="M000211"></a>
+
+        <div class="method-heading">
+          <span class="method-name">playlist_windows<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the playlist <a href="Application.html#M000214">windows</a> associated
+with this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="PlaylistWindow.html">OSA::ITunes::PlaylistWindow</a>
+objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000234" class="method-detail">
+        <a name="M000234"></a>
+
+        <div class="method-heading">
+          <span class="method-name">playpause<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Toggle the playing/paused state of the current track.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000235" class="method-detail">
+        <a name="M000235"></a>
+
+        <div class="method-heading">
+          <span class="method-name">previous_track<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return to the previous track in the current playlist.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000215" class="method-detail">
+        <a name="M000215"></a>
+
+        <div class="method-heading">
+          <span class="method-name">print(direct, print_dialog=nil, with_properties=nil, kind=nil, theme=nil)<br />
+print(direct, :print_dialog => nil, :with_properties => nil, :kind => nil, :theme => nil)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Print the specified object(s).
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>List of objects to <a href="Application.html#M000215">print</a>.
+
+</td></tr>
+<tr><td valign="top">print_dialog:</td><td>Should the application show the <a
+href="Application.html#M000215">print</a> dialog. Optional. Can be passed
+as a Hash key/value.
+
+</td></tr>
+<tr><td valign="top">with_properties:</td><td>The <a href="Application.html#M000215">print</a> settings. Optional. Can be
+passed as a Hash key/value.
+
+</td></tr>
+<tr><td valign="top">kind:</td><td>The kind of printout desired. Optional. Can be passed as a Hash key/value.
+
+</td></tr>
+<tr><td valign="top">theme:</td><td>Name of theme to use for formatting the printout. Optional. Can be passed
+as a Hash key/value.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000225" class="method-detail">
+        <a name="M000225"></a>
+
+        <div class="method-heading">
+          <span class="method-name">quit<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Quit iTunes.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000236" class="method-detail">
+        <a name="M000236"></a>
+
+        <div class="method-heading">
+          <span class="method-name">resume<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Disable fast forward/rewind and <a
+href="Application.html#M000236">resume</a> playback, if playing.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000237" class="method-detail">
+        <a name="M000237"></a>
+
+        <div class="method-heading">
+          <span class="method-name">rewind<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Skip backwards in a playing track.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000224" class="method-detail">
+        <a name="M000224"></a>
+
+        <div class="method-heading">
+          <span class="method-name">run<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Run iTunes.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000194" class="method-detail">
+        <a name="M000194"></a>
+
+        <div class="method-heading">
+          <span class="method-name">selection<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000194">selection</a> property &#8212;
+the <a href="Application.html#M000194">selection</a> visible to the user.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as specifier.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000226" class="method-detail">
+        <a name="M000226"></a>
+
+        <div class="method-heading">
+          <span class="method-name">set(direct, to)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <table>
+<tr><td valign="top">direct:</td><td>Documentation not available.
+
+</td></tr>
+<tr><td valign="top">to:</td><td>Documentation not available.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000177" class="method-detail">
+        <a name="M000177"></a>
+
+        <div class="method-heading">
+          <span class="method-name">sound_volume<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the sound volume property &#8212; the sound output volume (0 =
+minimum, 100 = maximum).
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000178" class="method-detail">
+        <a name="M000178"></a>
+
+        <div class="method-heading">
+          <span class="method-name">sound_volume=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the sound volume property &#8212; the sound output volume (0 =
+minimum, 100 = maximum).
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as integer.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000212" class="method-detail">
+        <a name="M000212"></a>
+
+        <div class="method-heading">
+          <span class="method-name">sources<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000212">sources</a> associated with
+this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="Source.html">OSA::ITunes::Source</a> objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000238" class="method-detail">
+        <a name="M000238"></a>
+
+        <div class="method-heading">
+          <span class="method-name">stop<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Stop playback.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000239" class="method-detail">
+        <a name="M000239"></a>
+
+        <div class="method-heading">
+          <span class="method-name">subscribe(direct)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Subscribe to a podcast feed.
+</p>
+<table>
+<tr><td valign="top">direct:</td><td>The URL of the feed to <a href="Application.html#M000239">subscribe</a> to.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000240" class="method-detail">
+        <a name="M000240"></a>
+
+        <div class="method-heading">
+          <span class="method-name">updateallpodcasts<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Update all subscribed podcast feeds.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000241" class="method-detail">
+        <a name="M000241"></a>
+
+        <div class="method-heading">
+          <span class="method-name">updatepodcast<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Update podcast feed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000197" class="method-detail">
+        <a name="M000197"></a>
+
+        <div class="method-heading">
+          <span class="method-name">version<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000197">version</a> property &#8212;
+the <a href="Application.html#M000197">version</a> of iTunes.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as 1.8.7.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000186" class="method-detail">
+        <a name="M000186"></a>
+
+        <div class="method-heading">
+          <span class="method-name">visual_size<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the visual size property &#8212; the size of the displayed visual.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as <a href="EVSZ.html">OSA::ITunes::EVSZ</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000187" class="method-detail">
+        <a name="M000187"></a>
+
+        <div class="method-heading">
+          <span class="method-name">visual_size=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the visual size property &#8212; the size of the displayed visual.
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as <a
+href="EVSZ.html">OSA::ITunes::EVSZ</a>.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000213" class="method-detail">
+        <a name="M000213"></a>
+
+        <div class="method-heading">
+          <span class="method-name">visuals<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000213">visuals</a> associated with
+this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="Visual.html">OSA::ITunes::Visual</a> objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000176" class="method-detail">
+        <a name="M000176"></a>
+
+        <div class="method-heading">
+          <span class="method-name">visuals_enabled=(val)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the <a href="Application.html#M000213">visuals</a> enabled property
+&#8212; are <a href="Application.html#M000213">visuals</a> currently being
+displayed?
+</p>
+<table>
+<tr><td valign="top">val:</td><td>The value to be <a href="Application.html#M000226">set</a>, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000175" class="method-detail">
+        <a name="M000175"></a>
+
+        <div class="method-heading">
+          <span class="method-name">visuals_enabled?<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000213">visuals</a> enabled property
+&#8212; are <a href="Application.html#M000213">visuals</a> currently being
+displayed?
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>The property value, as boolean.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000214" class="method-detail">
+        <a name="M000214"></a>
+
+        <div class="method-heading">
+          <span class="method-name">windows<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the <a href="Application.html#M000214">windows</a> associated with
+this object.
+</p>
+<table>
+<tr><td valign="top">Returns:</td><td>An Array of <a href="Window.html">OSA::ITunes::Window</a> objects.
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
