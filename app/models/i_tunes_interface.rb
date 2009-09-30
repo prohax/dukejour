@@ -23,7 +23,7 @@ class ITunesInterface
 
   def play obj = nil
     if obj
-      app_reference.play obj
+      app_reference.play obj, :once => true
     elsif paused?
       app_reference.playpause
     end
