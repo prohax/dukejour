@@ -20,7 +20,7 @@ namespace "dukejour" do
     if process.nil?
       puts "iTunes is not running!"
     else
-      currently_visible = process.visible?
+      # currently_visible = process.visible?
     
       rows = (find_rows_containing(process, "LIBRARY") or (puts "Could not find LIBRARY"; []))
 
@@ -45,7 +45,7 @@ namespace "dukejour" do
         }
       end
     
-      process.visible = currently_visible
+      process.visible = false
     end
   end
 end
