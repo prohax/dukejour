@@ -34,12 +34,7 @@ h1 {
   margin: 2em 0 1em 0;
 }
 
-#world {
-  min-width: 48em;
-}
-
 #main {
-  overflow: hidden;
   margin-bottom: 4em;
   width: 45em;
   margin: 0 auto;
@@ -54,16 +49,11 @@ h1 {
   background-color: #bbb;
 }
 
-#queue ul.entries {
-  border-top: #999 1px dashed;
-  border-bottom: #999 1px dashed;
-}
 #suggest_track {
   font: bold 2.5em Helvetica;
-  width: 98%;
-  width: 96%;
+  width: 17.8em;
   color: #894052;
-  padding: 0.2em 0.1em;
+  padding: 0.15em 0.1em;
   border: #777 1px solid;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
