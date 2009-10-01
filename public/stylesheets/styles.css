@@ -36,8 +36,12 @@ h1 {
 
 #main {
   margin-bottom: 4em;
-  width: 45em;
   margin: 0 auto;
+}
+
+#main,
+.ac_results {
+  width: 45em;
 }
 
 #footer {
@@ -104,7 +108,11 @@ li.entry .library_name {
 }
 
 .ac_results {
-  width: 32em;
+  background-color: #ccb4b9;
+  border: 1px solid #8f7d81;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  opacity: 0.95;
   position: absolute;
 }
 
