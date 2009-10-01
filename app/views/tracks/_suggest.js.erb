@@ -40,7 +40,7 @@ jQuery(function() {
   // Hook the suggestion code to the text field
   jQuery("#suggest_<%= mdl %>")
     .focus()
-    .suggest("<%= suggest_tracks_path :fields => 'artist,album,name', :limit => 25 %>", { })
+    .suggest("<%= suggest_tracks_path :fields => 'name,artist,album', :limit => 25 %>", { })
     .ajaxSuccess(function() {
       // Apply a click hook to each search result
       jQuery('.ac_results li').click(selectSearchResult);
