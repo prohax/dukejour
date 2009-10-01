@@ -1,3 +1,5 @@
+/* @override http://dukejour.hat.local/stylesheets/styles.css?1243259845 */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,10 +10,13 @@ body {
   font: 13px Helvetica, sans-serif;
 }
 a {
-  color: #826;
+  color: #d75483;
 }
 li.entry a {
   text-decoration: none;
+}
+.play {
+  color: #00883e;
 }
 li.entry.playing {
   font-weight: bold;
@@ -36,6 +41,8 @@ h1 {
 #main {
   overflow: hidden;
   margin-bottom: 4em;
+  width: 45em;
+  margin: 0 auto;
 }
 
 #footer {
@@ -47,24 +54,15 @@ h1 {
   background-color: #bbb;
 }
 
-#search {
-  width: 32em;
-  float: left;
-}
-#queue {
-  margin-left: 33em;
-}
-
 #queue ul.entries {
   border-top: #999 1px dashed;
   border-bottom: #999 1px dashed;
 }
-
 #suggest_track {
-  font-size: 2.5em;
+  font: bold 2.5em Helvetica;
+  width: 98%;
   width: 96%;
-  color: #338;
-  margin-bottom: 1em;
+  color: #894052;
   padding: 0.2em 0.1em;
   border: #777 1px solid;
   -webkit-border-radius: 3px;
@@ -78,7 +76,7 @@ h1 {
 }
 
 #queue li.entry:hover {
-  background-color: #ccc;
+  background-color: #d4d4d4;
 }
 
 #queue li.entry .name,
@@ -108,7 +106,7 @@ li.entry .library_name {
 
 .votes {
   float: right;
-  color: #338;
+  color: #e86e00;
   font-size: 1.5em;
   font-weight: bold;
   padding: 0 0.4em;
