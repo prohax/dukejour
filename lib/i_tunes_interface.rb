@@ -6,7 +6,6 @@ class ITunesInterface
     }
   rescue
     puts "Couldn't connect to iTunes."
-    exit 1
   end
 
   def player_state
