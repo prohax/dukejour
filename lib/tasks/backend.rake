@@ -38,8 +38,9 @@ end
 require 'vendor/plugins/hammock/lib/hammock'
 include Hammock
 
-
-require 'event'
+require 'entry'
+require 'track'
+require 'library'
 
 require 'rbosa'
 require 'i_tunes_interface'
@@ -50,21 +51,30 @@ def iTunes
 end
 
 def start_thread name, &block
-  returning(Thread.new &block) {
+  returning(Thread.new {
+    loop do
+      puts "#{name} looping."
+      begin
+        block.call
+      ensure
+        ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
+      end
+      sleep 1
+    end
+  }) {
     puts "Started #{name} thread."
   }
 end
 
 def playback_thread
   start_thread 'playback' do
-    loop do
-      if iTunes.stopped?
-        puts "playback looping."
-        
-        # 
-        # ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
-
-        sleep 1
+    if iTunes.stopped?
+      next_track = Entry.upcoming.first
+      if next_track.nil?
+        puts "Nothing to play next."
+      else
+        puts "Playing #{next_track.track.persistent_id} / #{next_track.track.artist} - #{next_track.track.name}"
+        next_track.play!
       end
     end
   end
@@ -72,11 +82,6 @@ end
 
 def library_thread
   start_thread 'library' do
-    loop do
-      puts "library looping."
-
-      sleep 1
-    end
   end
 end
 
@@ -84,6 +89,7 @@ namespace :dukejour do
 
   desc "run the backend services"
   task :backend do
+    Rails::Initializer.new(Rails::Configuration.new).initialize_database
     [
       playback_thread,
       library_thread
