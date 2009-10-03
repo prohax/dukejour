@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
   protect_from_forgery
 
+  after_filter :log_hit
 
   private
 
