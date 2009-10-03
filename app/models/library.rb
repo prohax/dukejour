@@ -33,6 +33,7 @@ class Library < ActiveRecord::Base
       else
         puts "Re-importing library #{display_name}, currently #{tracks.count} tracks."
       end
+      update_attribute :active, true
       import_tracks
     end
   end
@@ -67,7 +68,6 @@ class Library < ActiveRecord::Base
       have_and_dont_want.each {|old_id| tracks.find_by_persistent_id(old_id).destroy }
       want_and_dont_have.each {|new_id| Track.import source_tracks[new_id], self }
 
-      update_attribute :active, true
       touch :imported_at
       puts "Finished importing #{display_name} - library went from #{original_track_count} to #{tracks.count} tracks (#{want_and_dont_have.length} added, #{have_and_dont_want.length} removed).\n"
     end
