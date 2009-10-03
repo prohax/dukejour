@@ -31,7 +31,7 @@ namespace "dukejour" do
       if shared_index.nil?
         puts "No shared libraries available!"
       else
-        ((shared_index + 1)..(row_names.index("PLAYLISTS") - 1)).each { |r_index|
+        ((shared_index + 1)..((row_names.index("GENIUS") || row_names.index("PLAYLISTS")) - 1)).each { |r_index|
           itunes.activate
           puts "Adding library #{row_names[r_index]}"
           rows[r_index].actions.select { |a| a.name == "AXShowMenu" }.first.perform
