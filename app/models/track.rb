@@ -2,6 +2,10 @@ class Track < ActiveRecord::Base
 
   public_resource_for :read, :index
 
+  def self.suggestable
+    ambition_context.within(Library.select {|l| l.active })
+  end
+
   belongs_to :library
   validates_presence_of :persistent_id, :library_id
   validates_uniqueness_of :persistent_id, :scope => :library_id
