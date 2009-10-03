@@ -1,49 +1,61 @@
-require 'rubygems'
-
-module Hammock
-  module ActionController
-    class Base
-      def self.helper_method *args
-      end
-    end
-    class Rescue
-    end
-    class Routing
-      class RouteSet
-        def draw
-        end
-      end
-    end
-    class Resources
-      class Resource
-      end
-      def map_resource
-      end
-      def map_singleton_resource
-      end
-    end
-  end
-  module ActionView
-    class Base
-    end
-  end
-  class ApplicationController
-  end
-end
-
 class Object
   MixInto = 'wat'
 end
 
-require 'vendor/plugins/hammock/lib/hammock'
-include Hammock
+module RailsStubs
+  module Hammock
+    module ActionController
+      class Base
+        def self.helper_method *args
+        end
+      end
+      class Rescue
+      end
+      class Routing
+        class RouteSet
+          def draw
+          end
+        end
+      end
+      class Resources
+        class Resource
+        end
+        def map_resource
+        end
+        def map_singleton_resource
+        end
+      end
+    end
+    module ActionView
+      class Base
+      end
+    end
+    class ApplicationController
+    end
+  end
+end
 
-require 'entry'
-require 'track'
-require 'library'
+def require_and_include
+  require 'vendor/plugins/hammock/lib/hammock'
+  include Hammock
 
-require 'rbosa'
-require 'i_tunes_interface'
+  require 'entry'
+  require 'track'
+  require 'library'
+
+  require 'rbosa'
+  require 'i_tunes_interface'
+end
+
+def init_for_backend
+  require 'rubygems'
+  include RailsStubs
+  require_and_include
+
+  Rails::Initializer.new(Rails::Configuration.new).initialize_database
+end
+
+
 
 
 def iTunes
@@ -89,7 +101,7 @@ namespace :dukejour do
 
   desc "run the backend services"
   task :backend do
-    Rails::Initializer.new(Rails::Configuration.new).initialize_database
+    init_for_backend
     [
       playback_thread,
       library_thread
