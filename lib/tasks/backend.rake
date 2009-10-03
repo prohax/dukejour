@@ -68,6 +68,8 @@ def start_thread name, &block
       puts "#{name} looping."
       begin
         block.call
+      rescue Exception => e
+        puts "#{e.backtrace.first}: #{e.message}"
       ensure
         ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
       end
