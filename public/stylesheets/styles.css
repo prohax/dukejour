@@ -1,4 +1,7 @@
-/* @override http://dukejour.hat.local/stylesheets/styles.css?1243259845 */
+/* @override 
+	http://dukejour.hat.local/stylesheets/styles.css?1243259845
+	http://dukejour.hat.local/stylesheets/styles.css?1254418359
+*/
 
 * {
   margin: 0;
@@ -84,13 +87,19 @@ h1 {
   font-size: 18px;
 }
 
+.ac_results li.track .artist,
 #queue li.entry .artist {
   color: #555;
+}
+#queue li.entry .artist {
   clear: both;
 }
 
 #queue li.entry .album {
   font-size: 14px;
+}
+.ac_results li.track .album,
+#queue li.entry .album {
   color: #444;
 }
 
@@ -116,20 +125,22 @@ li.entry .library_name {
   position: absolute;
 }
 
-.ac_results ul {
-  margin-top: 0.4em;
-  border-left: #bbb 2px solid;
+.ac_results li.track {
+  padding: 0.2em;
+  font-size: 12px;
+  overflow: hidden;
 }
 
-.ac_results li.track {
-  margin: 0.2em;
-  font-size: 11px;
-  overflow: hidden;
+.ac_results li.track .name {
+  font-size: 16px;
+}
+.ac_results li.track .artist {
+  font-size: 13px;
 }
 
 .ac_results li.track:hover {
   cursor: pointer;
-  background-color: #ccc;
+  background-color: #ec9070;
 }
 
 .ac_results li.track .artist,
