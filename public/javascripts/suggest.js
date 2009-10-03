@@ -118,6 +118,7 @@
 
 				if (cached) {
 					displayItems(cached['items']);
+					if (options.cache_callback) options.cache_callback();
 				} else {
 
 					$.get(options.source, {q: q}, function(txt) {
@@ -127,6 +128,8 @@
 
 						displayItems(items);
 						addToCache(q, items, txt.length);
+
+						if (options.callback) options.callback();
 					});
 				}
 			} else {
