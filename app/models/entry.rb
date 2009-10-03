@@ -4,8 +4,6 @@ class Entry < ActiveRecord::Base
 
   belongs_to :track
 
-  has_many :votes, :dependent => :destroy
-
   has_many :events, :dependent => :destroy
   has_many :add_events, :dependent => :destroy
   has_many :play_events, :dependent => :destroy
