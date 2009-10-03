@@ -7,3 +7,9 @@ Rails::Initializer.run do |config|
 
   config.time_zone = 'UTC'
 end
+
+if "irb" == $0
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  require 'hirb'
+  Hirb.enable
+end
