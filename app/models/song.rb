@@ -10,9 +10,9 @@ class Song < ActiveRecord::Base
   before_save :set_normalized_fields
 
   def set_normalized_fields
-    self.normalized_name   =   name.normalize unless name.nil?
-    self.normalized_album  =  album.normalize unless album.nil?
-    self.normalized_artist = artist.normalize unless artist.nil?
+    self.normalized_name   =   name.normalize_for_display unless name.nil?
+    self.normalized_album  =  album.normalize_for_display unless album.nil?
+    self.normalized_artist = artist.normalize_for_display unless artist.nil?
   end
 
   def self.suggestable
@@ -76,7 +76,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.to_search_field field
-    field.downcase.gsub(/\b(the|a|an|and)\b/, '').normalize.gsub(/\W/, '')
+    field.downcase.gsub(/\b(the|a|an|and)\b/, '').normalize_for_display.gsub(/\W/, '')
   end
 
 end
