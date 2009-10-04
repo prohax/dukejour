@@ -13,6 +13,14 @@ class Song < ActiveRecord::Base
     :to => :track
   )
 
+  before_save :set_normalized_fields
+
+  def set_normalized_fields
+    self.normalized_name   =   name.normalize unless name.nil?
+    self.normalized_album  =  album.normalize unless album.nil?
+    self.normalized_artist = artist.normalize unless artist.nil?
+  end
+
   def self.suggestable
     ambition_context.within(Library.select {|l| l.active }, :libraries)
   end

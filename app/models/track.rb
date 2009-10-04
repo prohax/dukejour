@@ -8,8 +8,8 @@ class Track < ActiveRecord::Base
 
   belongs_to :song
 
-  before_create :clean_strings
-  after_create :update_song
+  before_save :clean_strings
+  after_save :update_song
 
   named_scope :dirty, :conditions => "dirty_at IS NOT NULL"
 
