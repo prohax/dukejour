@@ -7,12 +7,6 @@ class Song < ActiveRecord::Base
   has_many :tracks
   has_many :libraries, :through => :tracks
 
-  delegate(
-    :play!,
-
-    :to => :track
-  )
-
   before_save :set_normalized_fields
 
   def set_normalized_fields
@@ -35,6 +29,16 @@ class Song < ActiveRecord::Base
         puts "Source for #{t.persistent_id} #{result ? 'present' : 'missing'}."
       end
     }
+  end
+
+  def play!
+    returning best_track do |track|
+      if track.nil?
+        puts "Couldn't play #{display_name} - no available tracks."
+      else
+        track.play!
+      end
+    end
   end
 
   def self.for track_source
