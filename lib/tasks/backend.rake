@@ -47,9 +47,9 @@ namespace :dukejour do
     require 'rbosa'
     require 'i_tunes_interface'
     [
-      playback_thread,
+      # discover_thread,
       populate_thread,
-      discover_thread
+      playback_thread
     ].each &:join
   end
 end
