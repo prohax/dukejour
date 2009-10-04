@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091004110201) do
+ActiveRecord::Schema.define(:version => 20091004125945) do
 
   create_table "entries", :force => true do |t|
     t.integer  "song_id"
@@ -37,15 +37,18 @@ ActiveRecord::Schema.define(:version => 20091004110201) do
   end
 
   create_table "songs", :force => true do |t|
-    t.string   "artist",        :limit => 256
-    t.string   "album",         :limit => 256
-    t.string   "name",          :limit => 256
+    t.string   "artist",            :limit => 256
+    t.string   "album",             :limit => 256
+    t.string   "name",              :limit => 256
     t.integer  "year"
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "search_artist"
     t.string   "search_name"
+    t.string   "normalized_artist"
+    t.string   "normalized_album"
+    t.string   "normalized_name"
   end
 
   create_table "tracks", :force => true do |t|
@@ -59,6 +62,13 @@ ActiveRecord::Schema.define(:version => 20091004110201) do
     t.datetime "updated_at"
     t.integer  "duration"
     t.integer  "song_id"
+    t.datetime "dirty_at"
+    t.integer  "track_number"
+    t.integer  "track_count"
+    t.integer  "disc_number"
+    t.integer  "disc_count"
+    t.integer  "bit_rate"
+    t.string   "kind",          :limit => 16
   end
 
 end
