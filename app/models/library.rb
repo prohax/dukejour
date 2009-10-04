@@ -27,6 +27,8 @@ class Library < ActiveRecord::Base
     if source.nil?
       puts "Source for #{display_name} not available, marking as offline."
       update_attribute :active, false
+    elsif library_track_count == source.tracks.length
+      puts "Track count for #{display_name} hasn't changed, skipping."
     else
       if new_or_deleted_before_save?
         puts "Importing new library #{display_name}."
@@ -35,6 +37,7 @@ class Library < ActiveRecord::Base
       end
       update_attribute :active, true
       import_tracks
+      adjust :library_track_count => source.tracks.length
     end
   end
 
