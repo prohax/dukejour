@@ -34,6 +34,12 @@ class Track < ActiveRecord::Base
       :name => track_source.name,
       :year => track_source.year,
       :duration => (track_source.duration || -1),
+      :track_number => track_source.track_number,
+      :track_count => track_source.track_count,
+      :disc_number => track_source.disc_number,
+      :disc_count => track_source.disc_count,
+      :bit_rate => track_source.bit_rate,
+      :kind => kind_for(track_source.kind),
 
       :dirty_at => nil
     }, true) do |track|
@@ -60,4 +66,15 @@ class Track < ActiveRecord::Base
     iTunes.play source
   end
 
+  def self.kind_for kind_str
+    if kind_str['AAC audio file']
+      'AAC'
+    elsif kind_str['Apple Lossless audio file']
+      'Apple Lossless'
+    elsif kind_str['MPEG audio file']
+      'MP3'
+    else
+      'unknown'
+    end
+  end
 end
