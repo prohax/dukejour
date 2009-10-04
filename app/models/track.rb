@@ -49,7 +49,7 @@ class Track < ActiveRecord::Base
 
   def source
     library_source = library.source
-    library_source.search(name).detect {|t|
+    library_source.search(name.normalize).detect {|t|
       t.persistent_id == persistent_id
     } unless library_source.nil?
   end
