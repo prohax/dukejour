@@ -25,10 +25,12 @@ class Song < ActiveRecord::Base
     ambition_context.within(Library.select {|l| l.active }, :libraries)
   end
 
-  def track
-    tracks.select {|track|
-      
-    }.first
+  def best_track
+    tracks.sort_by(&:quality).reverse.detect {|t|
+      returning !t.source.nil? do |result|
+        puts "Source for #{t.persistent_id} #{result ? 'present' : 'missing'}."
+      end
+    }
   end
 
   def self.for track_source

@@ -62,6 +62,13 @@ class Track < ActiveRecord::Base
     } unless library_source.nil?
   end
 
+  def quality
+    # Consider some bitrates to be "better" than others - e.g. 192kbps AAC ~ 192kbps MP3.
+    bit_rate * ({
+      'AAC' => 1.4
+    }[kind] || 1)
+  end
+
   def play!
     iTunes.play source
   end
