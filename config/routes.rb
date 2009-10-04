@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
     map.send "suggest_#{name}".to_sym, "#{name}/suggest/:fields", :controller => name, :action => 'suggest', :conditions => {:method => :get}
   end
 
-  map.resources :entries, :member => {:play => :post, :vote => :post}
+  map.resources :entries, :member => {:vote => :post}
   map.resources :events, :collection => {:window => :get}
   map.resources :songs
 

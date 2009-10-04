@@ -21,12 +21,6 @@ li.entry a {
 .play {
   color: #00883e;
 }
-li.entry.playing {
-  font-weight: bold;
-}
-li.entry.playing:before {
-  content: '▶';
-}
 a.song:hover {
   border-bottom: #a48 1px solid;
 }
