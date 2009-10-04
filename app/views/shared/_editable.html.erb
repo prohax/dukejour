@@ -1,9 +1,0 @@
-<% unless opts[:heading] == false %>
-<div class="ht3">
-  <%= render :partial => "shared/editable_heading", :locals => { :opts => opts } %>
-</div>
-<% end %>
-
-<div id="<%= opts[:field] %>">
-  <%= render :partial => "#{opts[:field]}#{'_edit' if opts[:edit]}", :locals => { :opts => opts } %>
-</div>
