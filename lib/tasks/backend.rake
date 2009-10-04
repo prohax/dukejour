@@ -1,7 +1,3 @@
-def iTunes
-  ITunesInterface.new
-end
-
 def start_thread name, opts = {}, &block
   opts[:sleep] ||= 1
   returning(Thread.new {

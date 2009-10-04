@@ -13,3 +13,7 @@ if "irb" == $0
   require 'hirb'
   Hirb.enable
 end
+
+def iTunes
+  ITunesInterface.new
+end
