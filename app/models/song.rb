@@ -49,7 +49,7 @@ class Song < ActiveRecord::Base
   end
 
   def update_metadata
-    unless tracks.empty?
+    unless tracks.length.zero? # empty? would do a count(*), then tracks would be a second query.
       adjust Hash[*metadata_cols.zip(tracks.map {|t|
         metadata_cols.map {|c| t.send c }
       }.transpose).map {|col,data|
