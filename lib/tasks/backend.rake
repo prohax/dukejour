@@ -83,12 +83,11 @@ end
 def playback_thread
   start_thread 'playback' do
     if iTunes.stopped?
-      next_track = Entry.upcoming.first
-      if next_track.nil?
+      if Entry.next.nil?
         puts "Nothing to play next."
       else
-        puts "Playing #{next_track.track.persistent_id} / #{next_track.track.artist} - #{next_track.track.name}"
-        next_track.play!
+        puts "Playing #{Entry.next.track.persistent_id} / #{Entry.next.track.artist} - #{Entry.next.track.name}"
+        Entry.next.play!
       end
     end
   end
