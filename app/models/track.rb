@@ -1,5 +1,7 @@
 class Track < ActiveRecord::Base
 
+  include TrackSongCommon
+
   belongs_to :library
   validates_presence_of :persistent_id, :library_id
   validates_uniqueness_of :persistent_id, :scope => :library_id
@@ -17,18 +19,6 @@ class Track < ActiveRecord::Base
   
   def update_song
     song.update_metadata
-  end
-
-  def has_artist?
-    !artist.blank? && (/unknown( artist)?/i !~ artist)
-  end
-
-  def has_album?
-    !album.blank? && (/unknown( album)?/i !~ album)
-  end
-
-  def has_year?
-    !year.nil? && !year.zero?
   end
 
   def self.import track_source, library

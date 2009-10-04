@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091004064318) do
+ActiveRecord::Schema.define(:version => 20091004110201) do
 
   create_table "entries", :force => true do |t|
-    t.integer  "track_id"
+    t.integer  "song_id"
     t.datetime "played_at"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,5 +1,7 @@
 class Song < ActiveRecord::Base
 
+  include TrackSongCommon
+
   public_resource_for :read, :index
 
   has_many :tracks
@@ -12,7 +14,7 @@ class Song < ActiveRecord::Base
   )
 
   def self.suggestable
-    ambition_context.within(Library.select {|l| l.active })
+    ambition_context.within(Library.select {|l| l.active }, :libraries)
   end
 
   def track

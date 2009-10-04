@@ -1,7 +1,7 @@
 <%
-  mdl = 'track'
+  mdl = 'song'
   create_entry = jquery_xhr :create, Entry,
-    :params => "'entry[track_id]': track_id",
+    :params => "'entry[song_id]': song_id",
     :callback => %Q(
       $('#queue ul.entries').append(data)
         .children(':last').hide()
@@ -12,9 +12,9 @@
 function selectSearchResult() {
   var record, record_email;
 
-  track_id = parseInt($(this).find('.track_id').html());
+  song_id = parseInt($(this).find('.song_id').html());
 
-  if (0 < track_id) {
+  if (0 < song_id) {
     <%= create_entry %>;
 
     jQuery('#suggest_<%= mdl %>')
@@ -60,7 +60,7 @@ jQuery(function() {
   // Hook the suggestion code to the text field
   jQuery("#suggest_<%= mdl %>")
     .focus()
-    .suggest("<%= suggest_tracks_path :fields => 'name,artist,album', :limit => 25 %>", {
+    .suggest("<%= suggest_songs_path :fields => 'name,artist,album', :limit => 25 %>", {
       callback: on_suggest,
       cache_callback: on_suggest
     });

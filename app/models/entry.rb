@@ -2,7 +2,7 @@ class Entry < ActiveRecord::Base
 
   public_resource_for :read, :create, :play, :vote
 
-  belongs_to :track
+  belongs_to :song
 
   has_many :events, :dependent => :destroy
   has_many :add_events, :dependent => :destroy
@@ -36,7 +36,7 @@ class Entry < ActiveRecord::Base
 
   def play!
     touch :played_at
-    track.play!
+    song.play!
   end
 
   def vote!

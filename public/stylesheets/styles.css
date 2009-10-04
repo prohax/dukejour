@@ -27,7 +27,7 @@ li.entry.playing {
 li.entry.playing:before {
   content: '▶';
 }
-a.track:hover {
+a.song:hover {
   border-bottom: #a48 1px solid;
 }
 li {
@@ -56,7 +56,7 @@ h1 {
   background-color: #bbb;
 }
 
-#suggest_track {
+#suggest_song {
   font: bold 2.5em Helvetica;
   width: 17.8em;
   color: #894052;
@@ -87,7 +87,7 @@ h1 {
   font-size: 18px;
 }
 
-.ac_results li.track .artist,
+.ac_results li.song .artist,
 #queue li.entry .artist {
   color: #555;
 }
@@ -98,7 +98,7 @@ h1 {
 #queue li.entry .album {
   font-size: 14px;
 }
-.ac_results li.track .album,
+.ac_results li.song .album,
 #queue li.entry .album {
   color: #444;
 }
@@ -125,26 +125,26 @@ li.entry .library_name {
   position: absolute;
 }
 
-.ac_results li.track {
+.ac_results li.song {
   padding: 0.2em;
   font-size: 12px;
   overflow: hidden;
 }
 
-.ac_results li.track .name {
+.ac_results li.song .name {
   font-size: 16px;
 }
-.ac_results li.track .artist {
+.ac_results li.song .artist {
   font-size: 13px;
 }
 
-.ac_results li.track:hover {
+.ac_results li.song:hover {
   cursor: pointer;
   background-color: #ec9070;
 }
 
-.ac_results li.track .artist,
-.ac_results li.track .album,
-.ac_results li.track .name {
+.ac_results li.song .artist,
+.ac_results li.song .album,
+.ac_results li.song .name {
   padding-right: 1em;
 }
