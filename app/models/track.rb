@@ -40,7 +40,8 @@ class Track < ActiveRecord::Base
       :artist => track_source.artist,
       :album => track_source.album,
       :name => track_source.name,
-      :year => track_source.year
+      :year => track_source.year,
+      :duration => (track_source.duration || -1)
     }, true) do |track|
       if track.new_or_deleted_before_save?
         puts "Added #{library.name}/#{track_source.persistent_id}: #{track_source.name}"

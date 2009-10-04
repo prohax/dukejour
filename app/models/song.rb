@@ -50,7 +50,7 @@ class Song < ActiveRecord::Base
   private
 
   def metadata_cols
-    [:artist, :album, :name, :year]
+    [:artist, :album, :name, :year, :duration]
   end
 
   def self.to_search_field field
