@@ -38,10 +38,10 @@ class Library < ActiveRecord::Base
         else
           puts "Updating library #{display_name}, currently #{tracks.count} tracks."
         end
-        adjust :active => true
         import_tracks
         adjust :library_track_count => source.tracks.length
       end
+      adjust :active => true unless active?
     end
   end
 
