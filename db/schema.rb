@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091004053214) do
+ActiveRecord::Schema.define(:version => 20091004064318) do
 
   create_table "entries", :force => true do |t|
     t.integer  "track_id"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(:version => 20091004053214) do
     t.integer  "library_track_count"
   end
 
+  create_table "songs", :force => true do |t|
+    t.string   "artist",        :limit => 256
+    t.string   "album",         :limit => 256
+    t.string   "name",          :limit => 256
+    t.integer  "year"
+    t.integer  "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "search_artist"
+    t.string   "search_name"
+  end
+
   create_table "tracks", :force => true do |t|
     t.integer  "library_id"
     t.string   "persistent_id", :limit => 16
@@ -45,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20091004053214) do
     t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "duration"
+    t.integer  "song_id"
   end
 
 end

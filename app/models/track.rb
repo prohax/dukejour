@@ -1,20 +1,22 @@
 class Track < ActiveRecord::Base
 
-  public_resource_for :read, :index
-
-  def self.suggestable
-    ambition_context.within(Library.select {|l| l.active })
-  end
-
   belongs_to :library
   validates_presence_of :persistent_id, :library_id
   validates_uniqueness_of :persistent_id, :scope => :library_id
 
+  belongs_to :song
+
   before_create :clean_strings
+  after_create :update_song
+
   def clean_strings
     artist.strip! unless artist.nil?
     album.strip! unless album.nil?
     name.strip! unless name.nil?
+  end
+  
+  def update_song
+    song.update_metadata
   end
 
   def has_artist?
@@ -32,7 +34,8 @@ class Track < ActiveRecord::Base
   def self.import track_source, library
     returning find_or_create_with({
       :persistent_id => track_source.persistent_id,
-      :library_id => library.id
+      :library_id => library.id,
+      :song_id => Song.for(track_source).id
     }, {
       :artist => track_source.artist,
       :album => track_source.album,
