@@ -26,6 +26,14 @@ class Entry < ActiveRecord::Base
     select(&upcoming_scope).kick.sort_by(&sorter)
   end
 
+  def self.next
+    upcoming.first
+  end
+
+  def self.now_playing
+    select {|record| !record.played_at.nil? }.sort_by {|record| -record.played_at }.first
+  end
+
   def play!
     touch :played_at
     track.play!
