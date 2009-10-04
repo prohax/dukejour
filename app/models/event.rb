@@ -6,10 +6,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :entry_id, :type
 
   def self.window_scope
-    if 10.to_i > 0
-      timestamp = Time.now.utc - 10.to_i.seconds
-      lambda {|e| e.created_at > timestamp }
-    end
+    timestamp = Time.now.utc - 2.seconds
+    L{|e| e.created_at > timestamp }
   end
   export_scope :window
 
