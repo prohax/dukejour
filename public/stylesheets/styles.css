@@ -133,8 +133,8 @@ li.entry .library_name {
   color: #e86e00;
   font-size: 1.5em;
   font-weight: bold;
-  padding: 0 0.4em;
-  line-height: 1;
+  line-height: 0.5;
+  padding-top: 0.35em;
 }
 
 .ac_results {
