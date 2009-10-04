@@ -29,15 +29,15 @@ class Library < ActiveRecord::Base
         puts "Source for #{display_name} not available, marking as offline."
         update_attribute :active, false
       end
-    elsif library_track_count == source.tracks.length
+    elsif library_track_count == source.tracks.length && tracks.dirty.empty?
       puts "Track count for #{display_name} hasn't changed, skipping."
     else
       if new_or_deleted_before_save?
         puts "Importing new library #{display_name}."
       else
-        puts "Re-importing library #{display_name}, currently #{tracks.count} tracks."
+        puts "Updating library #{display_name}, currently #{tracks.count} tracks."
       end
-      update_attribute :active, true
+      adjust :active => true
       import_tracks
       adjust :library_track_count => source.tracks.length
     end
@@ -61,7 +61,7 @@ class Library < ActiveRecord::Base
   private
 
   def import_tracks
-    have = Track.persistent_ids_for self
+    have = Track.clean_persistent_ids_for self
     want = source_tracks.keys
     have_and_dont_want, want_and_dont_have = have - want, want - have
 
@@ -69,6 +69,8 @@ class Library < ActiveRecord::Base
       puts "Nothing to update for #{display_name}."
     else
       original_track_count = tracks.count
+
+      puts "This library contains #{original_track_count - have.length} dirty track#{'s' unless original_track_count - have.length == 1} that will be re-imported." unless original_track_count == have.length
 
       have_and_dont_want.each {|old_id|
         puts "Track #{library.name}/#{track_source.persistent_id}: #{track_source.name} disappeared, removing."

@@ -11,6 +11,8 @@ class Track < ActiveRecord::Base
   before_create :clean_strings
   after_create :update_song
 
+  named_scope :dirty, :conditions => "dirty_at IS NOT NULL"
+
   def clean_strings
     artist.strip! unless artist.nil?
     album.strip! unless album.nil?
@@ -31,17 +33,17 @@ class Track < ActiveRecord::Base
       :album => track_source.album,
       :name => track_source.name,
       :year => track_source.year,
-      :duration => (track_source.duration || -1)
+      :duration => (track_source.duration || -1),
+
+      :dirty_at => nil
     }, true) do |track|
-      if track.new_or_deleted_before_save?
-        puts "Added #{library.name}/#{track_source.persistent_id}: #{track_source.name}"
-      end
+      puts "#{track.new_or_deleted_before_save? ? 'Added' : 'Updated'} #{library.name}/#{track_source.persistent_id}: #{track_source.name}"
     end
   end
 
-  def self.persistent_ids_for library
+  def self.clean_persistent_ids_for library
     ActiveRecord::Base.connection.execute(
-      "SELECT persistent_id FROM tracks WHERE library_id = #{library.id}"
+      "SELECT persistent_id FROM tracks WHERE library_id = #{library.id} AND dirty_at IS NULL"
     ).map {|i|
       i['persistent_id']
     }
