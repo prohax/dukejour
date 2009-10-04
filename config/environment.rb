@@ -12,6 +12,8 @@ if "irb" == $0
   ActiveRecord::Base.logger = Logger.new(STDOUT)
   require 'hirb'
   Hirb.enable
+  
+  require 'rbosa'
 end
 
 def iTunes
