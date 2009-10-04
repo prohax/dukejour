@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
 
-  public_resource_for :read, :index, :create, :play, :vote
+  public_resource_for :read, :create, :play, :vote
 
   belongs_to :track
 
@@ -9,8 +9,22 @@ class Entry < ActiveRecord::Base
   has_many :play_events, :dependent => :destroy
   has_many :vote_events, :dependent => :destroy
 
+  def self.upcoming_scope
+    L{|record| record.played_at.nil? }
+  end
 
-  named_scope :upcoming, :conditions => 'played_at IS NULL', :order => 'created_at DESC'
+  def self.index_scope
+    upcoming_scope
+  end
+  export_scope :index
+
+  def self.sorter
+    L{|record| -record.votes }
+  end
+
+  def self.upcoming
+    select(&upcoming_scope).kick.sort_by(&sorter)
+  end
 
   def play!
     touch :played_at
