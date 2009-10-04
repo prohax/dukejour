@@ -77,6 +77,10 @@ ul.entries li.entry .year {
   padding: 0;
 }
 
+ul.entries li.entry .not_track_name {
+  white-space: nowrap;
+}
+
 ul.entries li.entry .name {
   font-size: 18px;
 }
