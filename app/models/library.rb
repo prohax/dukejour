@@ -70,7 +70,10 @@ class Library < ActiveRecord::Base
     else
       original_track_count = tracks.count
 
-      have_and_dont_want.each {|old_id| tracks.find_by_persistent_id(old_id).destroy }
+      have_and_dont_want.each {|old_id|
+        puts "Track #{library.name}/#{track_source.persistent_id}: #{track_source.name} disappeared, removing."
+        tracks.find_by_persistent_id(old_id).destroy
+      }
       want_and_dont_have.each {|new_id| Track.import source_tracks[new_id], self }
 
       touch :imported_at
