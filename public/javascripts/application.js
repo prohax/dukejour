@@ -11,8 +11,12 @@ function checkForEvents() {
           handleEventJSON(e);
         });
       }
+      queueEventCheck();
     }
   );
+}
+
+function queueEventCheck() {
   setTimeout(checkForEvents, EventCheckInterval * 1000);
 }
 
@@ -41,4 +45,4 @@ $(function() {
 
 });
 
-$(window).load(checkForEvents);
+$(window).load(queueEventCheck);
