@@ -56,7 +56,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.to_search_field field
-    field.downcase.gsub(/\b(the|a|an|and)\b/, '').gsub(/\W/, '')
+    field.downcase.gsub(/\b(the|a|an|and)\b/, '').normalize.gsub(/\W/, '')
   end
 
 end
