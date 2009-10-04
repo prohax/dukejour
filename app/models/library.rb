@@ -52,7 +52,7 @@ class Library < ActiveRecord::Base
     if @source_tracks.nil?
       @source_tracks = {}
       source.tracks.each {|t|
-        @source_tracks[t.persistent_id] = t if t.video_kind == OSA::ITunes::EVDK::NONE && !t.podcast?
+        @source_tracks[t.persistent_id] = t if t.enabled? && !t.podcast? && t.video_kind == OSA::ITunes::EVDK::NONE
       }
     end
     @source_tracks
