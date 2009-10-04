@@ -1,3 +1,11 @@
+#now_playing
+  %ul.entries
+    - if Entry.now_playing.nil?
+      %li.entry
+        .name There's nothing playing right now.
+    - else
+      = render :partial => 'index_entry', :locals => {:entry => Entry.now_playing}
+
 #search
   = render :partial => 'songs/suggest'
 

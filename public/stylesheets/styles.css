@@ -60,40 +60,63 @@ h1 {
   -moz-border-radius: 3px;
 }
 
-#queue li.entry {
-  padding: 0.4em 0.2em;
+ul.entries li.entry {
+  padding: 0.4em;
   display: block;
   overflow: hidden;
 }
 
-#queue li.entry:hover {
+ul.entries li.entry:hover {
   background-color: #d4d4d4;
 }
 
-#queue li.entry .name,
-#queue li.entry .artist,
-#queue li.entry .album,
-#queue li.entry .year {
+ul.entries li.entry .name,
+ul.entries li.entry .artist,
+ul.entries li.entry .album,
+ul.entries li.entry .year {
   padding: 0;
 }
 
-#queue li.entry .name {
+ul.entries li.entry .name {
   font-size: 18px;
 }
 
+#now_playing ul.entries {
+  margin-bottom: 1em;
+}
+#queue ul.entries {
+  margin-top: 0.5em;
+}
+#now_playing ul.entries li {
+  color: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#333), color-stop(0.55, #272727), color-stop(0.55, #1a1a1a));
+  border: #555 1px solid;
+  -webkit-border-radius: 3px;
+}
+#now_playing ul.entries li .artist {
+  color: #666;
+}
+#now_playing ul.entries li .album {
+  color: #999;
+}
+
+ul.entries li span {
+  margin-right: 0.25em;
+}
+
 .ac_results li.song .artist,
-#queue li.entry .artist {
+ul.entries li.entry .artist {
   color: #555;
 }
-#queue li.entry .artist {
+ul.entries li.entry .artist {
   clear: both;
 }
 
-#queue li.entry .album {
+ul.entries li.entry .album {
   font-size: 14px;
 }
 .ac_results li.song .album,
-#queue li.entry .album {
+ul.entries li.entry .album {
   color: #444;
 }
 
