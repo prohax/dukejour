@@ -21,7 +21,7 @@ class ITunesInterface
   def playing?; :playing == player_state end
   def paused?;  :paused  == player_state end
 
-  def play obj = nil
+  def play! obj = nil
     if obj
       app_reference.play obj, :once => true
     elsif paused?

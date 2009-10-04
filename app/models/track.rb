@@ -70,7 +70,7 @@ class Track < ActiveRecord::Base
   end
 
   def play!
-    iTunes.play source
+    iTunes.play! source
   end
 
   def self.kind_for kind_str
