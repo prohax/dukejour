@@ -45,6 +45,7 @@ namespace :dukejour do
   desc "run the backend services"
   task :backend => :environment do
     require 'rbosa'
+    OSA.timeout = 10
     require 'i_tunes_interface'
     [
       # discover_thread,
