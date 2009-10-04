@@ -31,8 +31,8 @@ class Song < ActiveRecord::Base
       song.search_artist == track_search_artist &&
       song.search_name == track_search_name &&
 
-      song.duration >= track_duration - 1 &&
-      song.duration <= track_duration + 1
+      song.duration >= track_duration - 3 &&
+      song.duration <= track_duration + 3
     }.first || Song.create(
       :search_artist => track_search_artist,
       :search_name => track_search_name,
