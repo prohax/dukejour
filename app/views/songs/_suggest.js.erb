@@ -35,7 +35,6 @@ function size_suggest_results_to_window() {
 
 function on_suggest() {
   size_suggest_results_to_window();
-  // Apply a click hook to each search result
   jQuery('.ac_results li').click(selectSearchResult);
 }
 
@@ -44,9 +43,7 @@ jQuery(function() {
   // Prevent submits
   jQuery("form:first").submit(function() { return false; });
 
-  jQuery(window).resize(function() {
-    size_suggest_results_to_window();
-  });
+  jQuery(window).resize(size_suggest_results_to_window);
 
   // When an entry in the completion list is ENTERinated, AJAX load the corresponding record
   jQuery("#suggest_<%= mdl %>")
