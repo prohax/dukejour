@@ -25,8 +25,10 @@ class Library < ActiveRecord::Base
 
   def import
     if source.nil?
-      puts "Source for #{display_name} not available, marking as offline."
-      update_attribute :active, false
+      if active?
+        puts "Source for #{display_name} not available, marking as offline."
+        update_attribute :active, false
+      end
     elsif library_track_count == source.tracks.length
       puts "Track count for #{display_name} hasn't changed, skipping."
     else
