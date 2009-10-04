@@ -29,6 +29,8 @@ function handleEventJSON(e) {
 
 $(function() {
 
+  jQuery('#suggest_track').focus();
+
   // show when hovered
   jQuery('.hoverable .child').css({opacity: 0});
   jQuery('.hoverable').hover(function() {
