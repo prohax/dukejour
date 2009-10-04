@@ -2,10 +2,10 @@ def iTunes
   ITunesInterface.new
 end
 
-def start_thread name, &block
+def start_thread name, opts = {}, &block
+  opts[:sleep] ||= 1
   returning(Thread.new {
     loop do
-      puts "#{name} looping."
       begin
         block.call
       rescue Exception => e
@@ -13,10 +13,10 @@ def start_thread name, &block
       ensure
         ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
       end
-      sleep 1
+      sleep opts[:sleep]
     end
   }) {
-    puts "Started #{name} thread."
+    puts "Started #{name} thread, firing every #{opts[:sleep]}s."
   }
 end
 
@@ -33,8 +33,15 @@ def playback_thread
   end
 end
 
-def library_thread
-  start_thread 'library' do
+def populate_thread
+  start_thread 'library', :sleep => 10 do
+    populate
+  end
+end
+
+def discover_thread
+  start_thread 'library', :sleep => 30 do
+    discover
   end
 end
 
@@ -45,7 +52,8 @@ namespace :dukejour do
     require 'i_tunes_interface'
     [
       playback_thread,
-      library_thread
+      populate_thread,
+      discover_thread
     ].each &:join
   end
 end
