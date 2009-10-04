@@ -60,7 +60,7 @@ jQuery(function() {
   // Hook the suggestion code to the text field
   jQuery("#suggest_<%= mdl %>")
     .focus()
-    .suggest("<%= suggest_songs_path :fields => 'name,artist,album', :limit => 25 %>", {
+    .suggest("<%= suggest_songs_path :fields => 'normalized_name,normalized_artist,normalized_album', :limit => 25 %>", {
       callback: on_suggest,
       cache_callback: on_suggest
     });
