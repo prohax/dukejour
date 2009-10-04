@@ -25,6 +25,10 @@ class Song < ActiveRecord::Base
     ambition_context.within(Library.select {|l| l.active }, :libraries)
   end
 
+  def display_name
+    "#{artist} [#{album}] - #{track_number} #{name}"
+  end
+
   def best_track
     tracks.sort_by(&:quality).reverse.detect {|t|
       returning !t.source.nil? do |result|
