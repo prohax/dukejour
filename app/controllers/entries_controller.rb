@@ -5,9 +5,13 @@ class EntriesController < ApplicationController
   end
 
   def play
-    if find_record
-      @entry.track.play!
-    end
+    @entry.track.play! if find_record
+    render :nothing => true
+  end
+
+  def vote
+    @entry.vote! if find_record
+    render :nothing => true
   end
 
 end

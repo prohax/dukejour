@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
 
-  public_resource_for :read, :index, :create, :play
+  public_resource_for :read, :index, :create, :play, :vote
 
   belongs_to :track
 
@@ -9,8 +9,17 @@ class Entry < ActiveRecord::Base
   has_many :play_events, :dependent => :destroy
   has_many :vote_events, :dependent => :destroy
 
-  delegate :play!, :to => :track
 
   named_scope :upcoming, :conditions => 'played_at IS NULL', :order => 'created_at DESC'
+
+  def play!
+    touch :played_at
+    track.play!
+  end
+
+  def vote!
+    offset! :votes, 1
+    vote_events.create
+  end
 
 end
