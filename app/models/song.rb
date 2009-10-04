@@ -42,7 +42,7 @@ class Song < ActiveRecord::Base
     adjust Hash[*metadata_cols.zip(tracks.map {|t|
       metadata_cols.map {|c| t.send c }
     }.transpose).map {|col,data|
-      [col, data.compact.hash_by(:to_s, &:length).sort_by {|_,v| -v }.first.first]
+      [col, data.compact.hash_by(:self, &:length).sort_by {|_,v| -v }.first.first]
     }.flatten]
   end
 
