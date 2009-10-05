@@ -26,9 +26,10 @@ class Track < ActiveRecord::Base
   def self.import track_source, library
     returning find_or_create_with({
       :persistent_id => track_source.persistent_id,
-      :library_id => library.id,
-      :song_id => Song.for(track_source).id
+      :library_id => library.id
     }, {
+      :song_id => Song.for(track_source).id,
+
       :artist => track_source.artist,
       :album => track_source.album,
       :name => track_source.name,
