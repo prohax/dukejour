@@ -28,13 +28,13 @@ def playback_thread
 end
 
 def populate_thread
-  start_thread 'library', :sleep => 10 do
+  start_thread 'populated', :sleep => 10 do
     populate
   end
 end
 
 def discover_thread
-  start_thread 'library', :sleep => 30 do
+  start_thread 'discover', :sleep => 30 do
     discover
   end
 end
@@ -42,11 +42,11 @@ end
 namespace :dukejour do
   desc "run the backend services"
   task :backend => :environment do
-    require 'rbosa'
-    OSA.timeout = 10
+    require 'appscript'
+    include Appscript
     require 'i_tunes_interface'
     [
-      # discover_thread,
+      discover_thread,
       populate_thread,
       playback_thread
     ].each &:join

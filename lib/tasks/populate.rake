@@ -1,5 +1,6 @@
 def populate
-  require 'rbosa'
+  require 'appscript'
+  include Appscript
 
   (Library.all | iTunes.sources.map {|source|
     Library.create_for source

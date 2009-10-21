@@ -1,8 +1,8 @@
 class ITunesInterface
 
   def sources
-    app_reference.sources.select {|s|
-      [OSA::ITunes::ESRC::LIBRARY, OSA::ITunes::ESRC::SHARED_LIBRARY].include? s.kind
+    app_reference.sources.get.select {|s|
+      [:library, :shared_library].include? s.kind.get
     }
   rescue
     puts "Couldn't connect to iTunes."
@@ -10,11 +10,7 @@ class ITunesInterface
   end
 
   def player_state
-    case app_reference.player_state
-    when OSA::ITunes::EPLS::STOPPED; :stopped
-    when OSA::ITunes::EPLS::PLAYING; :playing
-    when OSA::ITunes::EPLS::PAUSED;  :paused
-    end
+    app_reference.player_state.get
   end
 
   def stopped?; :stopped == player_state end
@@ -38,8 +34,7 @@ class ITunesInterface
   private
 
   def app_reference
-    OSA.utf8_strings = true
-    @app_reference ||= OSA.app('iTunes')
+    @app_reference ||= app('iTunes')
   end
 
 end

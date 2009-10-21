@@ -25,26 +25,26 @@ class Track < ActiveRecord::Base
 
   def self.import track_source, library
     returning find_or_create_with({
-      :persistent_id => track_source.persistent_id,
+      :persistent_id => track_source.persistent_ID.get,
       :library_id => library.id
     }, {
       :song_id => Song.for(track_source).id,
 
-      :artist => track_source.artist,
-      :album => track_source.album,
-      :name => track_source.name,
-      :year => track_source.year,
-      :duration => (track_source.duration || -1),
-      :track_number => track_source.track_number,
-      :track_count => track_source.track_count,
-      :disc_number => track_source.disc_number,
-      :disc_count => track_source.disc_count,
-      :bit_rate => track_source.bit_rate,
-      :kind => kind_for(track_source.kind),
+      :artist => track_source.artist.get,
+      :album => track_source.album.get,
+      :name => track_source.name.get,
+      :year => track_source.year.get,
+      :duration => (track_source.duration.get || -1),
+      :track_number => track_source.track_number.get,
+      :track_count => track_source.track_count.get,
+      :disc_number => track_source.disc_number.get,
+      :disc_count => track_source.disc_count.get,
+      :bit_rate => track_source.bit_rate.get,
+      :kind => kind_for(track_source.kind.get),
 
       :dirty_at => nil
     }, true) do |track|
-      puts "#{track.new_or_deleted_before_save? ? 'Added' : 'Updated'} #{library.name}/#{track_source.persistent_id}: #{track_source.name}"
+      puts "#{track.new_or_deleted_before_save? ? 'Added' : 'Updated'} #{library.name}/#{track_source.persistent_ID.get}: #{track_source.name.get}"
     end
   end
 

@@ -27,10 +27,12 @@ def discover
     row_names = rows.map { |r| r.static_texts[0].name.get }
   
     shared_index = row_names.index("SHARED")
-    if shared_index.nil?
+    next_index = (row_names.index("GENIUS") || row_names.index("PLAYLISTS"))
+    lib_indices = ((shared_index + 1)..(next_index - 1)).to_a - [row_names.index("Home Sharing")].compact
+    if lib_indices.empty?
       puts "No shared libraries available!"
     else
-      ((shared_index + 1)..((row_names.index("GENIUS") || row_names.index("PLAYLISTS")) - 1)).each { |r_index|
+      lib_indices.each { |r_index|
         itunes.activate
         puts "Adding library #{row_names[r_index]}"
         rows[r_index].actions["AXShowMenu"].perform

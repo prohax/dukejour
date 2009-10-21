@@ -13,7 +13,8 @@ if "irb" == $0
   require 'hirb'
   Hirb.enable
   
-  require 'rbosa'
+  require 'appscript'
+  include Appscript
 end
 
 def iTunes

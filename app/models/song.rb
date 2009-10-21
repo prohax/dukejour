@@ -42,9 +42,12 @@ class Song < ActiveRecord::Base
   end
 
   def self.for track_source
-    track_search_artist = to_search_field(track_source.artist)
-    track_search_name = to_search_field(track_source.name)
-    track_duration = (track_source.duration || -1).round
+    track_search_artist = to_search_field(track_source.artist.get)
+    track_search_name = to_search_field(track_source.name.get)
+    track_duration = case (d = track_source.duration.get)
+      when Symbol: -1
+      else d.round
+    end            
     select {|song|
       song.search_artist == track_search_artist &&
       song.search_name == track_search_name &&

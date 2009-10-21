@@ -17,9 +17,9 @@ class Library < ActiveRecord::Base
 
   def self.create_for source
     find_or_create_with({
-      :name => source.name
+      :name => source.name.get
     }, {
-      :persistent_id => source.persistent_id
+      :persistent_id => source.persistent_ID.get
     }, true)
   end
 
@@ -30,7 +30,7 @@ class Library < ActiveRecord::Base
         adjust :active => false
       end
     else
-      if library_track_count == source.tracks.length && tracks.dirty.empty?
+      if library_track_count == source.tracks.get.size && tracks.dirty.empty?
         puts "Track count for #{display_name} hasn't changed, skipping."
       else
         if new_or_deleted_before_save?
@@ -46,15 +46,15 @@ class Library < ActiveRecord::Base
   end
 
   def source
-    detected_source = iTunes.sources.detect {|l| l.name == name }
+    detected_source = iTunes.sources.detect {|l| l.name.get == name }
     detected_source.library_playlists.first unless detected_source.nil?
   end
 
   def source_tracks
     if @source_tracks.nil?
       @source_tracks = {}
-      source.tracks.each {|t|
-        @source_tracks[t.persistent_id] = t if t.enabled? && !t.podcast? && t.video_kind == OSA::ITunes::EVDK::NONE
+      source.tracks.get.each {|t|
+        @source_tracks[t.persistent_ID.get] = t if t.enabled.get && !t.podcast.get && t.video_kind.get == :none
       }
     end
     @source_tracks
