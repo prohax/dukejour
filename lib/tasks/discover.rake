@@ -19,8 +19,8 @@ def discover
   process = sys.processes.get.find { |p| p.name.get == "iTunes" }
   if process.nil?
     puts "iTunes is not running!"
-  else  
-    process.visible.set true
+  else
+    # process.visible.set true if !process.visible.get
     rows = process.windows.first.splitter_groups.first.scroll_areas.first.outlines.first.rows.get
 
     # rows = process.windows[0].splitter_groups[0].scroll_areas[0].outlines[0].rows
@@ -33,20 +33,20 @@ def discover
       puts "No shared libraries available!"
     else
       lib_indices.each { |r_index|
-        itunes.activate
+        # itunes.activate
         puts "Adding library #{row_names[r_index]}"
         rows[r_index].actions["AXShowMenu"].perform
-        sleep(1)
+        sleep(0.1)
         sys.key_code 53 # escape the right-click menu
-        sleep(1)
+        sleep(0.1)
         sys.key_code 53 # escape the password prompt, if it appeared
         # sys.key_code 100 # dismiss an error dialog, e.g. 'too many connections', if it appeared
-        sleep(1)
+        sleep(0.1)
         puts "Done."
       }
     end
   
-    process.visible.set false
+    # process.visible.set false
   end
 end
 
