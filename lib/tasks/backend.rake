@@ -46,7 +46,7 @@ namespace :dukejour do
     include Appscript
     require 'i_tunes_interface'
     [
-      discover_thread,
+      # discover_thread,
       populate_thread,
       playback_thread
     ].each &:join

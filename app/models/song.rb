@@ -49,12 +49,12 @@ class Song < ActiveRecord::Base
       else d.round
     end            
     select {|song|
-      song.search_artist == track_search_artist &&
-      song.search_name == track_search_name &&
-
       song.duration >= track_duration - 3 &&
       song.duration <= track_duration + 3
-    }.first || Song.create(
+    }.find(:all, :conditions => {
+      :search_artist => track_search_artist,
+      :search_name => track_search_name
+    }).first || Song.create(
       :search_artist => track_search_artist,
       :search_name => track_search_name,
       :duration => track_duration
@@ -79,7 +79,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.to_search_field field
-    field.downcase.gsub(/\b(the|a|an|and)\b/, '').normalize_for_display.gsub(/\W/, '')
+    field.downcase.gsub(/\b(the|a|an|and)\b/, '').normalize_for_display.gsub(/\W/, '').to_s
   end
 
 end

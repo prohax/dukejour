@@ -39,7 +39,7 @@ class Library < ActiveRecord::Base
           puts "Updating library #{display_name}, currently #{tracks.count} tracks."
         end
         import_tracks
-        adjust :library_track_count => source.tracks.length
+        adjust :library_track_count => source.tracks.get.length
       end
       adjust :active => true unless active?
     end
@@ -75,8 +75,9 @@ class Library < ActiveRecord::Base
       puts "This library contains #{original_track_count - have.length} dirty track#{'s' unless original_track_count - have.length == 1} that will be re-imported." unless original_track_count == have.length
 
       have_and_dont_want.each {|old_id|
-        puts "Track #{library.name}/#{track_source.persistent_id}: #{track_source.name} disappeared, removing."
-        tracks.find_by_persistent_id(old_id).destroy
+        old_track = tracks.find_by_persistent_id(old_id)
+        puts "Track #{old_track.library.name}/#{old_track.persistent_id}: #{old_track.name} disappeared, removing."
+        old_track.destroy
       }
       want_and_dont_have.each {|new_id| Track.import source_tracks[new_id], self }
 
