@@ -15,9 +15,10 @@ def discover
     else
       left_sidebar.splitter_groups.first
     end
-    rows = library_panel.scroll_areas.first.outlines.first.rows.get
-
-    # rows = process.windows[0].splitter_groups[0].scroll_areas[0].outlines[0].rows
+    outline = library_panel.scroll_areas.first.outlines
+    outline_y_min = outline.position.get.flatten.last
+    outline_y_bounds = outline_y_min..(outline_y_min + outline.size.get.flatten.last)
+    rows = outline.first.rows.get
     row_names = rows.map { |r| r.static_texts[0].name.get }
   
     shared_index = row_names.index("SHARED")
@@ -27,16 +28,19 @@ def discover
       puts "No shared libraries available!"
     else
       lib_indices.each { |r_index|
-        # itunes.activate
-        puts "Adding library #{row_names[r_index]}"
-        rows[r_index].actions["AXShowMenu"].perform
-        sleep(0.1)
-        sys.key_code 53 # escape the right-click menu
-        puts "Done."
+        y_pos = rows[r_index].position.get.last
+        if (outline_y_bounds.include? y_pos)
+          puts "Adding library #{row_names[r_index]}"
+          rows[r_index].actions["AXShowMenu"].perform
+          sleep(0.1)
+          sys.key_code 53 # escape the right-click menu
+          puts "Done."
+        else
+          puts "Sorry, you need to have the shared library visible in the iTunes window. Sucky, I know."
+          puts "TODO - HIT SCROLLBARS TO MAKE VISIBLE"
+        end
       }
     end
-  
-    # process.visible.set false
   end
 end
 
