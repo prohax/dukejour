@@ -32,7 +32,7 @@ class Library < ActiveRecord::Base
     else
       adjust :active => true unless active?
       if library_track_count == source.tracks.get.size && tracks.dirty.empty?
-        puts "Track count for #{display_name} hasn't changed, skipping."
+        # puts "Track count for #{display_name} hasn't changed, skipping."
       else
         if new_or_deleted_before_save?
           puts "Importing new library #{display_name}."
