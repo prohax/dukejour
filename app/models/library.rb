@@ -30,6 +30,7 @@ class Library < ActiveRecord::Base
         adjust :active => false
       end
     else
+      adjust :active => true unless active?
       if library_track_count == source.tracks.get.size && tracks.dirty.empty?
         puts "Track count for #{display_name} hasn't changed, skipping."
       else
@@ -41,7 +42,6 @@ class Library < ActiveRecord::Base
         import_tracks
         adjust :library_track_count => source.tracks.get.length
       end
-      adjust :active => true unless active?
     end
   end
 
