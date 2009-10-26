@@ -26,7 +26,7 @@ class Song < ActiveRecord::Base
   def best_track
     tracks.sort_by(&:quality).reverse.detect {|t|
       returning !t.source.nil? do |result|
-        puts "Source for #{t.persistent_id} #{result ? 'present' : 'missing'}."
+        puts "Source for #{t.persistent_id} (from #{t.library.name}) #{result ? 'present' : 'missing'}."
       end
     }
   end
