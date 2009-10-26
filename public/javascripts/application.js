@@ -9,15 +9,5 @@ function vote_event(entry) {
 }
 
 $(function() {
-
   jQuery('#suggest_track').focus();
-
-  // show when hovered
-  jQuery('.hoverable .child').css({opacity: 0});
-  jQuery('.hoverable').hover(function() {
-    jQuery('.child', this).animate({opacity: 1}, 100);
-  }, function() {
-    jQuery('.child', this).animate({opacity: 0}, 400);
-  });
-
 });
