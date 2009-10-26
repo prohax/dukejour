@@ -28,7 +28,7 @@ def playback_thread
 end
 
 def populate_thread
-  start_thread 'populated', :sleep => 10 do
+  start_thread 'populate', :sleep => 10 do
     populate
   end
 end
