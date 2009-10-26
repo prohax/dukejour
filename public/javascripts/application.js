@@ -10,8 +10,11 @@ function vote_event(entry) {
   entry = entry.entry
   vote_count = $('ul.entries li.entry_' + entry.id + ' .votes .count');
   vote_count
-    .show('highlight', 2000)
-    .html(parseInt(vote_count.html()) + 1);
+    .html(parseInt(vote_count.html()) + 1)
+    .stop()
+    .animate({'font-size': '1.5em'}, 200)
+    .animate({'font-size': '0.85em'}, 200)
+    .animate({'font-size': '1em'}, 200);
 }
 
 $(function() {
