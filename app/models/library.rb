@@ -34,7 +34,7 @@ class Library < ActiveRecord::Base
       if source_duration > 0 #source duration is 0 while the library is being connected
         adjust :active => true unless active?
         if duration == source_duration && tracks.dirty.empty?
-          puts "Track count for #{display_name} hasn't changed, skipping."
+          # puts "Track count for #{display_name} hasn't changed, skipping."
         else
           if new_or_deleted_before_save?
             puts "Importing new library #{display_name}."
