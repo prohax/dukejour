@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
   def current_user
     nil
   end
+
+  def call_via_juggernaut function, data
+    Juggernaut.send_to_channels "#{function}(#{escape_juggernaut data});", ['dukejour']
+  end
+
+  def escape_juggernaut message
+    message.gsub(/\n/, '\n').gsub(/\r/, '\r')
+  end
 end

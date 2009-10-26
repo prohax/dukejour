@@ -1,34 +1,11 @@
 var KEYS = { BACKSPACE:8, TAB:9, RETURN:13, ENTER:3, ESC:27, SPACE:32, LEFT:37, UP:38, RIGHT:39, DOWN:40, DELETE:46 };
 
-var EventCheckInterval = 2;
-
-function checkForEvents() {
-  $.getJSON(
-    '/events/window?format=json&window_size=' + EventCheckInterval,
-    function(data, textStatus) {
-      if ('success' == textStatus) {
-        $.each(data, function(i, e){
-          handleEventJSON(e);
-        });
-      }
-      queueEventCheck();
-    }
-  );
-}
-
-function queueEventCheck() {
-  setTimeout(checkForEvents, EventCheckInterval * 1000);
-}
-
-function handleEventJSON(e) {
-  if (e.vote_event) {
-    vote_count = $('ul.entries li.entry_' + e.vote_event.entry_id + ' .votes .count');
-    vote_count
-      .show('highlight', 2000)
-      .html(parseInt(vote_count.html()) + 1);
-  } else if (e.add_event) {
-
-  }
+function vote_event(entry) {
+  entry = entry.entry
+  vote_count = $('ul.entries li.entry_' + entry.id + ' .votes .count');
+  vote_count
+    .show('highlight', 2000)
+    .html(parseInt(vote_count.html()) + 1);
 }
 
 $(function() {
@@ -44,5 +21,3 @@ $(function() {
   });
 
 });
-
-$(window).load(queueEventCheck);

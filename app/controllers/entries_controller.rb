@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
 
   def vote
     @entry.vote! if find_record
+    call_via_juggernaut :vote_event, @entry.to_json(:include => :song)
     render :nothing => true
   end
 
