@@ -1,9 +1,11 @@
 var KEYS = { BACKSPACE:8, TAB:9, RETURN:13, ENTER:3, ESC:27, SPACE:32, LEFT:37, UP:38, RIGHT:39, DOWN:40, DELETE:46 };
 
 function add_event(entry_html) {
-  $('#queue ul.entries').append(entry)
-    .children(':last').hide()
-    .show('blind', {direction: 'vertical'}, 500);
+  if ($('#queue ul.entries li.' + $(entry_html).attr('class').match(/entry_\d+/)[0]).length == 0) {
+    $('#queue ul.entries').append(entry_html)
+      .children(':last').hide()
+      .show('blind', {direction: 'vertical'}, 500);
+  }
 }
 
 function vote_event(entry) {
