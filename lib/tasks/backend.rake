@@ -28,14 +28,8 @@ def playback_thread
 end
 
 def populate_thread
-  start_thread 'populated', :sleep => 10 do
+  start_thread 'populated', :sleep => 1 do
     populate
-  end
-end
-
-def discover_thread
-  start_thread 'discover', :sleep => 30 do
-    discover
   end
 end
 
@@ -46,7 +40,7 @@ namespace :dukejour do
     include Appscript
     require 'i_tunes_interface'
     [
-      # discover_thread,
+      discover, #is naturally asynchronous
       populate_thread,
       playback_thread
     ].each &:join
