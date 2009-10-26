@@ -1,4 +1,6 @@
-def discover
+def discover target_names = []
+  puts "Searching and adding the following: " + target_names.join(", ") if !target_names.empty?
+  
   require 'appscript'
   include Appscript
   
@@ -21,11 +23,16 @@ def discover
     rows = outline.first.rows.get
     row_names = rows.map { |r| r.static_texts[0].name.get }
   
-    shared_index = row_names.index("SHARED")
-    next_index = (row_names.index("GENIUS") || row_names.index("PLAYLISTS"))
-    lib_indices = ((shared_index + 1)..(next_index - 1)).to_a - [row_names.index("Home Sharing")].compact
+    lib_indices = if (target_names.empty?)
+      shared_index = row_names.index("SHARED")
+      next_index = (row_names.index("GENIUS") || row_names.index("PLAYLISTS"))
+      ((shared_index + 1)..(next_index - 1)).to_a - [row_names.index("Home Sharing")].compact
+    else
+      target_names.map { |n| row_names.index(n) }.compact
+    end
+    
     if lib_indices.empty?
-      puts "No shared libraries available!"
+      puts "None of the requested shared libraries available!"
     else
       lib_indices.each { |r_index|
         y_pos = rows[r_index].position.get.last

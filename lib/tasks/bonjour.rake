@@ -8,28 +8,31 @@ def bonjour
   mutex = Mutex.new
   
   DNSSD.browse('_daap._tcp.') do |br|
+    p br.flags
     begin
-     Timeout.timeout(5) do
-        DNSSD.resolve(br) do |rr|
-          begin
-            mutex.synchronize do
-              puts br.name + if br.flags.add? then " joined." else " parted." end
-              puts rr.text_record.map { |k,v| k + " => " + v }
-              puts "\n" * 3
-              # rr_exists = Proc.new {|existing_rr| existing_rr.target == rr.target && existing_rr.fullname == rr.fullname}
-              # if (DNSSD::Flags::Add & br.flags.to_i) != 0
-                # @replies << rr unless @replies.any?(&rr_exists)
-              # else
-                # @replies.delete_if(&rr_exists)
-              # end
+      if !br.flags.add?
+        puts br.name + " dropped. Nothing to do."
+      else
+        puts br.name + " detected."
+        Timeout.timeout(5) do
+          DNSSD.resolve(br) do |rr|
+            begin
+              mutex.synchronize do
+                if rr.text_record["Password"] != "0"
+                  puts "Can't import, this library is password-protected."
+                  break
+                else
+                  discover [rr.text_record["Machine Name"]]
+                end
+              end
+            rescue DNSSD::UnknownError
+              $stderr.puts "unknown error occurred in dnssd: #{$!.message}"
+            ensure
+              rr.service.stop unless rr.service.stopped?
             end
-          rescue DNSSD::UnknownError
-            $stderr.puts "unknown error occurred in dnssd: #{$!.message}"
-          ensure
-            rr.service.stop unless rr.service.stopped?
           end
         end
-     end
+      end
     rescue DNSSD::UnknownError
       $stderr.puts "unknown error occurred in dnssd: #{$!.message}"
     rescue Timeout::Error
