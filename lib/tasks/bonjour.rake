@@ -8,7 +8,6 @@ def bonjour
   mutex = Mutex.new
   
   DNSSD.browse('_daap._tcp.') do |br|
-    p br.flags
     begin
       if !br.flags.add?
         puts br.name + " dropped. Nothing to do."
@@ -45,8 +44,7 @@ namespace :dukejour do
   desc "find the libraries over bonjour"
   task :bonjour do
     bonjour
-    # sleep 10
-    sleep 0.1 while true
+    sleep 10 while true
   end
 end
   
