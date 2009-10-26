@@ -55,10 +55,17 @@ class Library < ActiveRecord::Base
 
   def source_tracks
     if @source_tracks.nil?
-      @source_tracks = {}
-      source.tracks.get.each {|t|
-        @source_tracks[t.persistent_ID.get] = t if t.enabled.get && !t.podcast.get && t.video_kind.get == :none
+      gt = Time.now
+      puts "Loading source tracks into memory."
+      @source_tracks = Hash.new { |h,k| h[k] = [] }
+      cols = %w[persistent_ID enabled podcast video_kind artist album name year duration track_number track_count disc_number disc_count bit_rate kind]
+      col_data = cols.map { |c| source.tracks.send(c.to_sym).get }
+      puts "Applescript done (#{Time.now - gt} seconds). Everything in memory now, hashifying."
+      col_data.transpose.each { |row|
+        t = Hash[*cols.zip(row).flatten]
+        @source_tracks[t['persistent_ID']] = t if t['enabled'] && !t['podcast'] && t['video_kind'] == :none
       }
+      puts "Done (total #{Time.now - gt} seconds)."
     end
     @source_tracks
   end
