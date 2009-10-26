@@ -39,6 +39,7 @@ def bonjour
       # Do nothing
     end
   end
+  
 end
 
 namespace :dukejour do
