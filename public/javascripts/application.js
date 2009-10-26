@@ -25,6 +25,11 @@ function vote_event(entry) {
     .animate({'font-size': '1em'}, 200);
 }
 
+function play_event(entry) {
+  entry = entry.entry;
+  $('#now_playing ul.entries').html($('#queue ul.entries li.entry_' + entry.id).remove());
+}
+
 $(function() {
   jQuery('#suggest_track').focus();
 });

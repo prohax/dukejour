@@ -20,8 +20,11 @@ def playback_thread
   start_thread 'playback' do
     if iTunes.stopped?
       unless Entry.next.nil?
-        puts "Playing #{Entry.next.song.display_name}"
-        Entry.next.play!
+        Entry.next.tap {|entry|
+          puts "Playing #{entry.song.display_name}"
+          entry.play!
+          call_via_juggernaut :play_event, entry.to_json(:include => :song)
+        }
       end
     end
   end
