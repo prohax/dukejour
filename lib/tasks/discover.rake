@@ -40,7 +40,8 @@ def discover target_names = []
           puts "Adding library #{row_names[r_index]}"
           rows[r_index].actions["AXShowMenu"].perform
           sleep(0.1)
-          sys.key_code 53 # escape the right-click menu
+          sys.key_code 49 # escape the right-click menu
+          sys.activate
           puts "Done."
         else
           puts "Sorry, you need to have the shared library visible in the iTunes window. Sucky, I know."
