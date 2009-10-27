@@ -137,6 +137,18 @@ li.entry .library_name {
   padding-top: 0.35em;
 }
 
+#now_playing .votes {
+  display: none;
+}
+
+.hoverable .child {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s linear;
+}
+.hoverable:hover .child {
+  opacity: 1;
+}
+
 .ac_results {
   background-color: #ccb4b9;
   border: 1px solid #8f7d81;

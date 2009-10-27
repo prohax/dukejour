@@ -10,6 +10,7 @@
   = render :partial => 'songs/suggest'
 
 #queue
+  .rendered_at{:style => 'display: none'}= Time.now
   %ul.entries
     - @entries.each do |entry|
       = render :partial => 'index_entry', :locals => {:entry => entry}

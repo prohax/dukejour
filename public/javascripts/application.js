@@ -1,48 +1,35 @@
 var KEYS = { BACKSPACE:8, TAB:9, RETURN:13, ENTER:3, ESC:27, SPACE:32, LEFT:37, UP:38, RIGHT:39, DOWN:40, DELETE:46 };
 
-var EventCheckInterval = 2;
-
-function checkForEvents() {
-  $.getJSON(
-    '/events/window?format=json&window_size=' + EventCheckInterval,
-    function(data, textStatus) {
-      if ('success' == textStatus) {
-        $.each(data, function(i, e){
-          handleEventJSON(e);
-        });
-      }
-      queueEventCheck();
-    }
-  );
-}
-
-function queueEventCheck() {
-  setTimeout(checkForEvents, EventCheckInterval * 1000);
-}
-
-function handleEventJSON(e) {
-  if (e.vote_event) {
-    vote_count = $('ul.entries li.entry_' + e.vote_event.entry_id + ' .votes .count');
-    vote_count
-      .show('highlight', 2000)
-      .html(parseInt(vote_count.html()) + 1);
-  } else if (e.add_event) {
-
+function add_event(entry_html) {
+  if ($('#queue ul.entries li.' + $(entry_html).attr('class').match(/entry_\d+/)[0]).length == 0) {
+    $('#queue ul.entries').append(entry_html)
+      .children(':last').hide()
+      .show('blind', {direction: 'vertical'}, 500);
   }
 }
 
-$(function() {
+function vote_event(entry) {
+  entry = entry.entry;
+  vote_count = $('#queue ul.entries li.entry_' + entry.id + ' .votes .count')
+  vote_count.html(parseInt(vote_count.html()) + 1);
 
-  jQuery('#suggest_track').focus();
-
-  // show when hovered
-  jQuery('.hoverable .child').css({opacity: 0});
-  jQuery('.hoverable').hover(function() {
-    jQuery('.child', this).animate({opacity: 1}, 100);
-  }, function() {
-    jQuery('.child', this).animate({opacity: 0}, 400);
+  new_list = $('#queue ul.entries li').sort(function(a, b) {
+    return parseInt($(b).find('.votes .count').html())
+      - parseInt($(a).find('.votes .count').html());
   });
+  $.each(new_list, function(i, item) { $('#queue ul.entries').append(item); });
 
+  $(vote_count).stop()
+    .animate({'font-size': '1.5em'}, 200)
+    .animate({'font-size': '0.85em'}, 200)
+    .animate({'font-size': '1em'}, 200);
+}
+
+function play_event(entry) {
+  entry = entry.entry;
+  $('#now_playing ul.entries').html($('#queue ul.entries li.entry_' + entry.id).remove());
+}
+
+$(function() {
+  jQuery('#suggest_track').focus();
 });
-
-$(window).load(queueEventCheck);

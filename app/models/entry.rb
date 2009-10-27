@@ -19,7 +19,7 @@ class Entry < ActiveRecord::Base
   export_scope :index
 
   def self.sorter
-    L{|record| -record.votes }
+    L{|record| [-record.votes, record.created_at] }
   end
 
   def self.upcoming
