@@ -21,7 +21,7 @@ def iTunes
   ITunesInterface.new
 end
 
-def call_via_juggernaut function, data
+def call_via_juggernaut function, data = "{}"
   Juggernaut.send_to_channels "#{function}(#{escape_juggernaut data});", ['dukejour']
 end
 
