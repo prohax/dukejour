@@ -25,7 +25,11 @@ function vote_event(entry) {
 
 function play_event(entry) {
   entry = entry.entry;
-  $('#now_playing ul.entries').html($('#queue ul.entries li.entry_' + entry.id).remove());
+  $('#now_playing').removeClass('inactive').children('ul.entries').html($('#queue ul.entries li.entry_' + entry.id).remove());
+}
+
+function finished_event(data) {
+  $('#now_playing').addClass('inactive').children('ul.entries li:first').html('<span class="name">iTunes is stopped.</span><span class="artist">At least, it was last time I checked.</span>');
 }
 
 $(function() {

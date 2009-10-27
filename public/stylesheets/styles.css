@@ -109,6 +109,9 @@ ul.entries li.entry .name {
   border: #555 1px solid;
   -webkit-border-radius: 3px;
 }
+#now_playing.inactive ul.entries li {
+  color: #bbb;
+}
 #now_playing ul.entries li .artist {
   color: #666;
 }
