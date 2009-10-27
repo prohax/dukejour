@@ -114,4 +114,12 @@ class Library < ActiveRecord::Base
     end
   end
 
+  def self.juggernaut_message message
+    call_via_juggernaut :message_event, Library.stats.merge(:message => message).to_json
+  end
+
+  def juggernaut_message message
+    self.class.juggernaut_message message
+  end
+
 end
