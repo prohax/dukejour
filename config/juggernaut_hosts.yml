@@ -13,4 +13,3 @@
   - :port: 5001
     :host: dukejour.hat.local
     :public_host: dukejour.hat.local
-    :environment: :development
