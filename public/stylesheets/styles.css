@@ -130,6 +130,15 @@ ul.entries li.entry .name {
   color: #999;
 }
 
+#queue ul.entries li.entry.inactive .song {
+  text-decoration: line-through;
+}
+#queue ul.entries li.entry.inactive .song,
+#queue ul.entries li.entry.inactive .song .artist,
+#queue ul.entries li.entry.inactive .song .album {
+  color: #999;
+}
+
 ul.entries li span {
   margin-right: 0.25em;
 }
