@@ -73,6 +73,7 @@ class Library < ActiveRecord::Base
           end
           import_tracks
           adjust :duration => source_duration
+          juggernaut_message "Finished importing #{name}."
         end
       end
     end
