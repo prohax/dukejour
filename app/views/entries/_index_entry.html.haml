@@ -1,4 +1,4 @@
-%li.entry.hoverable{:class => entry.description}
+%li.entry.hoverable{{:class => entry.description},{:class => ('inactive' unless entry.active?)}}
   .votes
     %span.count= entry.votes
     = ajax_link :vote, entry, :text => '+', :class => 'vote child', :format => :js
