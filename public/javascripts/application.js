@@ -35,9 +35,19 @@ function finished_event(data) {
 function message_event(data) {
   $('ul.messages').append($('<li>' + data.message + '</li>'))
     .children(':last').hide().blindDown();
-  if (data.library_count_str) $('.info .library_count').html(data.library_count_str);
-  if (data.song_count_str) $('.info .song_count').html(data.song_count_str);
-  if (data.duration_str) $('.info .duration').html(data.duration_str);
+  if (data.stats) {
+    $('.info .library_count').html(data.stats.library_count_str);
+    $('.info .song_count').html(data.stats.song_count_str);
+    $('.info .duration').html(data.stats.duration_str);
+  }
+  if (data.entries) {
+    $.each(data.entries, function(i, entry) {
+      if (entry.active)
+        $('#queue ul.entries li.entry_' + entry.id).removeClass('inactive');
+      else
+        $('#queue ul.entries li.entry_' + entry.id).addClass('inactive');
+    });
+  }
 }
 
 $(function() {
