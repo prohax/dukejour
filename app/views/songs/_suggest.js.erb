@@ -24,12 +24,14 @@ function selectSearchResult() {
 }
 
 function size_suggest_results_to_window() {
-  while ($('.ac_results').offset().top + $('.ac_results').height() < $(window).height() - $('#footer').outerHeight()) {
-    if (jQuery('.ac_results ul li:hidden').length == 0) break;
-    jQuery('.ac_results ul li:hidden:first').show();
-  }
-  while ($('.ac_results').offset().top + $('.ac_results').height() > $(window).height() - $('#footer').outerHeight()) {
-    jQuery('.ac_results ul li:visible:last').hide();
+  if ($('.ac_results:visible').length > 0) {
+    while ($('.ac_results').offset().top + $('.ac_results').height() < $(window).height() - $('#footer').outerHeight()) {
+      if (jQuery('.ac_results ul li:hidden').length == 0) break;
+      jQuery('.ac_results ul li:hidden:first').show();
+    }
+    while ($('.ac_results').offset().top + $('.ac_results').height() > $(window).height() - $('#footer').outerHeight()) {
+      jQuery('.ac_results ul li:visible:last').hide();
+    }
   }
 }
 
