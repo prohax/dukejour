@@ -23,6 +23,10 @@ class Library < ActiveRecord::Base
     }, true)
   end
 
+  def self.active
+    select {|l| l.active }
+  end
+
   def import
     if source.nil?
       if active?

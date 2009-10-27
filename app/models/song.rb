@@ -16,7 +16,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.suggestable
-    ambition_context.within(Library.select {|l| l.active }, :libraries)
+    ambition_context.within(Library.active, :libraries)
   end
 
   def display_name
