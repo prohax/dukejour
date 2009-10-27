@@ -12,4 +12,8 @@ module TrackSongCommon
     !year.nil? && !year.zero?
   end
 
+  def has_track_number?
+    !track_number.nil? && !track_number.zero?
+  end
+
 end

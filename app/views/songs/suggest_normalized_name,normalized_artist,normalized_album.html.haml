@@ -5,6 +5,6 @@
 
       %span.primary.name= highlight(record.name, @queries)
       %span.secondary.artist= highlight(record.artist, @queries)
-      %span.secondary.album= highlight(record.album, @queries)
+      %span.secondary.album= highlight("#{record.album} #{"##{record.track_number}" if record.has_track_number?}", @queries)
 
       %span.song_id{:style => 'display: none'}= record.id
