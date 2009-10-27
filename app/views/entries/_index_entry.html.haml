@@ -1,6 +1,6 @@
 %li.entry.hoverable{:class => entry.description}
   .votes
     %span.count= entry.votes
-    = ajax_link :vote, [entry], :text => '+', :class => 'vote child', :format => :js
+    = ajax_link :vote, entry, :text => '+', :class => 'vote child', :format => :js
 
   = render :partial => 'songs/index_entry', :locals => {:song => entry.song}
