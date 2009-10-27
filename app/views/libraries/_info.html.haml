@@ -1,0 +1,2 @@
+- @libraries = Library.active.kick
+== serving #{pluralize @libraries.sum {|l| l.tracks.count }, 'track'} (#{@libraries.sum {|l| l.duration }.xsecs}) from #{pluralize @libraries.count, 'library'}
