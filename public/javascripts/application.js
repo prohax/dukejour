@@ -32,6 +32,14 @@ function finished_event(data) {
   $('#now_playing').addClass('inactive').children('ul.entries li:first').html('<span class="name">iTunes is stopped.</span><span class="artist">At least, it was last time I checked.</span>');
 }
 
+function message_event(data) {
+  $('ul.messages').append($('<li>' + data.message + '</li>'))
+    .children(':last').hide().blindDown();
+  if (data.library_count_str) $('.info .library_count').html(data.library_count_str);
+  if (data.song_count_str) $('.info .song_count').html(data.song_count_str);
+  if (data.duration_str) $('.info .duration').html(data.duration_str);
+}
+
 $(function() {
   jQuery('#suggest_track').focus();
 });
