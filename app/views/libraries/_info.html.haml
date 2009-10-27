@@ -1,2 +1,8 @@
-- @libraries = Library.active.kick
-== serving #{pluralize @libraries.sum {|l| l.tracks.count }, 'track'} (#{@libraries.sum {|l| l.duration }.xsecs}) from #{pluralize @libraries.count, 'library'}
+.info
+  - @libraries = Library.active.kick
+  serving
+  %span= pluralize @libraries.sum {|l| l.tracks.count }, 'track'
+  (
+  %span>= @libraries.sum {|l| l.duration }.xsecs
+  ) from
+  %span= pluralize @libraries.count, 'library'

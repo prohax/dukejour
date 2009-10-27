@@ -201,3 +201,8 @@ li.entry .library_name {
 .ac_results li.song .name {
   padding-right: 1em;
 }
+
+.info span {
+  color: #444;
+  background-color: #bbb;
+}
