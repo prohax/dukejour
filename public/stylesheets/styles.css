@@ -33,28 +33,39 @@ h1 {
 
 #main {
   margin-bottom: 4em;
+}
+#main,
+#footer {
   margin: 0 auto;
 }
 
 #main,
+#footer,
 .ac_results {
   width: 45em;
 }
 
-#footer {
+#wr_footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   color: #666;
   background-color: #bbb;
-  font-size: 0.85em;
   font-weight: bold;
 }
 
-#footer .copy, #footer .info {
-  float: left;
+#footer .info, #footer .copy {
+  font-size: 0.85em;
   padding: 1em;
+}
+
+#footer .info {
+  float: left;
+}
+
+#footer .copy {
+  float: right;
 }
 
 #footer .logo {

@@ -14,10 +14,12 @@
     #world
       #main
         = yield
-      #footer
-        .copy
-          &copy; 2009
-          = link_to '@glenmaddern', 'http://twitter.com/glenmaddern'
-          and
-          = link_to '@ben_h', 'http://twitter.com/ben_h'
-        = render :partial => 'libraries/info'
+        %ul.messages
+      #wr_footer
+        #footer
+          = render :partial => 'libraries/info'
+          .copy
+            &copy; 2009
+            = link_to '@glenmaddern', 'http://twitter.com/glenmaddern'
+            and
+            = link_to '@ben_h', 'http://twitter.com/ben_h'
