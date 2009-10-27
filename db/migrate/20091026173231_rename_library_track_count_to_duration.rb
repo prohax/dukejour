@@ -1,4 +1,4 @@
-class RenameLibararyTrackCountToDuration < ActiveRecord::Migration
+class RenameLibraryTrackCountToDuration < ActiveRecord::Migration
   def self.up
     rename_column :libraries, :library_track_count, :duration
   end
