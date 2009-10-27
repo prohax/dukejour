@@ -46,8 +46,20 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1em 2em;
+  color: #666;
   background-color: #bbb;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+
+#footer .copy, #footer .info {
+  float: left;
+  padding: 1em;
+}
+
+#footer .logo {
+  padding: 5px;
+  float: right;
 }
 
 #suggest_song {
