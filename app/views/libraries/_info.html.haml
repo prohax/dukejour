@@ -1,8 +1,8 @@
 .info
-  - @libraries = Library.active.kick
+  - @stats = Library.stats
   serving
-  %span= pluralize @libraries.sum {|l| l.tracks.count }, 'track'
+  %span.song_count= @stats[:song_count_str]
   (
-  %span>= @libraries.sum {|l| l.duration }.xsecs
+  %span.duration>= @stats[:duration_str]
   ) from
-  %span= pluralize @libraries.count, 'library'
+  %span.library_count= @stats[:library_count_str]
