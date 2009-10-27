@@ -2,7 +2,7 @@
   - @stats = Library.stats
   serving
   %span.song_count= @stats[:song_count_str]
-  (
-  %span.duration>= @stats[:duration_str]
-  ) from
+  from
   %span.library_count= @stats[:library_count_str]
+  &mdash;
+  %span.duration= @stats[:duration_str]
