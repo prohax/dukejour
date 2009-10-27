@@ -16,11 +16,15 @@ class Library < ActiveRecord::Base
   end
 
   def self.create_for source
-    find_or_create_with({
+    returning find_or_create_with({
       :name => source.name.get
     }, {
       :persistent_id => source.persistent_ID.get
-    }, true)
+    }, true) do |library|
+      if library.new_or_deleted_before_save?
+        juggernaut_message "Importing new library #{library.name}. Big libraries take a while (this one has #{library.tracks.count} tracks), but each track will be available as soon as it's imported."
+      end
+    end
   end
 
   def self.stats
