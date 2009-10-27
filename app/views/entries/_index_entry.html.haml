@@ -4,3 +4,5 @@
     = ajax_link :vote, entry, :text => '+', :class => 'vote child', :format => :js
 
   = render :partial => 'songs/index_entry', :locals => {:song => entry.song}
+
+= javascript_for_ajax_response
