@@ -30,8 +30,8 @@
 # 
 # This is the recommended method for broadcast authentication.
 #
-:allowed_ips: 
-  - 127.0.0.1
+# :allowed_ips:
+#   - 127.0.0.1
 
 # 2) Via HTTP request
 # 

@@ -11,8 +11,6 @@
 
 :hosts:
   - :port: 5001
-    :host: 127.0.0.1
-    # :public_host: 127.0.0.1
-    # :public_port: 5001
-    # :secret_key: 
-    # :environment: :development
+    :host: dukejour.hat.local
+    :public_host: dukejour.hat.local
+    :environment: :development
