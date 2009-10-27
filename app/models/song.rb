@@ -18,6 +18,9 @@ class Song < ActiveRecord::Base
   def self.active
     ambition_context.within(Library.active, :libraries)
   end
+  def active?
+    self.class.active.find :first, :conditions => {:id => id}
+  end
   def self.suggestable
     active
   end

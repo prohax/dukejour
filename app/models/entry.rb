@@ -9,6 +9,8 @@ class Entry < ActiveRecord::Base
   has_many :play_events, :dependent => :destroy
   has_many :vote_events, :dependent => :destroy
 
+  delegate :active?, :to => :song
+
   def self.upcoming_scope
     L{|record| record.played_at.nil? }
   end
