@@ -94,7 +94,7 @@ ul.entries li.entry .not_track_name {
 }
 
 ul.entries li.entry .name {
-  font-size: 22px;
+  font-size: 1.7em;
 }
 
 #now_playing ul.entries {
@@ -129,7 +129,7 @@ ul.entries li.entry .artist {
 }
 
 ul.entries li.entry .album {
-  font-size: 14px;
+  font-size: 1.1em;
 }
 .ac_results li.song .album,
 ul.entries li.entry .album {
@@ -147,6 +147,14 @@ li.entry .library_name {
   font-weight: bold;
   line-height: 0.5;
   padding-top: 0.35em;
+}
+
+#now_playing li.entry .name {
+  font-size: 2em;
+  display: block;
+}
+#now_playing li span {
+  margin-right: 0.5em;
 }
 
 #now_playing .votes {
