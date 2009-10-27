@@ -49,12 +49,20 @@ class Library < ActiveRecord::Base
     if source.nil?
       if active?
         puts "Source for #{display_name} not available, marking as offline."
+        prev_active_songs = Song.active.count
         adjust :active => false
+        active_songs_delta = prev_active_songs - Song.active.count
+        juggernaut_message "#{name} just went offline, taking #{active_songs_delta} song#{'s' unless active_songs_delta == 1} with it."
       end
     else
       source_duration = source.duration.get || 0
       if source_duration > 0 #source duration is 0 while the library is being connected
-        adjust :active => true unless active?
+        unless active?
+          prev_active_songs = Song.active.count
+          adjust :active => true
+          active_songs_delta = Song.active.count - prev_active_songs
+          juggernaut_message "Welcome back, #{name}! #{active_songs_delta} more song#{'s' unless active_songs_delta == 1} are online now."
+        end
         if duration == source_duration && tracks.dirty.empty?
           # puts "Track count for #{display_name} hasn't changed, skipping."
         else
