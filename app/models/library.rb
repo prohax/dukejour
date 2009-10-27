@@ -23,6 +23,20 @@ class Library < ActiveRecord::Base
     }, true)
   end
 
+  def self.stats
+    returning({
+      :library_count => active.count,
+      :song_count => Song.active.count,
+      :duration => active.sum {|l| l.duration }
+    }) do |hsh|
+      hsh.update({
+        :library_count_str => "#{hsh[:library_count].commas} #{hsh[:library_count] == 1 ? 'library' : 'libraries'}",
+        :song_count_str => "#{hsh[:song_count].commas} #{hsh[:song_count] == 1 ? 'song' : 'songs'}",
+        :duration_str => hsh[:duration].xsecs
+      })
+    end
+  end
+
   def self.active
     select {|l| l.active }
   end
