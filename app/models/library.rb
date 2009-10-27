@@ -30,7 +30,7 @@ class Library < ActiveRecord::Base
         adjust :active => false
       end
     else
-      source_duration = source.duration.get
+      source_duration = source.duration.get || 0
       if source_duration > 0 #source duration is 0 while the library is being connected
         adjust :active => true unless active?
         if duration == source_duration && tracks.dirty.empty?
