@@ -15,8 +15,11 @@ class Song < ActiveRecord::Base
     self.normalized_artist = artist.normalize_for_display unless artist.nil?
   end
 
-  def self.suggestable
+  def self.active
     ambition_context.within(Library.active, :libraries)
+  end
+  def self.suggestable
+    active
   end
 
   def display_name
