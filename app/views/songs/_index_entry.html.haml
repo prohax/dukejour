@@ -1,4 +1,9 @@
 .song
+  .sources
+    - song.tracks.map {|t| t.library_id }.each do |library_id|
+      - library = @libraries.find {|l| l.id == library_id }
+      %span{:class => "library_#{library_id}", :title => library.name, :style => ('display: none' unless library.active?)}> •
+
   %span.primary.name= song.name
   %span.not_track_name
     %span.secondary.artist= song.artist if song.has_artist?
