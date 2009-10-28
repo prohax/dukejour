@@ -31,7 +31,7 @@ class Library < ActiveRecord::Base
     returning({
       :library_count => active.count,
       :song_count => Song.active.count,
-      :duration => active.sum {|l| l.duration }
+      :duration => active.sum {|l| l.duration || 0 }
     }) do |hsh|
       hsh.update({
         :library_count_str => "#{hsh[:library_count]} #{hsh[:library_count] == 1 ? 'library' : 'libraries'}",
