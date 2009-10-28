@@ -11,5 +11,5 @@
 
 :hosts:
   - :port: 5001
-    :host: dukejour.hat.local
-    :public_host: dukejour.hat.local
+    :host: pants.local
+    :public_host: pants.local
