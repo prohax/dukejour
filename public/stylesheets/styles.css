@@ -84,6 +84,12 @@ h1 {
   color: #894052;
   padding: 0.15em 0.1em;
   border: #777 1px solid;
+}
+
+#suggest_song,
+.ac_results,
+ul.entries li
+{
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
 }
@@ -117,13 +123,12 @@ ul.entries li.entry .name {
   margin-bottom: 1em;
 }
 #queue ul.entries {
-  margin-top: 0.5em;
+  padding-top: 0.5em;
 }
 #now_playing ul.entries li {
   color: #fff;
   background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#333), color-stop(0.55, #272727), color-stop(0.55, #1a1a1a));
   border: #555 1px solid;
-  -webkit-border-radius: 3px;
 }
 #now_playing.inactive ul.entries li {
   color: #bbb;
@@ -219,8 +224,6 @@ li.entry .library_name {
 .ac_results {
   background-color: #ccb4b9;
   border: 1px solid #8f7d81;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
   opacity: 0.95;
   position: absolute;
 }
