@@ -34,9 +34,9 @@ class Library < ActiveRecord::Base
       :duration => active.sum {|l| l.duration }
     }) do |hsh|
       hsh.update({
-        :library_count_str => "#{hsh[:library_count].commas} #{hsh[:library_count] == 1 ? 'library' : 'libraries'}",
-        :song_count_str => "#{hsh[:song_count].commas} #{hsh[:song_count] == 1 ? 'song' : 'songs'}",
-        :duration_str => hsh[:duration].xsecs
+        :library_count_str => "#{hsh[:library_count]} #{hsh[:library_count] == 1 ? 'library' : 'libraries'}",
+        :song_count_str => "#{hsh[:song_count]} #{hsh[:song_count] == 1 ? 'song' : 'songs'}",
+        :duration_str => hsh[:duration]
       })
     end
   end
