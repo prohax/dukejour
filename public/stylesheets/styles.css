@@ -15,6 +15,7 @@ body {
 a {
   color: #d75483;
 }
+#footer a,
 li.entry a {
   text-decoration: none;
 }
@@ -55,9 +56,13 @@ h1 {
   font-weight: bold;
 }
 
+#footer {
+  overflow: hidden;
+}
+
 #footer .info, #footer .copy {
   font-size: 0.85em;
-  padding: 1em;
+  padding: 1em 0.4em;
 }
 
 #footer .info {
