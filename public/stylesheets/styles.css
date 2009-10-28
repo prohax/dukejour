@@ -130,13 +130,26 @@ ul.entries li.entry .name {
   color: #999;
 }
 
-#queue ul.entries li.entry.inactive .song {
-  text-decoration: line-through;
+.song .sources {
+  float: right;
+  text-align: right;
+  padding: 0.55em 0.6em 0 0;
+  color: #d75483;
+  line-height: 0.5;
+  cursor: default;
 }
+
+#now_playing .sources {
+  color: #bbb;
+}
+
 #queue ul.entries li.entry.inactive .song,
 #queue ul.entries li.entry.inactive .song .artist,
-#queue ul.entries li.entry.inactive .song .album {
-  color: #999;
+#queue ul.entries li.entry.inactive .song .album,
+#queue ul.entries li.entry.inactive .sources,
+#queue ul.entries li.entry.inactive .votes,
+#queue ul.entries li.entry.inactive .votes a {
+  color: #aaa;
 }
 
 ul.entries li span {
@@ -163,21 +176,27 @@ li.entry .library_name {
   float: right;
 }
 
+.votes, .sources {
+  font-size: 1.5em;
+}
+
 .votes {
   float: right;
   color: #e86e00;
-  font-size: 1.5em;
   font-weight: bold;
   line-height: 0.5;
-  padding-top: 0.35em;
+  padding-top: 0.4em;
 }
 
 #now_playing li.entry .name {
   font-size: 2em;
   display: block;
 }
-#now_playing li span {
+#now_playing li .song span {
   margin-right: 0.5em;
+}
+#now_playing li .song .sources span {
+  margin-right: 0;
 }
 
 #now_playing .votes {
