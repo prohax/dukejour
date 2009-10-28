@@ -6,22 +6,44 @@ function add_event(entry_html) {
   }
 }
 
-function vote_event(entry) {
-  entry = entry.entry;
-  vote_count = $('#queue ul.entries li.entry_' + entry.id + ' .votes .count')
-  vote_count.html(parseInt(vote_count.html()) + 1);
+function vote_event(entry_json) {
+  entry = $('#queue ul.entries li.entry_' + entry_json.entry.id);
+  vote_count_i = parseInt(entry.find('.votes .count').html()) + 1;
+  created_at_i = parseInt(entry.find('.created_at').html());
+  // console.log("re-inserting " + entry_json.entry.song.name + ": " + vote_count_i + " / " + created_at_i);
 
-  new_list = $('#queue ul.entries li').sort(function(a, b) {
-    vote_order = parseInt($(b).find('.votes .count').html()) - parseInt($(a).find('.votes .count').html());
-    created_at_order = parseInt($(b).find('.created_at').html()) - parseInt($(a).find('.created_at').html());
-    return vote_order == 0 ? -created_at_order : vote_order;
+  $('#queue ul.entries li').each(function(i, item) {
+    this_vote_count = parseInt($(item).find('.votes .count').html());
+    this_created_at = parseInt($(item).find('.created_at').html());
+    // console.log("comparing " + vote_count_i + " / " + created_at_i + " to " + this_vote_count + " / " + this_created_at);
+    if ((vote_count_i > this_vote_count) || ((vote_count_i == this_vote_count) && (created_at_i <= this_created_at))) {
+      if (entry.get(0) != $(item).get(0)) {
+        entryHeight = entry.outerHeight() + 'px';
+        entryWidth = entry.width() + 'px';
+        entryOffset = entry.offset();
+        itemOffset = $(item).offset();
+        entry.next().css({'margin-top': entryHeight}).animate({'margin-top': 0}, 600);
+        $(item).animate({'margin-top': entryHeight}, 600);
+        entry.css({
+          position: 'absolute', width: entryWidth,
+          top: entryOffset.top + 'px', left: entryOffset.left + 'px'
+        }).animate({
+          top: itemOffset.top + 'px', left: itemOffset.left + 'px'
+        }, 600, function() {
+          $(this).insertBefore($(item).css({'margin-top': 0}))
+            .css({
+              position: 'static', width: 'auto'
+            });
+        });
+      }
+      entry.find('.votes .count').html(vote_count_i)
+        .stop()
+        .animate({'font-size': '1.5em'}, 200)
+        .animate({'font-size': '0.85em'}, 200)
+        .animate({'font-size': '1em'}, 200);
+      return false;
+    }
   });
-  $.each(new_list, function(i, item) { $('#queue ul.entries').append(item); });
-
-  $(vote_count).stop()
-    .animate({'font-size': '1.5em'}, 200)
-    .animate({'font-size': '0.85em'}, 200)
-    .animate({'font-size': '1em'}, 200);
 }
 
 function play_event(entry) {
