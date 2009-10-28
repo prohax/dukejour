@@ -3,6 +3,9 @@ class EntriesController < ApplicationController
   before_index "load libraries" do
     @libraries = Library.all
   end
+  after_create "load libraries" do
+    @libraries = Library.all
+  end
 
   after_create "create add event" do
     @entry.add_events.create
