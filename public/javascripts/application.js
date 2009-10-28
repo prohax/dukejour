@@ -12,8 +12,9 @@ function vote_event(entry) {
   vote_count.html(parseInt(vote_count.html()) + 1);
 
   new_list = $('#queue ul.entries li').sort(function(a, b) {
-    return parseInt($(b).find('.votes .count').html())
-      - parseInt($(a).find('.votes .count').html());
+    vote_order = parseInt($(b).find('.votes .count').html()) - parseInt($(a).find('.votes .count').html());
+    created_at_order = parseInt($(b).find('.created_at').html()) - parseInt($(a).find('.created_at').html());
+    return vote_order == 0 ? -created_at_order : vote_order;
   });
   $.each(new_list, function(i, item) { $('#queue ul.entries').append(item); });
 

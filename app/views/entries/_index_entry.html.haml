@@ -2,6 +2,7 @@
   .votes
     %span.count= entry.votes
     = ajax_link :vote, entry, :text => '+', :class => 'vote child', :format => :js
+  .created_at{:style => 'display: none'}= entry.created_at.to_i
 
   = render :partial => 'songs/index_entry', :locals => {:song => entry.song}
 
