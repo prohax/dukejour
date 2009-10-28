@@ -1,5 +1,5 @@
 .song
-  .sources
+  .sources.child
     - song.tracks.map {|t| t.library_id }.each do |library_id|
       - library = @libraries.find {|l| l.id == library_id }
       %span{:class => "library_#{library_id}", :title => library.name, :style => ('display: none' unless library.active?)}> •
