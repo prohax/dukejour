@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091026173231) do
+ActiveRecord::Schema.define(:version => 20091027163019) do
 
   create_table "entries", :force => true do |t|
     t.integer  "song_id"
@@ -74,5 +74,7 @@ ActiveRecord::Schema.define(:version => 20091026173231) do
     t.integer  "bit_rate"
     t.string   "kind",          :limit => 16
   end
+
+  add_index "tracks", ["song_id"], :name => "index_tracks_on_song_id"
 
 end
