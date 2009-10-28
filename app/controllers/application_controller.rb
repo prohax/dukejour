@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
   def current_user
     nil
   end
+
+  def render_juggernaut function, data
+    call_via_juggernaut function, data
+    render :nothing => true
+  end
 end

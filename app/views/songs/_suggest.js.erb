@@ -2,6 +2,7 @@
   mdl = 'song'
   create_entry = jquery_xhr :create, Entry,
     :params => "'entry[song_id]': song_id",
+    :format => :jug,
     :callback => %Q(
       $('#queue ul.entries').append(data)
         .children(':last').hide()
