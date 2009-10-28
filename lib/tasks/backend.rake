@@ -38,14 +38,20 @@ def populate_thread
   end
 end
 
+def bonjour_thread
+  start_thread 'bonjour', :sleep => 1 do
+    run_bonjour
+  end
+end
+
 namespace :dukejour do
   desc "run the backend services"
   task :backend => :environment do
     require 'appscript'
     include Appscript
     require 'i_tunes_interface'
-    # bonjour #is naturally asynchronous
     [
+      bonjour_thread,
       populate_thread,
       playback_thread
     ].each &:join
