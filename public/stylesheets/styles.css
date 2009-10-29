@@ -52,17 +52,45 @@ h1 {
   left: 0;
   right: 0;
   color: #666;
-  background-color: #bbb;
   font-weight: bold;
 }
 
 #footer {
   overflow: hidden;
+  padding: 0.68em 0 0 0;
 }
 
-#footer .info, #footer .copy {
+#footer ul.messages,
+#footer .copy, #footer .info {
   font-size: 0.85em;
-  padding: 1em 0.4em;
+}
+
+#footer .copy, #footer .info {
+}
+
+#footer .copy_and_info {
+  overflow: hidden;
+  background-color: #bbb;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  padding: 0.4em;
+}
+
+#footer ul.messages {
+  overflow: hidden;
+}
+
+#footer ul.messages li {
+  display: block;
+  float: left;
+  padding-bottom: 0.4em;
+}
+
+#footer ul.messages li .message {
+  padding: 0.2em 0.4em;
+  background-color: #ffea8f;
 }
 
 #footer .info {
@@ -88,7 +116,8 @@ h1 {
 
 #suggest_song,
 .ac_results,
-ul.entries li
+ul.entries li,
+ul.messages li .message
 {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
