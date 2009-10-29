@@ -40,15 +40,16 @@ def bonjour
   end
 end
 
-def run_bonjour
-  bonjour
-  sleep 10 while true
-end
-
 namespace :dukejour do
   desc "find the libraries over bonjour"
   task :bonjour do
-    run_bonjour
+    while true
+      begin
+        bonjour
+        sleep 10 while true
+      rescue
+      end
+    end
   end
 end
   
