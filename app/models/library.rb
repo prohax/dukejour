@@ -61,7 +61,7 @@ class Library < ActiveRecord::Base
         if duration == source_duration && tracks.dirty.empty?
           # puts "Track count for #{display_name} hasn't changed, skipping."
         else
-          if new_or_deleted_before_save?
+          if new_or_deleted_before_save? || duration.zero?
             juggernaut_message "Hello #{name}! Importing now - each track is playable as soon as it's imported."
           else
             duration_delta = source_duration - duration
