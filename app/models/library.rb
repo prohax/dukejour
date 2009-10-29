@@ -16,15 +16,11 @@ class Library < ActiveRecord::Base
   end
 
   def self.create_for source
-    returning find_or_create_with({
+    find_or_create_with({
       :name => source.name.get
     }, {
       :persistent_id => source.persistent_ID.get
-    }, true) do |library|
-      if library.new_or_deleted_before_save?
-        juggernaut_message "Importing new library #{library.name}. Big libraries take a while (this one has #{library.tracks.count} tracks), but each track will be available as soon as it's imported."
-      end
-    end
+    }, true)
   end
 
   def self.stats
@@ -48,32 +44,31 @@ class Library < ActiveRecord::Base
   def import
     if source.nil?
       if active?
-        puts "Source for #{display_name} not available, marking as offline."
-        prev_active_songs = Song.active.count
-        adjust :active => false
-        active_songs_delta = prev_active_songs - Song.active.count
-        juggernaut_message "#{name} just went offline, taking #{active_songs_delta} song#{'s' unless active_songs_delta == 1} with it."
+        song_delta_via_juggernaut "#{name} just went offline", :leaving => true do
+          adjust :active => false
+        end
       end
     else
       source_duration = source.duration.get || 0
       if source_duration > 0 #source duration is 0 while the library is being connected
         unless active?
-          prev_active_songs = Song.active.count
-          adjust :active => true
-          active_songs_delta = Song.active.count - prev_active_songs
-          juggernaut_message "Welcome back, #{name}! #{active_songs_delta} more song#{'s' unless active_songs_delta == 1} are online now."
+          song_delta_via_juggernaut "Welcome back, #{name}!" do
+            adjust :active => true
+          end
         end
         if duration == source_duration && tracks.dirty.empty?
           # puts "Track count for #{display_name} hasn't changed, skipping."
         else
           if new_or_deleted_before_save?
-            puts "Importing new library #{display_name}."
+            juggernaut_message "Hello #{name}! Importing now - each track is playable as soon as it's imported."
           else
-            puts "Updating library #{display_name}, currently #{tracks.count} tracks."
+            duration_delta = source_duration - duration
+            juggernaut_message "Hey, #{name} #{duration_delta < 0 ? 'shrank' : 'grew'} by #{duration_delta.abs.xsecs} - importing the difference."
           end
-          import_tracks
-          adjust :duration => source_duration
-          juggernaut_message "Finished importing #{name}."
+          song_delta_via_juggernaut "Finished #{new_or_deleted_before_save? ? 'importing' : 'updating'} #{name} - " do
+            import_tracks
+            adjust :duration => source_duration
+          end
         end
       end
     end
@@ -127,7 +122,27 @@ class Library < ActiveRecord::Base
     end
   end
 
+  def song_delta_via_juggernaut message, opts = {}, &block
+    prev_active_songs = Song.active.count
+    block.call
+    active_songs_delta = (Song.active.count - prev_active_songs).abs
+    if opts[:leaving]
+      if active_songs_delta.zero?
+        juggernaut_message "#{message}, but no songs went offline since they're all on other libraries."
+      else
+        juggernaut_message "#{message}, taking #{active_songs_delta} song#{'s' unless active_songs_delta == 1} with it."
+      end
+    else
+      if active_songs_delta.zero?
+        juggernaut_message "#{message}, but all the tracks were already available in other libraries."
+      else
+        juggernaut_message "#{message} #{active_songs_delta} more song#{'s' unless active_songs_delta == 1} #{active_songs_delta == 1 ? 'is' : 'are'} online now."
+      end
+    end
+  end
+
   def self.juggernaut_message message
+    puts message
     call_via_juggernaut :message_event, {
       :message => message,
       :stats => Library.stats,
