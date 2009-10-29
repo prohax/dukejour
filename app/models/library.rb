@@ -145,6 +145,7 @@ class Library < ActiveRecord::Base
     puts message
     call_via_juggernaut :message_event, {
       :message => message,
+      :timestamp => Time.now.to_i_msec,
       :stats => Library.stats,
       :entries => Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
     }.to_json
