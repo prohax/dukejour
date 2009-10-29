@@ -59,9 +59,9 @@ function message_event(data) {
   $('ul.messages').append($('<li>' + data.message + '</li>'))
     .children(':last').hide().blindDown();
   if (data.stats) {
-    $('.info .library_count').html(data.stats.library_count_str);
-    $('.info .song_count').html(data.stats.song_count_str);
-    $('.info .duration').html(data.stats.duration_str);
+    update_stat("library_count", data.stats.library_count_str);
+    update_stat("song_count", data.stats.song_count_str);
+    update_stat("duration", data.stats.duration_str);
   }
   if (data.entries) {
     $.each(data.entries, function(i, entry) {
@@ -70,6 +70,12 @@ function message_event(data) {
       else
         $('#queue ul.entries li.entry_' + entry.id).addClass('inactive');
     });
+  }
+}
+
+function update_stat(elem, str) {
+  if ($('.info .' + elem).html() != str) {
+    $('.info .' + elem).html(str).show('highlight', 2000);
   }
 }
 
