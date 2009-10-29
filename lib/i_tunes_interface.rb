@@ -19,7 +19,7 @@ class ITunesInterface
 
   def play! obj = nil
     if obj
-      app_reference.play obj, :once => true
+      app_reference.play obj, :once => true, :timeout => 5
     elsif paused?
       app_reference.playpause
     end
