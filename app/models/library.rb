@@ -134,7 +134,7 @@ class Library < ActiveRecord::Base
       end
     else
       if active_songs_delta.zero?
-        juggernaut_message "#{message}, but all the tracks were already available in other libraries."
+        juggernaut_message "#{message} all the tracks were already available in other libraries."
       else
         juggernaut_message "#{message} #{active_songs_delta} more song#{'s' unless active_songs_delta == 1} #{active_songs_delta == 1 ? 'is' : 'are'} online now."
       end
