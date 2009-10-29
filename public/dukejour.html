@@ -3,19 +3,49 @@
 <html>
 <head>
     <title>dukejour</title>
-    <link href="stylesheets/styles.css" media="screen" rel="stylesheet" type="text/css">
+    <style type="text/css" media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        margin: 2em;
+        background-color: #fff;
+        font: 16px/3 Helvetica, sans-serif;
+      }
+      a {
+        color: #d75483;
+        text-decoration: none;
+      }
+      img {
+        margin-bottom: 2em;
+      }
+      #world {
+        text-align: center;
+      }
+      p.status {
+        font-size: 2em;
+      }
+    </style>
 </head>
 <body>
-<img src="images/dukejour.png" alt="dukejour"/>
+  <div id="world">
+    <img src="images/dukejour.png" height="200" alt="dukejour"/>
 
-<p>...is still being developed.</p>
+    <p class='status'>
+      ...is still being developed.
+    </p>
 
-<p>Watch it on <a href="http://github.com/prohax/dukejour">github</a> | Follow it on twitter <a
-        href="http://twitter.com/dukejour">@dukejour</a></p>
+    <p class='contact'>
+      <a href="http://github.com/prohax/dukejour">github</a>
+      |
+      <a href="http://twitter.com/dukejour">@dukejour</a>
+    </p>
 
-<p>
-    by <a href="http://twitter.com/glenmaddern">@glenmaddern</a>
-    and <a href="http://twitter.com/ben_h">@ben_h</a>
-</p>
+    <p class='authors'>
+        by <a href="http://twitter.com/glenmaddern">@glenmaddern</a>
+        and <a href="http://twitter.com/ben_h">@ben_h</a>
+    </p>
+  </world>
 </body>
 </html>
