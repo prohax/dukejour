@@ -53,9 +53,13 @@ class Library < ActiveRecord::Base
     else
       source_duration = source.duration.get || 0
       if source_duration > 0 #source duration is 0 while the library is being connected
-        unless active? || new_or_deleted_before_save?
-          song_delta_via_juggernaut "Welcome back, #{name}!" do
+        unless active?
+          if new_or_deleted_before_save?
             adjust :active => true
+          else
+            song_delta_via_juggernaut "Welcome back, #{name}!" do
+              adjust :active => true
+            end
           end
         end
         if duration == source_duration && tracks.dirty.empty?
