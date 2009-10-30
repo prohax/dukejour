@@ -34,7 +34,7 @@ class ITunesInterface
   private
 
   def app_reference
-    @app_reference ||= app('iTunes')
+    @app_reference ||= Appscript.app('iTunes')
   end
 
 end
