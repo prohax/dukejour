@@ -4,8 +4,8 @@ class ITunesInterface
     app_reference.sources.get.select {|s|
       [:library, :shared_library].include? s.kind.get
     }
-  rescue
-    puts "Couldn't connect to iTunes."
+  rescue Exception => ex
+    puts "#{ex.class}: Couldn't connect to iTunes: #{ex.backtrace.first}: #{ex.message}"
     []
   end
 
