@@ -60,11 +60,19 @@ namespace :dukejour do
     end
   end
 
+  task :jobs => :environment do
+    require 'appscript'
+    include Appscript
+
+    Delayed::Worker.new(:min_priority => ENV['MIN_PRIORITY'], :max_priority => ENV['MAX_PRIORITY']).start
+  end
+
   tasks = [
     "juggernaut -c config/juggernaut.yml",
     "rake dukejour:populate_loop",
     "rake dukejour:playback_loop",
-    "rake dukejour:bonjour"
+    "rake dukejour:bonjour",
+    "rake dukejour:jobs"
   ]
 
   task :backend do

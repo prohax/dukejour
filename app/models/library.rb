@@ -71,8 +71,8 @@ class Library < ActiveRecord::Base
             duration_delta = source_duration - duration
             juggernaut_message "Hey, #{name} #{duration_delta < 0 ? 'shrank' : 'grew'} by #{duration_delta.abs.xsecs} - importing the difference."
           end
-          song_delta_via_juggernaut "Finished #{new_or_deleted_before_save? ? 'importing' : 'updating'} #{name} - " do
-            import_tracks
+          song_delta_via_juggernaut "Finished #{new_or_deleted_before_save? ? 'importing' : 'updating'} #{name} -" do
+            send_later :import_tracks
             adjust :duration => source_duration
           end
         end
@@ -101,8 +101,6 @@ class Library < ActiveRecord::Base
     end
     @source_tracks
   end
-
-  private
 
   def import_tracks
     have = Track.clean_persistent_ids_for self
