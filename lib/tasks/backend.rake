@@ -68,7 +68,7 @@ namespace :dukejour do
   end
 
   tasks = [
-    "juggernaut -c config/juggernaut.yml",
+    "juggernaut -c config/juggernaut.yml -l log/juggernaut.log",
     "rake dukejour:populate_loop",
     "rake dukejour:playback_loop",
     "rake dukejour:bonjour",
