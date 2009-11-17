@@ -43,11 +43,15 @@ end
 namespace :dukejour do
   desc "find the libraries over bonjour"
   task :bonjour do
+    STDOUT.sync = true
+
     while true
       begin
         bonjour
         sleep 10 while true
-      rescue
+      rescue Exception => e
+        puts "#{e.backtrace.first}: #{e.message}\n#{e.backtrace[1..6] * "\n"}"
+        raise e
       end
     end
   end
