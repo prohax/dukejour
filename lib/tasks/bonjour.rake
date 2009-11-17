@@ -1,12 +1,11 @@
 def bonjour
   require 'dnssd'
-  
   require 'thread'
   require 'timeout'
 
   Thread.abort_on_exception = true
   mutex = Mutex.new
-  
+
   DNSSD.browse('_daap._tcp.') do |br|
     begin
       if !br.flags.add?
