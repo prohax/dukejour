@@ -32,14 +32,14 @@ def loop_task name, opts, &block
   }
 end
 
-def fork_off cmd
+def fork_off cmd, index
   require 'open3'
+  # colors = %w[blue green yellow pink cyan]
+
   returning(Thread.new {
     loop {
       Open3.popen3(cmd + " 2>> log/errors.log") { |i,o,e|
-        puts "popen3(#{cmd.inspect})"
-        puts o.gets until o.eof?
-        puts 'eof'
+        print o.gets until o.eof?
       }
     }
   }) {
@@ -60,10 +60,16 @@ namespace :dukejour do
     end
   end
 
+  tasks = [
+    "juggernaut -c config/juggernaut.yml",
+    "rake dukejour:populate_loop",
+    "rake dukejour:playback_loop",
+    "rake dukejour:bonjour"
+  ]
+
   task :backend do
-    [
-      fork_off("rake dukejour:populate_loop"),
-      fork_off("rake dukejour:playback_loop")
-    ].each &:join
+    tasks.zip((1..tasks.length).to_a).map {|cmd,i|
+      fork_off(cmd, i)
+    }.each &:join
   end
 end
