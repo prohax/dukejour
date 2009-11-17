@@ -5,7 +5,7 @@ def start_thread name, opts = {}, &block
       begin
         block.call
       rescue Exception => e
-        puts "#{e.backtrace.first}: #{e.message}"
+        puts "#{e.backtrace.first}: #{e.message}\n#{e.backtrace[1..6] * "\n"}"
       ensure
         ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
       end

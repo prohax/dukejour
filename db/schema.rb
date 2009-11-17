@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091028165150) do
+ActiveRecord::Schema.define(:version => 20091030052044) do
 
   create_table "entries", :force => true do |t|
     t.integer  "song_id"
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(:version => 20091028165150) do
     t.integer  "disc_count"
   end
 
+  add_index "songs", ["search_artist", "search_name", "duration"], :name => "index_songs_on_search_artist_and_search_name_and_duration"
+  add_index "songs", ["search_name", "search_artist", "duration"], :name => "index_songs_on_search_name_and_search_artist_and_duration"
+
   create_table "tracks", :force => true do |t|
     t.integer  "library_id"
     t.string   "persistent_id", :limit => 16
@@ -75,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20091028165150) do
     t.string   "kind",          :limit => 16
   end
 
+  add_index "tracks", ["library_id", "persistent_id"], :name => "index_tracks_on_library_id_and_persistent_id"
+  add_index "tracks", ["persistent_id", "library_id"], :name => "index_tracks_on_persistent_id_and_library_id"
   add_index "tracks", ["song_id"], :name => "index_tracks_on_song_id"
 
 end
