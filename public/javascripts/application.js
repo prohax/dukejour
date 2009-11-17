@@ -60,8 +60,10 @@ function message_event(data) {
   console.log("$('ul.messages li.message_" + data.timestamp + "').blindUp().remove();");
   $('ul.messages')
     .append($("<li class='message_" + data.timestamp + "'><div class='message'>" + data.message + "</div></li>"))
-    .children(':last').hide().blindDown();
-  setTimeout("$('ul.messages li.message_" + data.timestamp + "').hide('blind', {direction: 'vertical'}, 1000, function() { $(this).remove() });", 10000);
+    .children(':last').hide().blindDown(function() {
+      size_suggest_results_to_window();
+    });
+  setTimeout("$('ul.messages li.message_" + data.timestamp + "').fadeOut(2000, function() { $(this).remove(); size_suggest_results_to_window(); } );", 10000);
   if (data.stats) {
     update_stat("library_count", data.stats.library_count_str);
     update_stat("song_count", data.stats.song_count_str);
