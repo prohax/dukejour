@@ -79,17 +79,17 @@ h1 {
 }
 
 #footer ul.messages {
-  overflow: hidden;
 }
 
 #footer ul.messages li {
   display: block;
-  float: left;
+  overflow: hidden;
   padding-bottom: 0.4em;
 }
 
 #footer ul.messages li .message {
   padding: 0.2em 0.4em;
+  float: left;
   background-color: #ffea8f;
 }
 
