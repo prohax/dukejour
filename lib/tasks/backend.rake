@@ -18,7 +18,7 @@ def loop_task name, opts, &block
   require 'i_tunes_interface'
   STDOUT.sync = true
   
-  puts "Starting #{name}, firing every #{opts[:sleep]} seconds."
+  puts "#{Process.pid}: starting #{name}, firing every #{opts[:sleep]} seconds."
   loop {
     begin
       sleep opts[:sleep]
