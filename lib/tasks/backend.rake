@@ -1,58 +1,69 @@
-def start_thread name, opts = {}, &block
-  opts[:sleep] ||= 1
-  returning(Thread.new {
-    loop do
-      begin
-        block.call
-      rescue Exception => e
-        puts "#{e.backtrace.first}: #{e.message}\n#{e.backtrace[1..6] * "\n"}"
-      ensure
-        ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
-      end
-      sleep opts[:sleep]
+def play_next
+  if iTunes.stopped?
+    if Entry.next.nil?
+      call_via_juggernaut :finished_event
+    else
+      Entry.next.tap {|entry|
+        puts "Playing #{entry.song.display_name}"
+        entry.play!
+        call_via_juggernaut :play_event, entry.to_json(:include => :song)
+      }
     end
-  }) {
-    puts "Started #{name} thread, firing every #{opts[:sleep]}s."
+  end
+end
+
+def loop_task name, opts, &block
+  require 'appscript'
+  include Appscript
+  require 'i_tunes_interface'
+  STDOUT.sync = true
+  
+  puts "Starting #{name}, firing every #{opts[:sleep]} seconds."
+  loop {
+    begin
+      sleep opts[:sleep]
+      block.call
+    rescue Exception => e
+      puts "#{e.backtrace.first}: #{e.message}\n#{e.backtrace[1..6] * "\n"}"
+      raise e
+    ensure
+      ActiveRecord::Base.connection_pool.checkin ActiveRecord::Base.connection
+    end
   }
 end
 
-def playback_thread
-  start_thread 'playback' do
-    if iTunes.stopped?
-      if Entry.next.nil?
-        call_via_juggernaut :finished_event
-      else
-        Entry.next.tap {|entry|
-          puts "Playing #{entry.song.display_name}"
-          entry.play!
-          call_via_juggernaut :play_event, entry.to_json(:include => :song)
-        }
-      end
-    end
-  end
-end
-
-def populate_thread
-  start_thread 'populate', :sleep => 5 do
-    populate
-  end
-end
-
-def bonjour_thread
-  start_thread 'bonjour', :sleep => 1 do
-    run_bonjour
-  end
+def fork_off cmd
+  require 'open3'
+  returning(Thread.new {
+    loop {
+      Open3.popen3(cmd + " 2>> log/errors.log") { |i,o,e|
+        puts "popen3(#{cmd.inspect})"
+        puts o.gets until o.eof?
+        puts 'eof'
+      }
+    }
+  }) {
+    puts "Forked off #{cmd.inspect}."
+  }
 end
 
 namespace :dukejour do
-  desc "run the backend services"
-  task :backend => :environment do
-    require 'appscript'
-    include Appscript
-    require 'i_tunes_interface'
+  task :playback_loop => :environment do
+    loop_task "playback", :sleep => 1 do
+      play_next
+    end
+  end
+
+  task :populate_loop => :environment do
+    loop_task "populate", :sleep => 5 do
+      populate
+    end
+  end
+
+  task :backend do
     [
-      populate_thread,
-      playback_thread
+      fork_off("rake dukejour:populate_loop"),
+      fork_off("rake dukejour:playback_loop")
     ].each &:join
   end
 end
