@@ -2,7 +2,7 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'hammock', :version => '~> 0.5.3'
+  config.gem 'hammock', :version => '~> 0.5.4'
   config.gem 'haml'
   config.gem 'collectiveidea-delayed_job', :version => '~> 1.8.2', :lib => 'delayed_job'
 
