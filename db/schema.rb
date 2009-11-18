@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091117113238) do
+ActiveRecord::Schema.define(:version => 20091117135842) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20091117113238) do
     t.string   "type",       :limit => 16
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "creator_id"
   end
 
   create_table "libraries", :force => true do |t|
@@ -94,5 +95,19 @@ ActiveRecord::Schema.define(:version => 20091117113238) do
   add_index "tracks", ["library_id", "persistent_id"], :name => "index_tracks_on_library_id_and_persistent_id"
   add_index "tracks", ["persistent_id", "library_id"], :name => "index_tracks_on_persistent_id_and_library_id"
   add_index "tracks", ["song_id"], :name => "index_tracks_on_song_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "ip",         :limit => 16
+    t.string   "name",       :limit => 64
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "entry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

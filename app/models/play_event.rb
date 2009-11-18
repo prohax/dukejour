@@ -1,2 +1,0 @@
-class PlayEvent < Event
-end
