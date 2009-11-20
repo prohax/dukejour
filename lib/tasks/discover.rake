@@ -37,11 +37,12 @@ def discover target_names = []
       lib_indices.each { |r_index|
         y_pos = rows[r_index].position.get.last
         if (outline_y_bounds.include? y_pos)
+          iTunes.activate
           puts "Adding library #{row_names[r_index]}"
           rows[r_index].actions["AXShowMenu"].perform
           sleep(0.1)
           sys.key_code 49 # escape the right-click menu
-          sys.activate
+          sys.key_code 100 # dismiss an error dialog, e.g. 'too many connections', if it appeared
           puts "Done."
         else
           puts "Sorry, you need to have the shared library visible in the iTunes window. Sucky, I know."
