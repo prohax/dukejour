@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
 
-  public_resource_for :read, :create, :play
+  public_resource_for :read, :create, :play, :vote
 
   belongs_to :song
 
@@ -8,15 +8,11 @@ class Entry < ActiveRecord::Base
   has_many :add_events
   has_many :vote_events
 
+  validates_uniqueness_of :song_id, :scope => :played_at, :message => "That song is already queued."
+
   has_defaults :votes => 1
 
   delegate :active?, :to => :song
-
-  def self.vote_scope_for user
-    entry_ids = user.events.find(:all, :select => 'events.entry_id').map(&:entry_id).push(0)
-    L{|record| !entry_ids.include?(record.id) }
-  end
-  export_scope :vote
 
   def self.upcoming_scope
     L{|record| record.played_at.nil? }
