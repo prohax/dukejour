@@ -103,11 +103,4 @@ ActiveRecord::Schema.define(:version => 20091117135842) do
     t.datetime "updated_at"
   end
 
-  create_table "votes", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "entry_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end

@@ -11,6 +11,17 @@ def discover target_names = []
   if process.nil?
     puts "iTunes is not running!"
   else
+    #clear any dialog boxes
+    puts "a"
+    if (process.windows.first.splitter_groups.count == 0)
+      puts "b"
+      itunes.activate
+      sleep(0.5)
+      sys.key_code 49 # dismiss an error dialog, e.g. 'too many connections', if it appeared
+      sleep(0.5)
+      process = sys.processes.get.find { |p| p.name.get == "iTunes" }
+    end
+    
     left_sidebar = process.windows.first.splitter_groups.first
     library_panel = if (left_sidebar.splitter_groups.count == 0) 
       left_sidebar 
@@ -37,12 +48,12 @@ def discover target_names = []
       lib_indices.each { |r_index|
         y_pos = rows[r_index].position.get.last
         if (outline_y_bounds.include? y_pos)
-          iTunes.activate
+          itunes.activate
           puts "Adding library #{row_names[r_index]}"
           rows[r_index].actions["AXShowMenu"].perform
-          sleep(0.1)
-          sys.key_code 49 # escape the right-click menu
-          sys.key_code 100 # dismiss an error dialog, e.g. 'too many connections', if it appeared
+          sleep(0.5)
+          sys.key_code 53 # escape the right-click menu
+          sleep(0.5)
           puts "Done."
         else
           puts "Sorry, you need to have the shared library visible in the iTunes window. Sucky, I know."
