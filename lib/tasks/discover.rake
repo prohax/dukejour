@@ -17,7 +17,7 @@ def discover target_names = []
       puts "b"
       itunes.activate
       sleep(0.5)
-      sys.key_code 49 # dismiss an error dialog, e.g. 'too many connections', if it appeared
+      sys.key_code 52 # dismiss an error dialog, e.g. 'too many connections', if it appeared
       sleep(0.5)
       process = sys.processes.get.find { |p| p.name.get == "iTunes" }
     end
