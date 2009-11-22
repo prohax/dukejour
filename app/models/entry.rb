@@ -46,7 +46,7 @@ class Entry < ActiveRecord::Base
 
   def vote! opts
     if (event = events.find_by_creator_id(opts[:creator].id)).nil?
-      offset! :votes, 1
+      offset! :votes, 1 if vote_events.create :creator => opts[:creator]
     else
       if event.is_a? AddEvent
         errors.add :You, "can't vote for songs that you added."

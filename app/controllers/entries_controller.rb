@@ -23,7 +23,10 @@ class EntriesController < ApplicationController
         if @entry.vote! :creator => current_user
           format.jug { render_juggernaut :vote_event, @entry.to_json(:include => :song) }
         else
-          format.jug { juggernaut_message @entry.errors.full_messages.first, :kind => 'error' }
+          format.jug {
+            juggernaut_message @entry.errors.full_messages.first, :kind => 'error'
+            render :nothing => true
+          }
         end
       }
     end
