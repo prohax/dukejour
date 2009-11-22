@@ -45,7 +45,16 @@ class Entry < ActiveRecord::Base
   end
 
   def vote! opts
-    offset! :votes, 1 if vote_events.create(opts).valid?
+    if (event = events.find_by_creator_id(opts[:creator].id)).nil?
+      offset! :votes, 1
+    else
+      if event.is_a? AddEvent
+        errors.add :You, "can't vote for songs that you added."
+      else
+        errors.add :You, "can't vote for the same track twice."
+      end
+      nil
+    end
   end
 
 end

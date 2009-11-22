@@ -66,10 +66,10 @@ class Library < ActiveRecord::Base
           # puts "Track count for #{display_name} hasn't changed, skipping."
         else
           if new_or_deleted_before_save? || duration.zero?
-            juggernaut_message "Hello #{name}! Importing now - each track is playable as soon as it's imported."
+            juggernaut_library_message "Hello #{name}! Importing now - each track is playable as soon as it's imported."
           else
             duration_delta = source_duration - duration
-            juggernaut_message "Hey, #{name} #{duration_delta < 0 ? 'shrank' : 'grew'} by #{duration_delta.abs.xsecs} - importing the difference."
+            juggernaut_library_message "Hey, #{name} #{duration_delta < 0 ? 'shrank' : 'grew'} by #{duration_delta.abs.xsecs} - importing the difference."
           end
           song_delta_via_juggernaut "Finished #{new_or_deleted_before_save? ? 'importing' : 'updating'} #{name} -" do
             send_later :import_tracks
@@ -132,31 +132,28 @@ class Library < ActiveRecord::Base
     active_songs_delta = (Song.active.count - prev_active_songs).abs
     if opts[:leaving]
       if active_songs_delta.zero?
-        juggernaut_message "#{message}, but no songs went offline since they're all on other libraries."
+        juggernaut_library_message "#{message}, but no songs went offline since they're all on other libraries."
       else
-        juggernaut_message "#{message}, taking #{active_songs_delta} song#{'s' unless active_songs_delta == 1} with it."
+        juggernaut_library_message "#{message}, taking #{active_songs_delta} song#{'s' unless active_songs_delta == 1} with it."
       end
     else
       if active_songs_delta.zero?
-        juggernaut_message "#{message} all the tracks were already available in other libraries."
+        juggernaut_library_message "#{message} all the tracks were already available in other libraries."
       else
-        juggernaut_message "#{message} #{active_songs_delta} more song#{'s' unless active_songs_delta == 1} #{active_songs_delta == 1 ? 'is' : 'are'} online now."
+        juggernaut_library_message "#{message} #{active_songs_delta} more song#{'s' unless active_songs_delta == 1} #{active_songs_delta == 1 ? 'is' : 'are'} online now."
       end
     end
   end
 
-  def self.juggernaut_message message
-    puts message
-    call_via_juggernaut :message_event, {
-      :message => message,
-      :timestamp => Time.now.to_i_msec,
+  def self.juggernaut_library_message message
+    juggernaut_message message, {
       :stats => Library.stats,
       :entries => Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
-    }.to_json
+    }
   end
 
-  def juggernaut_message message
-    self.class.juggernaut_message message
+  def juggernaut_library_message message
+    self.class.juggernaut_library_message message
   end
 
 end
