@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091117135842) do
+ActiveRecord::Schema.define(:version => 20100416042131) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -97,10 +97,11 @@ ActiveRecord::Schema.define(:version => 20091117135842) do
   add_index "tracks", ["song_id"], :name => "index_tracks_on_song_id"
 
   create_table "users", :force => true do |t|
-    t.string   "ip",         :limit => 16
-    t.string   "name",       :limit => 64
+    t.string   "ip",               :limit => 16
+    t.string   "name",             :limit => 64
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter_username"
   end
 
 end
