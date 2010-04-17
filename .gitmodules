@@ -1,6 +1,3 @@
-[submodule "vendor/plugins/jrails"]
-	path = vendor/plugins/jrails
-	url = git://github.com/benhoskings/jrails.git
 [submodule "vendor/plugins/juggernaut"]
 	path = vendor/plugins/juggernaut
 	url = git://github.com/maccman/juggernaut_plugin.git
