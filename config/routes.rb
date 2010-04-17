@@ -1,4 +1,4 @@
-ActionController::Routing::Routes.draw do |map|
+Rails3::Application.routes.draw do |map|
 
   %w[songs].each do |name|
     map.send "suggest_#{name}".to_sym, "#{name}/suggest/:fields", :controller => name, :action => 'suggest', :conditions => {:method => :get}
