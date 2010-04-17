@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.xml
   def index
+    @libraries = Library.all
     @entries = Entry.all
 
     respond_to do |format|
@@ -44,6 +45,9 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
+        @libraries = Library.all
+        @entry.add_events.create :creator => current_user
+        format.jug { render_juggernaut :add_event, render(:partial => 'index_entry.html', :locals => {:entry => @entry}).inspect }
         format.html { redirect_to(@entry, :notice => 'Entry was successfully created.') }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
       else
@@ -78,6 +82,21 @@ class EntriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(entries_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def vote
+    if find_record
+      respond_to {|format|
+        if @entry.vote! :creator => current_user
+          format.jug { render_juggernaut :vote_event, @entry.to_json(:include => :song) }
+        else
+          format.jug {
+            juggernaut_message @entry.errors.full_messages.first, :kind => 'error'
+            render :nothing => true
+          }
+        end
+      }
     end
   end
 end
