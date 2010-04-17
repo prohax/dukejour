@@ -1,5 +1,5 @@
 defaults: &defaults
-  adapter: postgresql
+  adapter: sqlite3
 
 production:
   <<: *defaults
@@ -7,7 +7,7 @@ production:
 
 development:
   <<: *defaults
-  database: dukejour
+  database: db/dukejour_dev.sqlite3
 
 test:
   <<: *defaults
