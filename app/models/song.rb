@@ -48,7 +48,7 @@ class Song < ActiveRecord::Base
     track_search_artist = to_search_field(track_source['artist'])
     track_search_name = to_search_field(track_source['name'])
     track_duration = case (d = track_source['duration'])
-      when Symbol: -1
+      when Symbol; -1
       else d.round
     end            
     select {|song|
