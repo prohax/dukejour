@@ -1,13 +1,13 @@
 class Library < ActiveRecord::Base
 
-  public_resource_for :read, :index
-
   has_many :tracks, :dependent => :destroy
   validates_presence_of :persistent_id, :name
   validates_uniqueness_of :name
 
-  has_defaults :duration => 0
-
+  before_create :default_duration_to_zero
+  def default_duration_to_zero
+    self.duration ||= 0
+  end
   before_create :clean_strings
   def clean_strings
     name.strip! unless name.nil?
@@ -40,7 +40,7 @@ class Library < ActiveRecord::Base
   end
 
   def self.active
-    select {|l| l.active }
+    where(:active => true)
   end
 
   def import
