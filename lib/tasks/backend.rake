@@ -17,7 +17,7 @@ def loop_task name, opts, &block
   include Appscript
   require 'i_tunes_interface'
   STDOUT.sync = true
-  
+
   puts "#{Process.pid}: starting #{name}, firing every #{opts[:sleep]} seconds."
   loop {
     begin
@@ -33,6 +33,7 @@ def loop_task name, opts, &block
 end
 
 def fork_off cmd, index
+  require 'active_support/core_ext'
   require 'open3'
   # colors = %w[blue green yellow pink cyan]
 

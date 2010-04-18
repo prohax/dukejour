@@ -16,6 +16,9 @@ rescue LoadError
   # require 'rubygems'
 end
 
+# um, do I really have to do this?
+require 'active_support/core_ext'
+
 # Auto-require all bundled libraries.
 Bundler.require
 
@@ -32,3 +35,4 @@ require 'rails/all'
 # require "action_mailer/railtie"
 # require "active_resource/railtie"
 # require "rails/test_unit/railtie"
+
