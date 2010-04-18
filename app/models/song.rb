@@ -2,7 +2,7 @@ class Song < ActiveRecord::Base
 
   include TrackSongCommon
 
-  public_resource_for :read, :index
+  # public_resource_for :read, :index
 
   has_many :tracks
   has_many :libraries, :through => :tracks
@@ -16,7 +16,8 @@ class Song < ActiveRecord::Base
   end
 
   def self.active
-    ambition_context.within(Library.active, :libraries)
+    all
+    # ambition_context.within(Library.active, :libraries)
   end
   def active?
     self.class.active.find :first, :conditions => {:id => id}
@@ -51,7 +52,7 @@ class Song < ActiveRecord::Base
     track_search_artist = to_search_field(track_source['artist'])
     track_search_name = to_search_field(track_source['name'])
     track_duration = case (d = track_source['duration'])
-      when Symbol: -1
+      when Symbol; -1
       else d.round
     end            
     select {|song|

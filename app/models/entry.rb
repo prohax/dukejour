@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
 
-  public_resource_for :read, :create, :play, :vote
+  # public_resource_for :read, :create, :play, :vote
 
   belongs_to :song
 
@@ -10,9 +10,16 @@ class Entry < ActiveRecord::Base
 
   validates_uniqueness_of :song_id, :scope => :played_at, :message => "That song is already queued."
 
-  has_defaults :votes => 1
+  # has_defaults :votes => 1
+
+  before_create :default_votes_to_one
+  def default_votes_to_one
+    self.votes ||= 1
+  end
 
   delegate :active?, :to => :song
+
+  default_scope :conditions => {:played_at => nil}
 
   def self.upcoming_scope
     L{|record| record.played_at.nil? }
@@ -21,7 +28,7 @@ class Entry < ActiveRecord::Base
   def self.index_scope
     upcoming_scope
   end
-  export_scope :index
+  # export_scope :index
 
   def self.sorter
     L{|record| [-record.votes, record.created_at] }
@@ -36,7 +43,8 @@ class Entry < ActiveRecord::Base
   end
 
   def self.now_playing
-    select {|record| !record.played_at.nil? }.sort_by {|record| -record.played_at }.first
+    where(:played_at => nil).order('played_at DESC').first
+    # select {|record| !record.played_at.nil? }.sort_by {|record| -record.played_at }.first
   end
 
   def play!
