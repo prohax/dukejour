@@ -16,9 +16,9 @@ function selectSearchResult() {
   song_id = parseInt($(this).find('.song_id').html());
 
   if (0 < song_id) {
-    <%= create_entry %>;
+    <%# create_entry %>;
 
-    jQuery('#suggest_<%= mdl %>')
+    jQuery('#suggest_songs')
       .val('')
       .focus();
   }
@@ -49,7 +49,7 @@ jQuery(function() {
   jQuery(window).resize(size_suggest_results_to_window);
 
   // When an entry in the completion list is ENTERinated, AJAX load the corresponding record
-  jQuery("#suggest_<%= mdl %>")
+  jQuery("#suggest_songs")
     .keypress(function(e) {
       key = e.which;
       if ((KEYS.RETURN == key) || (KEYS.ENTER == key) || (KEYS.TAB == key)) {
@@ -58,12 +58,10 @@ jQuery(function() {
     });
 
   // Hook the suggestion code to the text field
-  jQuery("#suggest_<%= mdl %>")
+  jQuery("#suggest_songs")
     .focus()
     .suggest("<%= suggest_songs_path :fields => 'normalized_name,normalized_artist,normalized_album', :limit => 25 %>", {
       callback: on_suggest,
       cache_callback: on_suggest
     });
 });
-
-<%= javascript_for_ajax_response %>
