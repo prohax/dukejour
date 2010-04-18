@@ -146,10 +146,12 @@ class Library < ActiveRecord::Base
   end
 
   def self.juggernaut_library_message message
-    juggernaut_message message, {
-      :stats => Library.stats,
-      :entries => Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
-    }
+    # ok juggernaut doesn't work at all :/
+#    JuggernautHelpers.juggernaut_message message, {
+#      :stats => Library.stats,
+#      # upcoming doesn't work yet
+#      :entries => []# Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
+#    }
   end
 
   def juggernaut_library_message message
