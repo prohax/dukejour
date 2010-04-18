@@ -4,3 +4,4 @@ logfile
 public/javascripts/all.js
 tmp
 .bundle
+db/dukejour_dev.sqlite3
