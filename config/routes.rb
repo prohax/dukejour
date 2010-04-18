@@ -1,16 +1,15 @@
 Rails3::Application.routes.draw do |map|
-
   %w[songs].each do |name|
-    map.send "suggest_#{name}".to_sym, "#{name}/suggest/:fields", :controller => name, :action => 'suggest', :conditions => {:method => :get}
+    match "#{name}/suggest/:fields", :to => 'name#suggest', :as => "suggest_#{name}".to_sym, :conditions => {:method => :get}
   end
 
-  map.resources :entries, :member => {:vote => :post}
-  map.resources :events, :collection => {:window => :get}
-  map.resources :songs
+  resources :entries, :member => {:vote => :post}
+  resources :events, :collection => {:window => :get}
+  resources :songs
 
-  map.resources :libraries do |library|
-    library.resources :songs
+  resources :libraries do
+    resources :songs
   end
 
-  map.root :controller => 'entries', :action => 'index'
+  root :to => 'entries#index'
 end
