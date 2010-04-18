@@ -106,3 +106,9 @@ class << ActiveRecord::Base
     end
   end
 end
+
+class Time
+  def to_i_msec
+    (to_f * 1000).floor
+  end
+end
