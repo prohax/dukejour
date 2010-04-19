@@ -17,7 +17,7 @@ class Song < ActiveRecord::Base
   end
 
   def active?
-    self.class.active.find :first, :conditions => {:id => id}
+    self.class.active.where(:id => id).first
   end
 
   def self.suggestable

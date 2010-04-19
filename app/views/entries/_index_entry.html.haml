@@ -1,9 +1,10 @@
 %li.entry.hoverable{{:class => entry.description},{:class => ('inactive' unless entry.active?)}}
   .votes
     %span.count= entry.votes
-    = ajax_link :vote, entry, :text => '☝', :class => 'vote child', :format => :jug
+    -# TODO
+    -#= ajax_link :vote, entry, :text => '☝', :class => 'vote child', :format => :jug
   .created_at{:style => 'display: none'}= entry.created_at.to_i_msec
 
   = render :partial => 'songs/index_entry.html', :locals => {:song => entry.song}
-
-= javascript_for_ajax_response
+-# TODO
+-# = javascript_for_ajax_response
