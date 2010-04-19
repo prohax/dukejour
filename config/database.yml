@@ -1,5 +1,6 @@
 defaults: &defaults
   adapter: sqlite3
+  timeout: 1000
 
 production:
   <<: *defaults

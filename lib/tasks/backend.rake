@@ -15,7 +15,6 @@ end
 def loop_task name, opts, &block
   require 'appscript'
   include Appscript
-  require 'i_tunes_interface'
   STDOUT.sync = true
 
   puts "#{Process.pid}: starting #{name}, firing every #{opts[:sleep]} seconds."
@@ -64,6 +63,7 @@ namespace :dukejour do
   task :jobs => :environment do
     require 'appscript'
     include Appscript
+    require 'delayed_job'
 
     Delayed::Worker.new(:min_priority => ENV['MIN_PRIORITY'], :max_priority => ENV['MAX_PRIORITY']).start
   end

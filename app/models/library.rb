@@ -1,3 +1,6 @@
+require 'i_tunes_interface'
+include ITunes
+
 class Library < ActiveRecord::Base
 
   has_many :tracks, :dependent => :destroy
@@ -45,6 +48,7 @@ class Library < ActiveRecord::Base
   end
 
   def import
+    puts "import"
     if source.nil?
       if active?
         song_delta_via_juggernaut "#{name} just went offline", :leaving => true do

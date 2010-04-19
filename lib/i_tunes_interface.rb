@@ -38,7 +38,8 @@ module ITunes
     private
 
     def app_reference
-      @app_reference ||= Appscript.app('iTunes')
+      require 'appscript'
+      @app_reference ||= Appscript::app('iTunes')
     end
   end
 end
