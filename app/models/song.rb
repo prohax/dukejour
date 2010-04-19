@@ -16,12 +16,11 @@ class Song < ActiveRecord::Base
   end
 
   def self.active
-    all
-    # ambition_context.within(Library.active, :libraries)
+    joins(:libraries).where('libraries.active' => true)
   end
 
   def active?
-    self.class.active.find :first, :conditions => {:id => id}
+    self.class.active.where(:id => id).first
   end
 
   def self.suggestable

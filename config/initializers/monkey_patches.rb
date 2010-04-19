@@ -73,6 +73,14 @@ class ActiveRecord::Base
   def set_new_or_deleted_before_save
     @new_or_deleted_before_save = new_record? || send_if_respond_to(:deleted?)
   end
+
+  def description
+    new_record? ? "new_#{base_model}" : "#{base_model}_#{id}"
+  end
+
+  def base_model
+    self.class.base_model
+  end  
 end
 
 class << ActiveRecord::Base
@@ -104,6 +112,10 @@ class << ActiveRecord::Base
       log "Adjust failed. #{record.errors.inspect}", :skip => 1 if should_adjust && !record.adjust_attributes(create_attributes)
       record
     end
+  end
+
+  def base_model
+    base_class.to_s.underscore
   end
 end
 
@@ -143,5 +155,13 @@ class Array
     end
 
     hsh
+  end
+
+  def squash
+    dup.squash!
+  end
+
+  def squash!
+    delete_if &:blank?
   end
 end
