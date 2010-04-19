@@ -1,6 +1,8 @@
 module JuggernautHelpers
   def self.call_via_juggernaut function, data = "{}"
-    Juggernaut.send_to_channels "#{function}(#{escape_juggernaut data});", ['dukejour']
+    # Juggernaut not working at all :(
+    puts "JUGGERNAUT: #{function}(#{escape_juggernaut data});"
+#    Juggernaut.send_to_channels "#{function}(#{escape_juggernaut data});", ['dukejour']
   end
 
   def self.escape_juggernaut message

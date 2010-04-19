@@ -1,12 +1,17 @@
 def play_next
+  require 'lib/i_tunes_interface'
+  include ITunes
+
   if iTunes.stopped?
     if Entry.next.nil?
-      call_via_juggernaut :finished_event
+      # Juggernaut still borked
+      JuggernautHelpers.call_via_juggernaut :finished_event
     else
       Entry.next.tap {|entry|
         puts "Playing #{entry.song.display_name}"
         entry.play!
-        call_via_juggernaut :play_event, entry.to_json(:include => :song)
+        # Juggernaut still borked
+        JuggernautHelpers.call_via_juggernaut :play_event, entry.to_json(:include => :song)
       }
     end
   end
