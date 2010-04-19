@@ -1,3 +1,6 @@
+require 'i_tunes_interface'
+include ITunes
+
 class Library < ActiveRecord::Base
 
   has_many :tracks, :dependent => :destroy
@@ -146,9 +149,10 @@ class Library < ActiveRecord::Base
   end
 
   def self.juggernaut_library_message message
-    juggernaut_message message, {
+    JuggernautHelpers.juggernaut_message message, {
       :stats => Library.stats,
-      :entries => Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
+#      # upcoming doesn't work yet
+#      :entries => []# Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
     }
   end
 

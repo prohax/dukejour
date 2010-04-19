@@ -1,12 +1,17 @@
 def play_next
+  require 'lib/i_tunes_interface'
+  include ITunes
+
   if iTunes.stopped?
     if Entry.next.nil?
-      call_via_juggernaut :finished_event
+      # Juggernaut still borked
+      JuggernautHelpers.call_via_juggernaut :finished_event
     else
       Entry.next.tap {|entry|
         puts "Playing #{entry.song.display_name}"
         entry.play!
-        call_via_juggernaut :play_event, entry.to_json(:include => :song)
+        # Juggernaut still borked
+        JuggernautHelpers.call_via_juggernaut :play_event, entry.to_json(:include => :song)
       }
     end
   end
@@ -15,9 +20,8 @@ end
 def loop_task name, opts, &block
   require 'appscript'
   include Appscript
-  require 'i_tunes_interface'
   STDOUT.sync = true
-  
+
   puts "#{Process.pid}: starting #{name}, firing every #{opts[:sleep]} seconds."
   loop {
     begin
@@ -33,6 +37,7 @@ def loop_task name, opts, &block
 end
 
 def fork_off cmd, index
+  require 'active_support/core_ext'
   require 'open3'
   # colors = %w[blue green yellow pink cyan]
 
@@ -63,6 +68,7 @@ namespace :dukejour do
   task :jobs => :environment do
     require 'appscript'
     include Appscript
+    require 'delayed_job'
 
     Delayed::Worker.new(:min_priority => ENV['MIN_PRIORITY'], :max_priority => ENV['MAX_PRIORITY']).start
   end

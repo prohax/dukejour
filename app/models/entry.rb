@@ -5,6 +5,7 @@ class Entry < ActiveRecord::Base
   has_many :add_events
   has_many :vote_events
 
+  validates_presence_of :song_id
   validates_uniqueness_of :song_id, :scope => :played_at, :message => "That song is already queued."
 
   # has_defaults :votes => 1
@@ -23,7 +24,7 @@ class Entry < ActiveRecord::Base
   end
 
   def self.upcoming
-    select(&upcoming_scope).kick.sort_by(&sorter)
+    upcoming_scope.sort_by(&sorter)
   end
 
   def self.next

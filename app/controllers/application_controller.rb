@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def render_juggernaut function, data
-    call_via_juggernaut function, data
+    JuggernautHelpers.call_via_juggernaut function, data
     render :nothing => true
   end
 end

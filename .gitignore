@@ -3,3 +3,5 @@ log
 logfile
 public/javascripts/all.js
 tmp
+.bundle
+db/*.sqlite3

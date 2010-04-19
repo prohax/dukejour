@@ -1,9 +1,9 @@
 def discover target_names = []
   puts "Searching and adding the following: " + target_names.join(", ") if !target_names.empty?
-  
+
   require 'appscript'
   include Appscript
-  
+
   itunes = app('iTunes')
 
   sys = app('System Events')
@@ -12,19 +12,17 @@ def discover target_names = []
     puts "iTunes is not running!"
   else
     #clear any dialog boxes
-    puts "a"
     if (process.windows.first.splitter_groups.count == 0)
-      puts "b"
       itunes.activate
       sleep(0.5)
       sys.key_code 52 # dismiss an error dialog, e.g. 'too many connections', if it appeared
       sleep(0.5)
       process = sys.processes.get.find { |p| p.name.get == "iTunes" }
     end
-    
+
     left_sidebar = process.windows.first.splitter_groups.first
-    library_panel = if (left_sidebar.splitter_groups.count == 0) 
-      left_sidebar 
+    library_panel = if (left_sidebar.splitter_groups.count == 0)
+      left_sidebar
     else
       left_sidebar.splitter_groups.first
     end
@@ -33,7 +31,7 @@ def discover target_names = []
     outline_y_bounds = outline_y_min..(outline_y_min + outline.size.get.flatten.last)
     rows = outline.first.rows.get
     row_names = rows.map { |r| r.static_texts[0].name.get }
-  
+
     lib_indices = if (target_names.empty?)
       shared_index = row_names.index("SHARED")
       next_index = (row_names.index("GENIUS") || row_names.index("PLAYLISTS"))
@@ -41,7 +39,7 @@ def discover target_names = []
     else
       target_names.map { |n| row_names.index(n) }.compact
     end
-    
+
     if lib_indices.empty?
       puts "None of the requested shared libraries available!"
     else
