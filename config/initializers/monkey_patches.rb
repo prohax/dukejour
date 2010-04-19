@@ -111,3 +111,32 @@ class Time
     (to_f * 1000).floor
   end
 end
+
+class String
+  def normalize_for_display
+    mb_chars.normalize(:kd).
+      gsub('¾', 'ae').
+      gsub('?', 'd').
+      gsub(/[^\x00-\x7f]/n, '').to_s
+  end
+end
+
+class Array
+  def hash_by *methods, &block
+    hsh = Hash.new {|h, k| h[k] = [] }
+    this_method = methods.shift
+
+    # First, hash this array into +hsh+.
+    each {|i| hsh[this_method == :self ? i : i.send(this_method)] << i }
+
+    if methods.empty?
+      # If there are no methods remaining, yield this group to the block if required.
+      hsh.each_pair {|k, v| hsh[k] = yield(hsh[k]) } if block_given?
+    else
+      # Recursively hash remaining methods.
+      hsh.each_pair {|k, v| hsh[k] = v.hash_by(*methods, &block) }
+    end
+
+    hsh
+  end
+end

@@ -12,9 +12,7 @@ def discover target_names = []
     puts "iTunes is not running!"
   else
     #clear any dialog boxes
-    puts "a"
     if (process.windows.first.splitter_groups.count == 0)
-      puts "b"
       itunes.activate
       sleep(0.5)
       sys.key_code 52 # dismiss an error dialog, e.g. 'too many connections', if it appeared
