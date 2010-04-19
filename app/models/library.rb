@@ -48,7 +48,6 @@ class Library < ActiveRecord::Base
   end
 
   def import
-    puts "import"
     if source.nil?
       if active?
         song_delta_via_juggernaut "#{name} just went offline", :leaving => true do
@@ -151,12 +150,11 @@ class Library < ActiveRecord::Base
   end
 
   def self.juggernaut_library_message message
-    # ok juggernaut doesn't work at all :/
-#    JuggernautHelpers.juggernaut_message message, {
-#      :stats => Library.stats,
+    JuggernautHelpers.juggernaut_message message, {
+      :stats => Library.stats,
 #      # upcoming doesn't work yet
 #      :entries => []# Entry.upcoming.map {|e| {:id => e.id, :active => e.active?} }
-#    }
+    }
   end
 
   def juggernaut_library_message message

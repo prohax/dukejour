@@ -114,6 +114,10 @@ class Time
 end
 
 class String
+  def normalize
+    mb_chars.normalize(:kd).gsub(/[^\x00-\x7f]/n, '').to_s
+  end
+
   def normalize_for_display
     mb_chars.normalize(:kd).
       gsub('¾', 'ae').
