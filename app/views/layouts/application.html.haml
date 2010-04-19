@@ -9,7 +9,6 @@
     = javascript_include_tag 'jquery', 'jquery-ui', 'hammock', 'suggest', 'jquery.json', 'juggernaut', 'jquerynaut', 'swfobject', :cache => true
     = juggernaut :channels => ['dukejour'], :debug => false, :host => 'dukejour'
     = javascript_tag yield :javascript
-    = javascript_for_page
   %body
     #world
       #main
