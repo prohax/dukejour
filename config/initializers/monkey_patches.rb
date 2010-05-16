@@ -52,69 +52,71 @@ end
 
 #FROM HAMMOCK
 
-class ActiveRecord::Base
-  before_create :set_new_or_deleted_before_save
+if defined?(ActiveRecord::Base)
+  class ActiveRecord::Base
+    before_create :set_new_or_deleted_before_save
 
-  def adjust attrs
-    attrs.each {|k, v| send "#{k}=", v }
-    save false
+    def adjust attrs
+      attrs.each {|k, v| send "#{k}=", v }
+      save false
+    end
+
+    def adjust_attributes attrs
+      self.attributes = attrs
+      changed.empty? || update_attributes(attrs)
+    end
+
+    def new_or_deleted_before_save?
+      @new_or_deleted_before_save
+    end
+
+    def set_new_or_deleted_before_save
+      @new_or_deleted_before_save = new_record? || send_if_respond_to(:deleted?)
+    end
+
+    def description
+      new_record? ? "new_#{base_model}" : "#{base_model}_#{id}"
+    end
+
+    def base_model
+      self.class.base_model
+    end  
   end
 
-  def adjust_attributes attrs
-    self.attributes = attrs
-    changed.empty? || update_attributes(attrs)
-  end
+  class << ActiveRecord::Base
+    def find_or_new_with(find_attributes, create_attributes = {})
+      finder = respond_to?(:find_with_destroyed) ? :find_with_destroyed : :find
 
-  def new_or_deleted_before_save?
-    @new_or_deleted_before_save
-  end
+      if record = send(finder, :first, :conditions => find_attributes.tap { |a| a.delete(:deleted_at) })
+        # Found the record, so we can return it, if:
+        # (a) the record can't have a stored deletion state,
+        # (b) it can, but it's not actually deleted,
+        # (c) it is deleted, but we want to find one that's deleted, or
+        # (d) we don't want a deleted record, and undestruction succeeds.
+        if (finder != :find_with_destroyed) || !record.deleted? || create_attributes[:deleted_at] || record.restore
+          record
+        end
+      else
+        creating_class = if create_attributes[:type].is_a?(ActiveRecord::Base)
+          create_attributes.delete(:type)
+        else
+          self
+        end
+        creating_class.new create_attributes.merge(find_attributes)
+      end
+    end
 
-  def set_new_or_deleted_before_save
-    @new_or_deleted_before_save = new_record? || send_if_respond_to(:deleted?)
-  end
-
-  def description
-    new_record? ? "new_#{base_model}" : "#{base_model}_#{id}"
-  end
-
-  def base_model
-    self.class.base_model
-  end  
-end
-
-class << ActiveRecord::Base
-  def find_or_new_with(find_attributes, create_attributes = {})
-    finder = respond_to?(:find_with_destroyed) ? :find_with_destroyed : :find
-
-    if record = send(finder, :first, :conditions => find_attributes.tap { |a| a.delete(:deleted_at) })
-      # Found the record, so we can return it, if:
-      # (a) the record can't have a stored deletion state,
-      # (b) it can, but it's not actually deleted,
-      # (c) it is deleted, but we want to find one that's deleted, or
-      # (d) we don't want a deleted record, and undestruction succeeds.
-      if (finder != :find_with_destroyed) || !record.deleted? || create_attributes[:deleted_at] || record.restore
+    def find_or_create_with(find_attributes, create_attributes = {}, should_adjust = false)
+      if record = find_or_new_with(find_attributes, create_attributes)
+        log "Create failed. #{record.errors.inspect}", :skip => 1 if record.new_record? && !record.save
+        log "Adjust failed. #{record.errors.inspect}", :skip => 1 if should_adjust && !record.adjust_attributes(create_attributes)
         record
       end
-    else
-      creating_class = if create_attributes[:type].is_a?(ActiveRecord::Base)
-        create_attributes.delete(:type)
-      else
-        self
-      end
-      creating_class.new create_attributes.merge(find_attributes)
     end
-  end
 
-  def find_or_create_with(find_attributes, create_attributes = {}, should_adjust = false)
-    if record = find_or_new_with(find_attributes, create_attributes)
-      log "Create failed. #{record.errors.inspect}", :skip => 1 if record.new_record? && !record.save
-      log "Adjust failed. #{record.errors.inspect}", :skip => 1 if should_adjust && !record.adjust_attributes(create_attributes)
-      record
+    def base_model
+      base_class.to_s.underscore
     end
-  end
-
-  def base_model
-    base_class.to_s.underscore
   end
 end
 
