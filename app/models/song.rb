@@ -3,14 +3,15 @@ class Song
   include HammockMongo
   include TrackSongCommon
 
+  embeds_many :tracks
   field :search_artist
   field :search_name
   field :normalized_artist
   field :normalized_album
   field :normalized_name
-  embeds_many :tracks
 
   before_save :set_normalized_fields
+  before_save :update_metadata
 
   def set_normalized_fields
     self.normalized_name   =   name.normalize_for_display unless name.nil?
@@ -52,36 +53,40 @@ class Song
     end
   end
 
-  def self.for track_source
-    track_search_artist = to_search_field(track_source['artist'])
-    track_search_name = to_search_field(track_source['name'])
-    track_duration = case (d = track_source['duration'])
-      when Symbol;
-        -1
-      else
-        d.round
+  def self.add_track! track
+    song = self.for(track)
+    song.tracks.delete_if {|t| t.persistent_id == track.persistent_id }
+    song.tracks << track
+    returning song.save do |result|
+      puts "Added Track<#{track.persistent_id}> to #{song.name}: #{result}."
     end
+  end
+
+  def self.for track
+    track_search_artist = to_search_field(track.artist)
+    track_search_name = to_search_field(track.name)
 
     Song.where(
-      :duration.lte => (track_duration + 3),
-      :duration.gte => (track_duration - 3),
+      :duration.lte => (track.duration + 3),
+      :duration.gte => (track.duration - 3),
       :search_artist => track_search_artist,
       :search_name => track_search_name
-    ).first || Song.create(
+    ).first || Song.new(
       :search_artist => track_search_artist,
       :search_name => track_search_name,
-      :duration => track_duration
+      :duration => track.duration
     )
   end
 
   def update_metadata
-    unless tracks.length.zero? # empty? would do a count(*), then tracks would be a second query.
-      update_attributes Hash[*metadata_cols.zip(tracks.map {|t|
-        metadata_cols.map {|c| t.send c }
-      }.transpose).map {|col, data|
-        [col, data.compact.hash_by(:self, &:length).sort_by {|_, v| -v }.first.first]
-      }.flatten]
-    end
+    self.attributes = metadata_cols.inject({}) { |hash, col|
+      track_metadatas = tracks.map { |t| t.send col }.compact
+      if !track_metadatas.empty?
+        most_common_metadata = track_metadatas.hash_by(:self, &:length).sort_by {|_, v| -v }.first.first
+        hash[col] = most_common_metadata
+      end
+      hash
+    }
   end
 
 

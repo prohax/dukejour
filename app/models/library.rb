@@ -4,20 +4,16 @@ include ITunes
 class Library
   include Mongoid::Document
   include HammockMongo
-  embeds_many :tracks
   field :persistent_id
   field :name
   field :active, :type => Boolean
   field :imported_at, :type => Time
-  field :duration, :type => Integer
+  field :duration, :type => Integer, :default => 0
+  field :current_persistent_track_ids, :type => Array
 
   validates_presence_of :persistent_id, :name
   validates_uniqueness_of :name
 
-  before_create :default_duration_to_zero
-  def default_duration_to_zero
-    self.duration ||= 0
-  end
   before_create :clean_strings
   def clean_strings
     name.strip! unless name.nil?
@@ -72,7 +68,7 @@ class Library
             end
           end
         end
-        if duration == source_duration && tracks.dirty.empty?
+        if duration == source_duration #&& tracks.dirty.empty?
           # puts "Track count for #{display_name} hasn't changed, skipping."
         else
           if new_before_save? || duration.zero?
@@ -113,16 +109,16 @@ class Library
   end
 
   def import_tracks!
-    have = Track.clean_persistent_ids_for self
     want = source_tracks.keys
-    have_and_dont_want, want_and_dont_have = have - want, want - have
+    current_persistent_track_ids ||= []
+    have_and_dont_want, want_and_dont_have = current_persistent_track_ids - want, want - current_persistent_track_ids
 
     if have_and_dont_want.empty? && want_and_dont_have.empty?
       puts "Nothing to update for #{display_name}."
     else
-      original_track_count = tracks.count
+      original_track_count = current_persistent_track_ids.length
 
-      puts "This library contains #{original_track_count - have.length} dirty track#{'s' unless original_track_count - have.length == 1} that will be re-imported." unless original_track_count == have.length
+      puts "This library contains #{original_track_count - current_persistent_track_ids.length} dirty track#{'s' unless original_track_count - current_persistent_track_ids.length == 1} that will be re-imported." unless original_track_count == current_persistent_track_ids.length
 
       have_and_dont_want.each {|old_id|
         old_track = tracks.find_by_persistent_id(old_id)
@@ -131,8 +127,11 @@ class Library
       }
       want_and_dont_have.each {|new_id| Track.import! source_tracks[new_id], self }
 
-      touch :imported_at
-      puts "Finished importing #{display_name} - library went from #{original_track_count} to #{tracks.count} tracks (#{want_and_dont_have.length} added, #{have_and_dont_want.length} removed).\n"
+      current_persistent_track_ids = want
+      save!
+
+      update_attributes :imported_at => Time.now
+      puts "Finished importing #{display_name} - library went from #{original_track_count} to #{current_persistent_track_ids.count} tracks (#{want_and_dont_have.length} added, #{have_and_dont_want.length} removed).\n"
     end
   end
 

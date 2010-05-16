@@ -3,38 +3,28 @@ class Track
   include HammockMongo
   include TrackSongCommon
 
+  embedded_in :song, :inverse_of => :tracks
+  belongs_to_related :library
   field :persistent_id
   field :dirty_at, :type => Time
   field :bit_rate, :type => Integer
   field :kind
-  embedded_in :library, :inverse_of => :tracks
-  embedded_in :song, :inverse_of => :tracks
-
-  validates_presence_of :persistent_id, :library
-  validates_uniqueness_of :persistent_id, :scope => :library
-
-  before_save :clean_strings
-  after_save :update_song
-
-  named_scope :dirty, :conditions => "dirty_at IS NOT NULL"
 
   def clean_strings
     artist.strip! unless artist.nil?
     album.strip! unless album.nil?
     name.strip! unless name.nil?
   end
-  
-  def update_song
-    song.update_metadata
-  end
 
   def self.import! track_source, library
-    returning find_or_create_with({
-      :persistent_id => track_source['persistent_ID'],
-      :library => library
-    }, {
-      :song => Song.for(track_source),
+    Song.add_track! new_for(track_source, library)
+  end
 
+  def self.new_for track_source, library
+    new(
+      :library => library,
+
+      :persistent_id => track_source['persistent_ID'],
       :artist => track_source['artist'],
       :album => track_source['album'],
       :name => track_source['name'],
@@ -48,13 +38,7 @@ class Track
       :kind => kind_for(track_source['kind']),
 
       :dirty_at => nil
-    }, true) do |track|
-      puts "#{track.new_or_deleted_before_save? ? 'Added' : 'Updated'} #{library.name}/#{track.persistent_id}: #{track.name}"
-    end
-  end
-
-  def self.clean_persistent_ids_for library
-    library.tracks.only(:persistent_id).where(:dirty_at => nil)
+    )
   end
 
   def source
@@ -65,7 +49,7 @@ class Track
   end
 
   def quality
-    # Consider some bitrates to be "better" than others - e.g. 192kbps AAC ~ 192kbps MP3.
+    # Consider some bitrates to be "better" than others - e.g. 128kbps AAC ~ 192kbps MP3.
     bit_rate * ({
       'AAC' => 1.4
     }[kind] || 1)
