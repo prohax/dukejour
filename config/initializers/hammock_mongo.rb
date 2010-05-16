@@ -1,21 +1,39 @@
 module HammockMongo
-  def logger
-    @logger ||= Logger.new(STDOUT)
+  def self.included base
+    base.send :extend, HammockMongo::ClassMethods
+    base.class_eval {
+      before_create :set_new_before_save
+    }
   end
 
-  def find_or_new_with(find_attributes, create_attributes = {})
-    if record = find(:first, :conditions => find_attributes)
-      record
-    else
-      new create_attributes.merge(find_attributes)
+  module ClassMethods
+    def logger
+      @logger ||= Logger.new(STDOUT)
+    end
+
+    def find_or_new_with(find_attributes, create_attributes = {})
+      if record = find(:first, :conditions => find_attributes)
+        record
+      else
+        new create_attributes.merge(find_attributes)
+      end
+    end
+
+    def find_or_create_with(find_attributes, create_attributes = {}, should_adjust = false)
+      if record = find_or_new_with(find_attributes, create_attributes)
+        logger.error "Create failed. #{record.errors.inspect}" if record.new_record? && !record.save
+        logger.error "Adjust failed. #{record.errors.inspect}" if should_adjust && !record.update_attributes(create_attributes)
+        record
+      end
     end
   end
 
-  def find_or_create_with(find_attributes, create_attributes = {}, should_adjust = false)
-    if record = find_or_new_with(find_attributes, create_attributes)
-      logger.error "Create failed. #{record.errors.inspect}" if record.new_record? && !record.save
-      logger.error "Adjust failed. #{record.errors.inspect}" if should_adjust && !record.update_attributes(create_attributes)
-      record
-    end
+  def new_before_save?
+    @new_before_save
   end
+
+  def set_new_before_save
+    @new_before_save = new_record?
+  end
+
 end

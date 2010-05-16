@@ -1,14 +1,17 @@
-class Track < ActiveRecord::Base
+class Track
   include Mongoid::Document
-  embedded_in :library, :inverse_of => :tracks
-
-
+  include HammockMongo
   include TrackSongCommon
 
-  validates_presence_of :persistent_id, :library_id
-  validates_uniqueness_of :persistent_id, :scope => :library_id
+  field :persistent_id
+  field :dirty_at, :type => Time
+  field :bit_rate, :type => Integer
+  field :kind
+  embedded_in :library, :inverse_of => :tracks
+  embedded_in :song, :inverse_of => :tracks
 
-  belongs_to :song
+  validates_presence_of :persistent_id, :library
+  validates_uniqueness_of :persistent_id, :scope => :library
 
   before_save :clean_strings
   after_save :update_song
@@ -28,9 +31,9 @@ class Track < ActiveRecord::Base
   def self.import track_source, library
     returning find_or_create_with({
       :persistent_id => track_source['persistent_ID'],
-      :library_id => library.id
+      :library => library
     }, {
-      :song_id => Song.for(track_source).id,
+      :song => Song.for(track_source),
 
       :artist => track_source['artist'],
       :album => track_source['album'],
@@ -46,16 +49,12 @@ class Track < ActiveRecord::Base
 
       :dirty_at => nil
     }, true) do |track|
-      puts "#{track.new_or_deleted_before_save? ? 'Added' : 'Updated'} #{library.name}/#{track_source['persistent_ID']}: #{track_source['name']}"
+      puts "#{track.new_or_deleted_before_save? ? 'Added' : 'Updated'} #{library.name}/#{track.persistent_id}: #{track.name}"
     end
   end
 
   def self.clean_persistent_ids_for library
-    ActiveRecord::Base.connection.execute(
-      "SELECT persistent_id FROM tracks WHERE library_id = #{library.id} AND dirty_at IS NULL"
-    ).map {|i|
-      i['persistent_id']
-    }
+    library.tracks.only(:persistent_id).where(:dirty_at => nil)
   end
 
   def source

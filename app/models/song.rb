@@ -1,8 +1,14 @@
-class Song < ActiveRecord::Base
+class Song
+  include Mongoid::Document
+  include HammockMongo
   include TrackSongCommon
 
-  has_many :tracks
-  has_many :libraries, :through => :tracks
+  field :search_artist
+  field :search_name
+  field :normalized_artist
+  field :normalized_album
+  field :normalized_name
+  embeds_many :tracks
 
   before_save :set_normalized_fields
 
@@ -13,7 +19,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.active
-    joins(:libraries).where('libraries.active' => true)
+    where('tracks.library.active' => true)
   end
 
   def active?
@@ -56,20 +62,21 @@ class Song < ActiveRecord::Base
         d.round
     end
 
-    Song.where("duration <= ?", track_duration + 3).
-      where("duration >= ?", track_duration - 3).
-      where(:search_artist => track_search_artist,
-            :search_name => track_search_name).first ||
-      Song.create(
-        :search_artist => track_search_artist,
-        :search_name => track_search_name,
-        :duration => track_duration
-      )
+    Song.where(
+      :duration.lte => (track_duration + 3),
+      :duration.gte => (track_duration - 3),
+      :search_artist => track_search_artist,
+      :search_name => track_search_name
+    ).first || Song.create(
+      :search_artist => track_search_artist,
+      :search_name => track_search_name,
+      :duration => track_duration
+    )
   end
 
   def update_metadata
     unless tracks.length.zero? # empty? would do a count(*), then tracks would be a second query.
-      adjust Hash[*metadata_cols.zip(tracks.map {|t|
+      update_attributes Hash[*metadata_cols.zip(tracks.map {|t|
         metadata_cols.map {|c| t.send c }
       }.transpose).map {|col, data|
         [col, data.compact.hash_by(:self, &:length).sort_by {|_, v| -v }.first.first]

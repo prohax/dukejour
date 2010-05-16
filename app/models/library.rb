@@ -3,13 +3,13 @@ include ITunes
 
 class Library
   include Mongoid::Document
-  extend HammockMongo
+  include HammockMongo
   embeds_many :tracks
   field :persistent_id
   field :name
-  field :active
-  field :imported_at
-  field :duration
+  field :active, :type => Boolean
+  field :imported_at, :type => Time
+  field :duration, :type => Integer
 
   validates_presence_of :persistent_id, :name
   validates_uniqueness_of :name
@@ -39,7 +39,7 @@ class Library
     returning({
       :library_count => active.count,
       :song_count => Song.active.count,
-      :duration => active.sum {|l| l.duration || 0 }
+      :duration => active.map(&:duration).sum
     }) do |hsh|
       hsh.update({
         :library_count_str => "#{hsh[:library_count].commas} #{hsh[:library_count] == 1 ? 'library' : 'libraries'}",
@@ -57,33 +57,33 @@ class Library
     if source.nil?
       if active?
         song_delta_via_juggernaut "#{name} just went offline", :leaving => true do
-          adjust :active => false
+          update_attributes :active => false
         end
       end
     else
       source_duration = source.duration.get || 0
       if source_duration > 0 #source duration is 0 while the library is being connected
         unless active?
-          if new_or_deleted_before_save?
-            adjust :active => true
+          if new_before_save?
+            update_attributes :active => true
           else
             song_delta_via_juggernaut "Welcome back, #{name}!" do
-              adjust :active => true
+              update_attributes :active => true
             end
           end
         end
         if duration == source_duration && tracks.dirty.empty?
           # puts "Track count for #{display_name} hasn't changed, skipping."
         else
-          if new_or_deleted_before_save? || duration.zero?
+          if new_before_save? || duration.zero?
             juggernaut_library_message "Hello #{name}! Importing now - each track is playable as soon as it's imported."
           else
             duration_delta = source_duration - duration
             juggernaut_library_message "Hey, #{name} #{duration_delta < 0 ? 'shrank' : 'grew'} by #{duration_delta.abs.xsecs} - importing the difference."
           end
-          song_delta_via_juggernaut "Finished #{new_or_deleted_before_save? ? 'importing' : 'updating'} #{name} -" do
-            send_later :import_tracks
-            adjust :duration => source_duration
+          song_delta_via_juggernaut "Finished #{new_before_save? ? 'importing' : 'updating'} #{name} -" do
+            import_tracks
+            update_attributes :duration => source_duration
           end
         end
       end
