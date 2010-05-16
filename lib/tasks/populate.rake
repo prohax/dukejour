@@ -7,7 +7,7 @@ def populate
 
   (Library.all | iTunes.sources.map {|source|
     Library.create_for source
-  }).each &:import
+  }).each &:import!
 end
 
 namespace :dukejour do

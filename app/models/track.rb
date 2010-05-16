@@ -28,7 +28,7 @@ class Track
     song.update_metadata
   end
 
-  def self.import track_source, library
+  def self.import! track_source, library
     returning find_or_create_with({
       :persistent_id => track_source['persistent_ID'],
       :library => library

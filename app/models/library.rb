@@ -53,7 +53,7 @@ class Library
     where(:active => true)
   end
 
-  def import
+  def import!
     if source.nil?
       if active?
         song_delta_via_juggernaut "#{name} just went offline", :leaving => true do
@@ -82,7 +82,7 @@ class Library
             juggernaut_library_message "Hey, #{name} #{duration_delta < 0 ? 'shrank' : 'grew'} by #{duration_delta.abs.xsecs} - importing the difference."
           end
           song_delta_via_juggernaut "Finished #{new_before_save? ? 'importing' : 'updating'} #{name} -" do
-            import_tracks
+            import_tracks!
             update_attributes :duration => source_duration
           end
         end
@@ -112,7 +112,7 @@ class Library
     @source_tracks
   end
 
-  def import_tracks
+  def import_tracks!
     have = Track.clean_persistent_ids_for self
     want = source_tracks.keys
     have_and_dont_want, want_and_dont_have = have - want, want - have
@@ -129,7 +129,7 @@ class Library
         puts "Track #{old_track.library.name}/#{old_track.persistent_id}: #{old_track.name} disappeared, removing."
         old_track.destroy
       }
-      want_and_dont_have.each {|new_id| Track.import source_tracks[new_id], self }
+      want_and_dont_have.each {|new_id| Track.import! source_tracks[new_id], self }
 
       touch :imported_at
       puts "Finished importing #{display_name} - library went from #{original_track_count} to #{tracks.count} tracks (#{want_and_dont_have.length} added, #{have_and_dont_want.length} removed).\n"
