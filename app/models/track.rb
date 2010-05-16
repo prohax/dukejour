@@ -1,8 +1,10 @@
 class Track < ActiveRecord::Base
+  include Mongoid::Document
+  embedded_in :library, :inverse_of => :tracks
+
 
   include TrackSongCommon
 
-  belongs_to :library
   validates_presence_of :persistent_id, :library_id
   validates_uniqueness_of :persistent_id, :scope => :library_id
 

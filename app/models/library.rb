@@ -1,9 +1,16 @@
 require 'i_tunes_interface'
 include ITunes
 
-class Library < ActiveRecord::Base
+class Library
+  include Mongoid::Document
+  extend HammockMongo
+  embeds_many :tracks
+  field :persistent_id
+  field :name
+  field :active
+  field :imported_at
+  field :duration
 
-  has_many :tracks, :dependent => :destroy
   validates_presence_of :persistent_id, :name
   validates_uniqueness_of :name
 
