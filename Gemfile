@@ -1,8 +1,7 @@
 gem "rails", :git => '/Users/ben/code/rails'
-gem 'sqlite3-ruby'
-gem 'haml', '3.0.3'
+gem 'haml', '~> 3.0.0'
 gem 'rb-appscript'
-gem 'delayed_job', "2.0.3"
+gem 'delayed_job', "1.9.0pre"
 gem 'dnssd'
 
 gem "mongoid", "2.0.0.beta4"
