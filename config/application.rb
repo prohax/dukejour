@@ -1,6 +1,12 @@
 require File.expand_path('../boot', __FILE__)
 
-module Rails3
+require 'rails/all'
+
+# If you have a Gemfile, require the gems listed there, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(:default, Rails.env) if defined?(Bundler)
+
+module Dukejour
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -21,7 +27,7 @@ module Rails3
     config.time_zone = 'UTC'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
+    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
     # Configure generators values. Many other options are available, be sure to check the documentation.
@@ -31,7 +37,10 @@ module Rails3
     #   g.test_framework  :test_unit, :fixture => true
     # end
 
+    # Configure the default encoding used in templates for Ruby 1.9.
+    config.encoding = "utf-8"
+
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters << :password
+    config.filter_parameters += [:password]
   end
 end

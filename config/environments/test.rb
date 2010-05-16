@@ -1,4 +1,4 @@
-Rails3::Application.configure do
+Dukejour::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # The test environment is used exclusively to run your application's
@@ -13,6 +13,9 @@ Rails3::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
+
+  # Raise exceptions instead of rendering exception templates
+  config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false

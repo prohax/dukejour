@@ -1,4 +1,4 @@
-Rails3::Application.routes.draw do |map|
+Dukejour::Application.routes.draw do |map|
   %w[songs].each do |name|
     match "#{name}/suggest/:fields", :to => 'name#suggest', :as => "suggest_#{name}".to_sym, :conditions => {:method => :get}
   end
