@@ -32,12 +32,14 @@ def discover target_names = []
     rows = outline.first.rows.get
     row_names = rows.map { |r| r.static_texts[0].name.get }
 
-    lib_indices = if (target_names.empty?)
-      shared_index = row_names.index("SHARED")
+    lib_indices = if !target_names.empty?
+      target_names.map { |n| row_names.index(n) }.compact
+    elsif (shared_index = row_names.index("SHARED")).nil?
+      puts "There are no shared libraries visible."
+      []
+    else
       next_index = (row_names.index("GENIUS") || row_names.index("PLAYLISTS"))
       ((shared_index + 1)..(next_index - 1)).to_a - [row_names.index("Home Sharing")].compact
-    else
-      target_names.map { |n| row_names.index(n) }.compact
     end
 
     if lib_indices.empty?
