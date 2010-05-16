@@ -1,0 +1,14 @@
+defaults: &defaults
+  host: localhost
+
+development:
+  <<: *defaults
+  database: dukejour_development
+
+test:
+  <<: *defaults
+  database: dukejour_test
+
+production:
+  <<: *defaults
+  database: dukejour
